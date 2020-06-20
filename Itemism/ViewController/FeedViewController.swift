@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 private let reuseIdentifer = "FeedCell"
 
@@ -27,6 +28,7 @@ class FeedViewController : UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        checkUserIsLogin()
         configureCV()
         
     }
@@ -47,6 +49,26 @@ class FeedViewController : UICollectionViewController {
         
         
     }
+    
+    //MARK: - API
+    
+    func checkUserIsLogin() {
+        
+        
+        if Auth.auth().currentUser == nil {
+            
+            DispatchQueue.main.async {
+                let nav = UINavigationController(rootViewController: LoginViewController())
+                nav.modalPresentationStyle = .fullScreen
+                
+                self.present(nav, animated: true, completion: nil)
+            }
+        } else {
+             print("Current User")
+        }
+    }
+    
+    
 }
 
 
