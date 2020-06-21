@@ -51,6 +51,11 @@ class AuthService {
         
     }
     
+    static func loginUser(email : String, password : String, complation : AuthDataResultCallback?) {
+        
+        Auth.auth().signIn(withEmail: email, password: password, completion: complation)
+    }
+    
     
     
 }

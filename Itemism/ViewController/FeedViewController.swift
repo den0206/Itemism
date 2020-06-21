@@ -30,6 +30,9 @@ class FeedViewController : UICollectionViewController {
         
         configureCV()
         
+        print(User.currentUser())
+
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

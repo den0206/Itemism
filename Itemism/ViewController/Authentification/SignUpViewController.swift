@@ -229,6 +229,17 @@ class SignUpViewController : UIViewController {
             
             /// no error
             
+            guard let window = UIApplication.shared.windows.first(where: {$0.isKeyWindow}) else {return}
+            guard let tab = window.rootViewController as? MainTabController else {return}
+            
+            tab.checkUserIsLogin()
+            
+            
+            self.dismiss(animated: true) {
+                // dismiss Indicator
+                self.showPresentLoadindView(false)
+            }
+            
             
         }
         

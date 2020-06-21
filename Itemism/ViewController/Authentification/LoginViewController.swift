@@ -133,7 +133,41 @@ class LoginViewController : UIViewController  {
     }
     
     @objc func handleLogin() {
-        print("Login")
+        guard let email = emailTextField.text , let password = passwordTextField.text else {
+            showAlert(title: "Recheck", message: "項目を埋めてください")
+            
+            return
+        }
+        
+        guard isValidEmail(email) else {
+            showAlert(title: "Recheck", message: "Eメール用の書式を記入ください")
+            return
+        }
+        
+        showPresentLoadindView(true)
+        
+        AuthService.loginUser(email: email, password: password) { (result, error) in
+            
+            if error != nil {
+                self.showAlert(title: "Recheck", message: error!.localizedDescription)
+                self.showPresentLoadindView(false)
+                return
+            }
+            
+            /// no error
+            
+            guard let window = UIApplication.shared.windows.first(where: {$0.isKeyWindow}) else {return}
+            guard let tab = window.rootViewController as? MainTabController else {return}
+            
+            tab.checkUserIsLogin()
+            
+            self.dismiss(animated: true) {
+                // dismiss Indicator
+                self.showPresentLoadindView(false)
+            }
+            
+            
+        }
     }
     
     @objc func fillTextField() {
