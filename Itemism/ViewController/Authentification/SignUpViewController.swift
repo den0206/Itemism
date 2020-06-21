@@ -168,6 +168,23 @@ class SignUpViewController : UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    
+    @objc func fillTextField() {
+        guard emailTextField.text != "" && fullnameTextField.text != "" && passwordTextField.text != "" && passwordConfirmationTextField.text != "" else {
+            alertLabel.isHidden = false
+            
+            SignUpButton.isEnabled = false
+            SignUpButton.backgroundColor = .lightGray
+            return
+        }
+        
+        alertLabel.isHidden = true
+        
+        SignUpButton.isEnabled = true
+        SignUpButton.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+    }
+    
+    
     @objc func tappedPlusButton() {
        
         imagePicker.delegate = self
@@ -176,23 +193,46 @@ class SignUpViewController : UIViewController {
         present(imagePicker, animated: true, completion: nil)
     }
     
-    @objc func handleSignUp() {
-        print(selectedImage)
-    }
     
-    @objc func fillTextField() {
-        guard emailTextField.text != "" && fullnameTextField.text != "" && passwordTextField.text != "" && passwordConfirmationTextField.text != "" else {
-                  alertLabel.isHidden = false
-                  
-                  SignUpButton.isEnabled = false
-                  SignUpButton.backgroundColor = .lightGray
-                  return
-              }
-              
-              alertLabel.isHidden = true
-              
-              SignUpButton.isEnabled = true
-              SignUpButton.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+    @objc func handleSignUp() {
+        
+        /// validations
+        guard selectedImage != nil else {
+            showAlert(title: "Recheck", message: "画像を選択してください")
+            return
+        }
+        
+        guard isValidEmail(emailTextField.text!) else {
+            showAlert(title: "Recheck", message: "Eメール用の書式を記入ください")
+            return
+        }
+        
+        guard passwordTextField.text == passwordConfirmationTextField.text else {
+            showAlert(title: "Recheck", message: "確認用パスワードが一致しません")
+            return
+        }
+        
+        let avatarData = selectedImage?.jpegData(compressionQuality: 0.3)
+        let avatar = avatarData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
+        
+        showPresentLoadindView(true)
+        
+        let credential = AuthCredential(email: emailTextField.text!, fullname: fullnameTextField.text!, password: passwordTextField.text!, profileImage: avatar!)
+        
+        AuthService.registerser(credential: credential) { (error) in
+            
+            if error != nil {
+                self.showPresentLoadindView(false)
+                self.showAlert(title: "error", message: error!.localizedDescription)
+                return
+            }
+            
+            /// no error
+            
+            
+        }
+        
+        
     }
     
     

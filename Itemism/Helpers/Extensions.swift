@@ -34,6 +34,14 @@ class GradiatinButton : UIButton {
     }
 }
 
+func isValidEmail(_ string: String) -> Bool {
+       let emailRegEx = "[A-Z0-9a-z._+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+       let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+       let result = emailTest.evaluate(with: string)
+       return result
+}
+
+
 extension UIViewController {
     func configureGradientLayer() {
         let topColor = #colorLiteral(red: 0.9921568627, green: 0.3568627451, blue: 0.3725490196, alpha: 1)
@@ -280,6 +288,69 @@ extension UIView {
     convenience public init(backgroundColor: UIColor = .clear) {
         self.init(frame: .zero)
         self.backgroundColor = backgroundColor
+    }
+}
+
+//MARK: - Indicators
+
+extension UIViewController {
+    func showAlert(title : String, message : String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func showPresentLoadindView(_ present : Bool, message : String? = nil) {
+        
+        if present {
+            
+            let blackView = UIView()
+            blackView.frame = self.view.bounds
+            blackView.backgroundColor = .black
+            blackView.alpha = 0
+            blackView.tag = 1
+            
+            let indicator = UIActivityIndicatorView()
+            indicator.color = .white
+            indicator.style = .large
+            indicator.center = blackView.center
+            
+            let label = UILabel()
+            label.text = message
+            label.font = UIFont.systemFont(ofSize: 16)
+            label.textColor = .white
+            label.textAlignment = .center
+            label.alpha = 0.7
+            
+            self.view.addSubview(blackView)
+            blackView.addSubview(indicator)
+            blackView.addSubview(label)
+            
+            label.centerX(inView: view)
+            label.anchor(top : indicator.bottomAnchor,paddingTop: 23)
+            
+            indicator.startAnimating()
+            
+            UIView.animate(withDuration: 0.2) {
+                blackView.alpha = 0.7
+            }
+            
+            
+        } else {
+            
+            // hide
+            view.subviews.forEach { (subview) in
+                
+                if subview.tag == 1 {
+                    UIView.animate(withDuration: 0.5, animations: {
+                        subview.alpha = 0
+                    }) { (_) in
+                        subview.removeFromSuperview()
+                    }
+                }
+            }
+            
+        }
     }
 }
 
