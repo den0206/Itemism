@@ -40,6 +40,40 @@ class LoginViewController : UIViewController  {
     }()
     
     
+    private let loginButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .lightGray
+        button.setTitle("Login", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private let alertLabel : UILabel  = {
+        let label = UILabel()
+        
+        label.text = "※項目を埋めてください"
+        label.textColor = .red
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let dontHaveAccountButton : UIButton = {
+        let button = UIButton(type: .system)
+        
+        let attributeTitle = NSMutableAttributedString(string: "アカウントを持っていませんか?", attributes: [NSAttributedString.Key.foregroundColor : UIColor.black])
+        
+        attributeTitle.append(NSMutableAttributedString(string: " Sign Up", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
+        
+        button.setAttributedTitle(attributeTitle, for: .normal)
+        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        return button
+    }()
+    
     
     //MARK: - Liffe cycle
     override func viewDidLoad() {
@@ -63,7 +97,7 @@ class LoginViewController : UIViewController  {
         titleLabel.anchor(top : view.safeAreaLayoutGuide.topAnchor)
         titleLabel.centerX(inView: view)
         
-        let stack = UIStackView(arrangedSubviews: [emailContainerView,passwordContainerView])
+        let stack = UIStackView(arrangedSubviews: [emailContainerView,passwordContainerView, loginButton, alertLabel])
         stack.axis = .vertical
         stack.distribution = .fillEqually
         
@@ -74,5 +108,57 @@ class LoginViewController : UIViewController  {
         stack.anchor(left : view.leftAnchor, right: view.rightAnchor,paddingTop: 40,paddingLeft: 16,paddingRight: 16)
         
         
+        view.addSubview(dontHaveAccountButton)
+        dontHaveAccountButton.centerX(inView: view)
+        dontHaveAccountButton.anchor(bottom : view.safeAreaLayoutGuide.bottomAnchor, paddingBottom:  12)
+        
+        addTFValidation()
     }
+    
+    private func addTFValidation() {
+        
+        for tf in [emailTextField,passwordTextField] {
+            tf.addTarget(self, action: #selector(fillTextField), for: .editingChanged)
+            tf.delegate = self
+        }
+
+    }
+    
+    //MARK: - Actions
+    
+    @objc func handleSignUp() {
+        let signVC = SignUpViewController()
+        
+        navigationController?.pushViewController(signVC, animated: true)
+    }
+    
+    @objc func handleLogin() {
+        print("Login")
+    }
+    
+    @objc func fillTextField() {
+        
+        guard emailTextField.text != "" && passwordTextField.text != "" else {
+            alertLabel.isHidden = false
+            
+            loginButton.isEnabled = false
+            loginButton.backgroundColor = .lightGray
+            return
+        }
+        
+        alertLabel.isHidden = true
+        
+        loginButton.isEnabled = true
+        loginButton.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+    }
+}
+
+
+extension LoginViewController : UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
 }
