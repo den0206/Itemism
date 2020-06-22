@@ -13,6 +13,18 @@ private let reuseIdentifer = "FeedCell"
 
 class FeedViewController : UICollectionViewController {
     
+    //MARK: - Parts
+    
+    let actionButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = .white
+        button.backgroundColor = .lightGray
+        button.setImage(#imageLiteral(resourceName: "new_tweet"), for: .normal)
+        button.addTarget(self, action: #selector(handleTappedAddItem), for: .touchUpInside)
+        
+        return button
+    }()
+    
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -43,12 +55,31 @@ class FeedViewController : UICollectionViewController {
     //MARK: - UI
     
     private func configureCV() {
-                
+        
+        view.addSubview(actionButton)
+        actionButton.anchor( bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingBottom: 64, paddingRight: 16, width: 56, height: 56)
+        actionButton.layer.cornerRadius = 56 / 2
+        
+        
         collectionView.backgroundColor = .white
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifer)
         
+        collectionView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 25, right: 24)
+        collectionView.horizontalScrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 25, right: 24)
         
         
+        
+    }
+    
+    //MARK: - Actions
+    
+    @objc func handleTappedAddItem() {
+        
+        let addItemVC = AddItemViewController()
+        let nav = UINavigationController(rootViewController: addItemVC)
+        
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
     }
     
 }
