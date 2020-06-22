@@ -37,6 +37,9 @@ class MainTabController : UITabBarController {
             }
         } else {
             
+            /// set currentUser
+            fetchCurrentUser(uid: Auth.auth().currentUser!.uid)
+            
             configureTabController()
         }
     }
@@ -46,13 +49,28 @@ class MainTabController : UITabBarController {
         let feedVC = FeedViewController()
         let nav = createNavController(image: UIImage(systemName: "house.fill"), title: "Items", rootViewController: feedVC)
         
-        viewControllers = [nav]
+        let settingVC = SettingViewController()
+        let nav1 = UINavigationController(rootViewController: settingVC)
         
-        UITabBar.appearance().tintColor = .lightGray
-        tabBar.unselectedItemTintColor = .white
+        
+        settingVC.tabBarItem.image = UIImage(systemName: "person.crop.rectangle")
+        settingVC.tabBarItem.title = "Settings"
+        
+        viewControllers = [nav, nav1]
+        
+        UITabBar.appearance().tintColor = .black
+        tabBar.unselectedItemTintColor = .lightGray
     
         
         
+    }
+    
+    //MARK: - API
+    
+    private func fetchCurrentUser(uid : String) {
+        AuthService.fetchCurrentUser(uid: uid) { (user) in
+           
+        }
     }
     
     //MARK: - Helpers

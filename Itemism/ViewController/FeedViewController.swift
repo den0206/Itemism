@@ -30,7 +30,6 @@ class FeedViewController : UICollectionViewController {
         
         configureCV()
         
-        print(User.currentUser())
 
         
     }

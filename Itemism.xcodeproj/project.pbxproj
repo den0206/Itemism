@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A04834124A0CF28008F1BC2 /* SettingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04834024A0CF28008F1BC2 /* SettingFooterView.swift */; };
 		3A0AA474249EF87D009BE640 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0AA473249EF87D009BE640 /* SignUpViewController.swift */; };
 		3ADB97DE249DD56A000AB412 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB97DD249DD56A000AB412 /* FeedCell.swift */; };
 		3ADB97E0249DD60A000AB412 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB97DF249DD60A000AB412 /* Extensions.swift */; };
@@ -18,6 +19,7 @@
 		3AEE21AD249F25A9002CB2F1 /* FirebaseReferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE21AC249F25A9002CB2F1 /* FirebaseReferences.swift */; };
 		3AEE21AF249F2B7A002CB2F1 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE21AE249F2B7A002CB2F1 /* Downloader.swift */; };
 		3AEE21B1249F2BDD002CB2F1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE21B0249F2BDD002CB2F1 /* User.swift */; };
+		3AEE21B3249F2F9D002CB2F1 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE21B2249F2F9D002CB2F1 /* SettingViewController.swift */; };
 		3AF97672249DB9BC00A7BA80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF97671249DB9BC00A7BA80 /* AppDelegate.swift */; };
 		3AF97674249DB9BC00A7BA80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF97673249DB9BC00A7BA80 /* SceneDelegate.swift */; };
 		3AF9767B249DB9BE00A7BA80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AF9767A249DB9BE00A7BA80 /* Assets.xcassets */; };
@@ -28,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		1BE3FEA6259665A9D8D5C625 /* Pods-Itemism.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Itemism.release.xcconfig"; path = "Target Support Files/Pods-Itemism/Pods-Itemism.release.xcconfig"; sourceTree = "<group>"; };
+		3A04834024A0CF28008F1BC2 /* SettingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingFooterView.swift; sourceTree = "<group>"; };
 		3A0AA473249EF87D009BE640 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3ADB97DD249DD56A000AB412 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		3ADB97DF249DD60A000AB412 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -39,6 +42,7 @@
 		3AEE21AC249F25A9002CB2F1 /* FirebaseReferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReferences.swift; sourceTree = "<group>"; };
 		3AEE21AE249F2B7A002CB2F1 /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		3AEE21B0249F2BDD002CB2F1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		3AEE21B2249F2F9D002CB2F1 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		3AF9766E249DB9BC00A7BA80 /* Itemism.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Itemism.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AF97671249DB9BC00A7BA80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AF97673249DB9BC00A7BA80 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				3ADB97DD249DD56A000AB412 /* FeedCell.swift */,
+				3A04834024A0CF28008F1BC2 /* SettingFooterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 				3ADB97E5249DDD52000AB412 /* Authentification */,
 				3ADB97E1249DD67F000AB412 /* MainTabController.swift */,
 				3AF97685249DBA0600A7BA80 /* FeedViewController.swift */,
+				3AEE21B2249F2F9D002CB2F1 /* SettingViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -289,10 +295,12 @@
 				3AEE21AB249F2541002CB2F1 /* Constracts.swift in Sources */,
 				3AEE21AF249F2B7A002CB2F1 /* Downloader.swift in Sources */,
 				3AF97672249DB9BC00A7BA80 /* AppDelegate.swift in Sources */,
+				3AEE21B3249F2F9D002CB2F1 /* SettingViewController.swift in Sources */,
 				3A0AA474249EF87D009BE640 /* SignUpViewController.swift in Sources */,
 				3ADB97E0249DD60A000AB412 /* Extensions.swift in Sources */,
 				3AEE21AD249F25A9002CB2F1 /* FirebaseReferences.swift in Sources */,
 				3ADB97E2249DD67F000AB412 /* MainTabController.swift in Sources */,
+				3A04834124A0CF28008F1BC2 /* SettingFooterView.swift in Sources */,
 				3AEE21A9249F1E4B002CB2F1 /* Service.swift in Sources */,
 				3ADB97DE249DD56A000AB412 /* FeedCell.swift in Sources */,
 				3AF97674249DB9BC00A7BA80 /* SceneDelegate.swift in Sources */,

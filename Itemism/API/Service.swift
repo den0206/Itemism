@@ -57,6 +57,24 @@ class AuthService {
     }
     
     
+    static func fetchCurrentUser(uid : String, completion : @escaping(User) -> Void) {
+        
+        firebaseReference(.User).document(uid).getDocument { (snapshot, error) in
+            
+            guard let snapshot = snapshot else {return}
+            
+            if snapshot.exists {
+                let dictionary = snapshot.data()!
+                
+                UserDefaults.standard.setValue(snapshot.data()! as [String : Any], forKey: kCURRENTUSER)
+                UserDefaults.standard.synchronize()
+                
+                   let user = User(dictionary: dictionary)
+                   completion(user)
+            }
+        }
+        
+    }
     
 }
 
