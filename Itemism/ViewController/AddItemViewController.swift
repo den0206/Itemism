@@ -12,7 +12,13 @@ private let reuseIdentifer = "AddItemCell"
 
 class AddItemViewController : UITableViewController {
     
-    //MARK: - Partss
+    //MARK: - Item property
+    var itemImages : [UIImage] = []
+    var name : String?
+    var desc : String?
+    
+    
+    //MARK: - Parts
     let headerView = AddItemHeaderView()
     private var imageIndex = 0
     
@@ -53,18 +59,26 @@ class AddItemViewController : UITableViewController {
         
         tableView.register(AddItemCell.self, forCellReuseIdentifier: reuseIdentifer)
         
+        let tappedGesture = UITapGestureRecognizer(target: self, action: #selector(tappedBackground))
+        
+        view.addGestureRecognizer(tappedGesture)
         
     }
     
     //MARK: - Actions
     
     @objc func handleDone() {
-        print("Done")
+        
+        print(name,desc,itemImages)
     }
     
     @objc func handleDismiss() {
         
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func tappedBackground() {
+        self.view.endEditing(false)
     }
 }
 
@@ -87,6 +101,7 @@ extension AddItemViewController {
         guard let section = AddItemSections(rawValue: indexPath.section) else {return cell}
         let viewModel = AddItemViewModel(section: section)
         
+        cell.delegate = self
         cell.viewModel = viewModel
         return cell
     }
@@ -105,7 +120,7 @@ extension AddItemViewController {
         guard let section = AddItemSections(rawValue: indexPath.section) else {return 0}
         
         if section == .description {
-            return 100
+            return 200
         }
         
         return 45
@@ -129,9 +144,37 @@ extension AddItemViewController : AddItemHeaderViewDelegate, UIImagePickerContro
         
         headerView.buttons[imageIndex].setImage(selectedImage.withRenderingMode(.alwaysOriginal), for: .normal)
         
+        if itemImages.indices.contains(imageIndex){
+            self.itemImages.remove(at: imageIndex)
+        }
+        
         /// uploadPhoto
+        self.itemImages.insert(selectedImage, at: imageIndex)
+        
+    
+        
+        print(itemImages)
         
         dismiss(animated: true, completion: nil)
+    }
+    
+    
+}
+
+extension AddItemViewController : AddItemCellDelegate {
+    
+    func updateItemInfo(cell: AddItemCell, value: String, section: AddItemSections) {
+        switch section {
+       
+        case .name:
+            self.name = value
+        case .description:
+            return
+        }
+    }
+    
+    func updateDescription(cell: AddItemCell, description: String) {
+        self.desc = description
     }
     
     

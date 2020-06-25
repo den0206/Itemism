@@ -19,3 +19,12 @@ public let kFULLNAME = "fullname"
 //public let kFOLLOWING = "FOLLOWING"
 //public let kFOLLOWERS = "FOLLOWER"
 public let kCURRENTUSER = "currentUser"
+
+
+//MARK: - - Item
+
+public let kITEMID = "itemId"
+public let kITEMNAME = "itemName"
+public let kDESCRIPTION = "description"
+public let kIMGELINKS = "imageLinks"
+ 

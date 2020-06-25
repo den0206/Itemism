@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol AddItemCellDelegate : class {
+    func updateItemInfo(cell : AddItemCell, value : String, section : AddItemSections)
+    func updateDescription(cell : AddItemCell, description : String)
+}
+
 class AddItemCell : UITableViewCell {
     
     var viewModel : AddItemViewModel! {
@@ -15,6 +20,8 @@ class AddItemCell : UITableViewCell {
             congigure()
         }
     }
+    
+    weak var delegate : AddItemCellDelegate?
     
     //MARK: - Parts
     
@@ -26,8 +33,10 @@ class AddItemCell : UITableViewCell {
         
         let paddingView = UIView()
         paddingView.setDimensions(height: 50, width: 20)
+        
         tf.leftView = paddingView
         tf.leftViewMode = .always
+        tf.addTarget(self, action: #selector(editindDidEnd), for: .editingDidEnd)
         return tf
     }()
     
@@ -39,10 +48,13 @@ class AddItemCell : UITableViewCell {
         selectionStyle = .none
 //
         addSubview(inputField)
+        
         inputField.fillSuperview()
 //
         addSubview(descriptionTextView)
         descriptionTextView.anchor(top :topAnchor,left: leftAnchor,bottom: bottomAnchor,right: rightAnchor,paddingTop: 8,paddingLeft: 8,paddingRight: 8)
+        descriptionTextView.delegate = self
+        
         
     }
     
@@ -58,5 +70,20 @@ class AddItemCell : UITableViewCell {
         inputField.isHidden = viewModel.shoulHideInputField
         descriptionTextView.isHidden = viewModel.shoulHideTextView
         
+    }
+    
+    //MARK: - Actiuons
+    
+    @objc func editindDidEnd(sender : UITextField) {
+        guard let value = sender.text else {return}
+        
+        delegate?.updateItemInfo(cell: self, value: value, section: viewModel.section)
+    }
+}
+
+extension AddItemCell : UITextViewDelegate {
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        delegate?.updateDescription(cell: self, description: textView.text)
     }
 }
