@@ -15,6 +15,7 @@
 		3AA04B8524A23A4E00886E65 /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA04B8424A23A4E00886E65 /* InputTextView.swift */; };
 		3AA04B8824A23D7B00886E65 /* AddItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA04B8724A23D7B00886E65 /* AddItemViewModel.swift */; };
 		3AC396D924A4B94A0088C622 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC396D824A4B94A0088C622 /* Item.swift */; };
+		3AC396DB24A4CD330088C622 /* Reachbility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC396DA24A4CD330088C622 /* Reachbility.swift */; };
 		3ADB97DE249DD56A000AB412 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB97DD249DD56A000AB412 /* FeedCell.swift */; };
 		3ADB97E0249DD60A000AB412 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB97DF249DD60A000AB412 /* Extensions.swift */; };
 		3ADB97E2249DD67F000AB412 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB97E1249DD67F000AB412 /* MainTabController.swift */; };
@@ -44,6 +45,7 @@
 		3AA04B8424A23A4E00886E65 /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
 		3AA04B8724A23D7B00886E65 /* AddItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewModel.swift; sourceTree = "<group>"; };
 		3AC396D824A4B94A0088C622 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		3AC396DA24A4CD330088C622 /* Reachbility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachbility.swift; sourceTree = "<group>"; };
 		3ADB97DD249DD56A000AB412 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		3ADB97DF249DD60A000AB412 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3ADB97E1249DD67F000AB412 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				3AEE21AA249F2541002CB2F1 /* Constracts.swift */,
 				3AEE21AC249F25A9002CB2F1 /* FirebaseReferences.swift */,
 				3AEE21AE249F2B7A002CB2F1 /* Downloader.swift */,
+				3AC396DA24A4CD330088C622 /* Reachbility.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				3AEE21AF249F2B7A002CB2F1 /* Downloader.swift in Sources */,
 				3AC396D924A4B94A0088C622 /* Item.swift in Sources */,
 				3AA04B8824A23D7B00886E65 /* AddItemViewModel.swift in Sources */,
+				3AC396DB24A4CD330088C622 /* Reachbility.swift in Sources */,
 				3AF97672249DB9BC00A7BA80 /* AppDelegate.swift in Sources */,
 				3AA04B7E24A22B1B00886E65 /* AddItemHeaderView.swift in Sources */,
 				3AA04B8524A23A4E00886E65 /* InputTextView.swift in Sources */,

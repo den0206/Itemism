@@ -69,7 +69,26 @@ class AddItemViewController : UITableViewController {
     
     @objc func handleDone() {
         
-        print(name,desc,itemImages)
+        view.endEditing(true)
+        
+        guard itemImages.count > 0 else {
+            showAlert(title: "Recheck", message: "画像を選択してください")
+            return
+        }
+        
+        guard  let name = name ,let desc = desc, name != "" && desc != ""  else {
+            showAlert(title: "Recheck", message: "商品説明を記入してください")
+            return
+        }
+        
+        let itemId = UUID().uuidString
+        
+        let value = [kITEMID : itemId,
+                     kUSERID : User.currentId(),
+                     kITEMNAME : name,
+                     kDESCRIPTION : desc]
+        
+        print(value)
     }
     
     @objc func handleDismiss() {

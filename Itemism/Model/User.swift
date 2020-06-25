@@ -24,6 +24,12 @@ class User {
         self.profileImageData = dictionary[kPROFILE_IMAGE] as? String ?? ""
     }
     
+    class func currentId() -> String {
+        
+        return Auth.auth().currentUser!.uid
+    }
+       
+    
     class func currentUser() -> User? {
         if Auth.auth().currentUser != nil {
             

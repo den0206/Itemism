@@ -14,8 +14,12 @@ struct Item {
     var description : String
     var imageLinks : [String]
     
+    let userId : String
+    
+  
     init(dictionry : [String : Any]) {
         id = dictionry[kITEMID] as? String ?? ""
+        userId = dictionry[kUSERID] as? String ?? ""
         name = dictionry[kITEMNAME] as? String ?? ""
         description = dictionry[kDESCRIPTION] as? String ?? ""
         imageLinks = dictionry[kIMGELINKS] as? [String] ?? [String()]
