@@ -27,4 +27,5 @@ public let kITEMID = "itemId"
 public let kITEMNAME = "itemName"
 public let kDESCRIPTION = "description"
 public let kIMGELINKS = "imageLinks"
+public let kFILEREFERENCE = "gs://instagram-clone-9c6fe.appspot.com"
  

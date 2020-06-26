@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 func downloadImageFromData(picturedata : String) -> UIImage?{
     let imageFileName = (picturedata.components(separatedBy: "%").last!).components(separatedBy: "?").first!
@@ -75,3 +76,66 @@ func fileExistPath(path : String) -> Bool {
     
 }
 
+
+//MARK: - upload ItemImages
+
+func uploadImages(images : [UIImage?], itemId : String, completion : @escaping(_ imageLinks : [String]) -> Void) {
+    
+    if Reachabilty.HasConnection() {
+        
+        var uploadImagesCount = 0
+        var imageLinkArray : [String] = []
+        var nameShuffix = 0
+        
+        for image in images {
+            let fileName = "ItemImages/" + itemId + "/" + "\(nameShuffix)" + ".jpg"
+            let imageData = image!.jpegData(compressionQuality: 0.3)
+            
+            savaImageInFirestore(imageData: imageData!, fileName: fileName) { (imageLink) in
+                
+                if imageLink != nil {
+                    imageLinkArray.append(imageLink!)
+                    uploadImagesCount += 1
+                    
+                    if uploadImagesCount == images.count {
+                        completion(imageLinkArray)
+                    }
+                }
+            }
+            
+            nameShuffix += 1
+        }
+        
+    } else {
+        print("NI Internet Connections")
+    }
+}
+
+func savaImageInFirestore(imageData : Data,fileName : String,completion :  @escaping(_ imageLink : String?) -> Void) {
+    
+    let storage = Storage.storage()
+
+    
+    var task : StorageUploadTask!
+    let storogeRef = storage.reference(forURL: kFILEREFERENCE).child(fileName)
+    
+    task = storogeRef.putData(imageData, metadata: nil, completion: { (meta, error) in
+        
+        task.removeAllObservers()
+        
+        if error != nil {
+            print(error!.localizedDescription)
+            completion(nil)
+            return
+        }
+        
+        storogeRef.downloadURL { (url, error) in
+            
+            guard let downloadUrl = url else {
+                completion(nil)
+                return
+            }
+            completion(downloadUrl.absoluteString)
+        }
+    })
+}
