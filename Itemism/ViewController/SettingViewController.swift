@@ -21,7 +21,6 @@ class SettingViewController : UITableViewController {
         configureUI()
         configureTableView()
         
-        print(User.currentUser()?.name)
     }
     
     //MARK: - UI

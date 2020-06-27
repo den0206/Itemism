@@ -13,6 +13,14 @@ private let reuseIdentifer = "FeedCell"
 
 class FeedViewController : UICollectionViewController {
     
+    //MARK: - Property
+    
+    var items = [Item]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
     //MARK: - Parts
     
     let actionButton : UIButton = {
@@ -41,7 +49,7 @@ class FeedViewController : UICollectionViewController {
         super.viewDidLoad()
         
         configureCV()
-        
+        fetchItems()
 
         
     }
@@ -71,6 +79,16 @@ class FeedViewController : UICollectionViewController {
         
     }
     
+    //MARK: - API
+    
+    private func fetchItems() {
+        
+        ItemService.fetchAllItems { (items) in
+            
+            self.items = items
+        }
+    }
+    
     //MARK: - Actions
     
     @objc func handleTappedAddItem() {
@@ -91,13 +109,13 @@ extension FeedViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 3
+        return items.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifer, for: indexPath) as! FeedCell
-        
+        cell.item = items[indexPath.item]
         
         return cell
     }

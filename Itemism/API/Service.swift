@@ -82,7 +82,7 @@ class AuthService {
 
 class ItemService {
     
-    static func fetchAllITems( completion : @escaping(_ items : [Item]) -> Void) {
+    static func fetchAllItems( completion : @escaping([Item]) -> Void) {
         
         firebaseReference(.Item).order(by: kTIMESTAMP, descending: true).getDocuments { (snapshot, error) in
             
@@ -93,7 +93,20 @@ class ItemService {
             
             guard let snapshot = snapshot else {return}
             
+            var items = [Item]()
+//            var itemsCount = 0
             
+            if !snapshot.isEmpty {
+                
+                snapshot.documents.forEach { (snapshot) in
+                    let document = snapshot.data()
+                    let item = Item(dictionry: document)
+                    
+                    items.append(item)
+  
+                }
+                completion(items)
+            }
         }
         
     }
