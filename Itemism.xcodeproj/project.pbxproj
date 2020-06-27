@@ -21,6 +21,7 @@
 		3ADB97E2249DD67F000AB412 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB97E1249DD67F000AB412 /* MainTabController.swift */; };
 		3ADB97E4249DD917000AB412 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3ADB97E3249DD917000AB412 /* GoogleService-Info.plist */; };
 		3ADB97E7249DDD6F000AB412 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB97E6249DDD6F000AB412 /* LoginViewController.swift */; };
+		3AE001EB24A79541009BD9B5 /* DetailItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE001EA24A79541009BD9B5 /* DetailItemViewController.swift */; };
 		3AEE21A9249F1E4B002CB2F1 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE21A8249F1E4B002CB2F1 /* Service.swift */; };
 		3AEE21AB249F2541002CB2F1 /* Constracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE21AA249F2541002CB2F1 /* Constracts.swift */; };
 		3AEE21AD249F25A9002CB2F1 /* FirebaseReferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE21AC249F25A9002CB2F1 /* FirebaseReferences.swift */; };
@@ -51,6 +52,7 @@
 		3ADB97E1249DD67F000AB412 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		3ADB97E3249DD917000AB412 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3ADB97E6249DDD6F000AB412 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3AE001EA24A79541009BD9B5 /* DetailItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemViewController.swift; sourceTree = "<group>"; };
 		3AEE21A8249F1E4B002CB2F1 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		3AEE21AA249F2541002CB2F1 /* Constracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constracts.swift; sourceTree = "<group>"; };
 		3AEE21AC249F25A9002CB2F1 /* FirebaseReferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReferences.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				3AF97685249DBA0600A7BA80 /* FeedViewController.swift */,
 				3AEE21B2249F2F9D002CB2F1 /* SettingViewController.swift */,
 				3A04834224A0DF8C008F1BC2 /* AddItemViewController.swift */,
+				3AE001EA24A79541009BD9B5 /* DetailItemViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				3AEE21AD249F25A9002CB2F1 /* FirebaseReferences.swift in Sources */,
 				3ADB97E2249DD67F000AB412 /* MainTabController.swift in Sources */,
 				3A04834124A0CF28008F1BC2 /* SettingFooterView.swift in Sources */,
+				3AE001EB24A79541009BD9B5 /* DetailItemViewController.swift in Sources */,
 				3AEE21A9249F1E4B002CB2F1 /* Service.swift in Sources */,
 				3ADB97DE249DD56A000AB412 /* FeedCell.swift in Sources */,
 				3A04834324A0DF8C008F1BC2 /* AddItemViewController.swift in Sources */,

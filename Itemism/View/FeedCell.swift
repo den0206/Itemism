@@ -92,6 +92,9 @@ class FeedCell : UICollectionViewCell {
         
         itemImageView.layer.addSublayer(gradientLayer)
         
+        infoLabel.text = item.name
+        
+        
         
     }
 

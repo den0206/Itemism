@@ -64,16 +64,18 @@ class FeedViewController : UICollectionViewController {
     
     private func configureCV() {
         
+        
         view.addSubview(actionButton)
         actionButton.anchor( bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingBottom: 64, paddingRight: 16, width: 56, height: 56)
         actionButton.layer.cornerRadius = 56 / 2
         
         
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemGroupedBackground
+
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifer)
         
-        collectionView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 25, right: 24)
-        collectionView.horizontalScrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 25, right: 24)
+        collectionView.contentInset = UIEdgeInsets(top: 50, left: 25, bottom: 25, right: 24)
+        collectionView.horizontalScrollIndicatorInsets = UIEdgeInsets(top: 50, left: 25, bottom: 25, right: 24)
         
         
         
@@ -83,9 +85,14 @@ class FeedViewController : UICollectionViewController {
     
     private func fetchItems() {
         
+        self.tabBarController?.showPresentLoadindView(true)
+        
         ItemService.fetchAllItems { (items) in
             
             self.items = items
+            
+            self.tabBarController?.showPresentLoadindView(false)
+
         }
     }
     
@@ -120,6 +127,13 @@ extension FeedViewController {
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let item = items[indexPath.item]
+        
+        let itemVC = DetailItemViewController(item: item)
+        navigationController?.pushViewController(itemVC, animated: true)
+    }
     
     
 }
@@ -129,8 +143,13 @@ extension FeedViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let cellWidth = view.frame.width - 75
-        let cellHeight = view.frame.height - 200
+        let cellHeight = view.frame.height - 300
         
         return CGSize(width: cellWidth, height: cellHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        
+        return 25
     }
 }

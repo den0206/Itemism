@@ -16,6 +16,8 @@ struct Item {
     
     let userId : String
     
+    var user : User?
+    
   
     init(dictionry : [String : Any]) {
         id = dictionry[kITEMID] as? String ?? ""

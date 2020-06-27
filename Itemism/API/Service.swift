@@ -78,6 +78,31 @@ class AuthService {
     
 }
 
+//MARK: - User Service
+
+class UserService {
+    
+    static func fetchUser(uid : String, completion :  @escaping(User) -> Void) {
+        
+        firebaseReference(.User).document(uid).getDocument { (snapshot, error) in
+            
+            if error != nil {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            guard let snapshot = snapshot else {return}
+            
+            if snapshot.exists {
+                let date = snapshot.data()
+                let user = User(dictionary: date!)
+                
+                completion(user)
+            }
+        }
+    }
+}
+
 //MARK: - ITRM Service
 
 class ItemService {
@@ -97,15 +122,28 @@ class ItemService {
 //            var itemsCount = 0
             
             if !snapshot.isEmpty {
+                let documents = snapshot.documents
                 
-                snapshot.documents.forEach { (snapshot) in
+                documents.forEach { (snapshot) in
                     let document = snapshot.data()
-                    let item = Item(dictionry: document)
+                    var item = Item(dictionry: document)
                     
-                    items.append(item)
-  
+                    /// add user objc
+                    UserService.fetchUser(uid: item.userId) { (user) in
+                        
+                        item.user = user
+                        
+                        items.append(item)
+                        
+                        if items.count == documents.count {
+                            print("Set")
+                            completion(items)
+                        }
+                    }
+
+
                 }
-                completion(items)
+//                completion(items)
             }
         }
         
