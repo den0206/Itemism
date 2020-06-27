@@ -69,6 +69,7 @@ class AddItemHeaderView : UIView {
         button.imageView?.contentMode = .scaleToFill
         button.addTarget(self, action: #selector(selectedPhoto), for: .touchUpInside)
         button.tag = index
+        button.isEnabled = false
         
         return button
     }

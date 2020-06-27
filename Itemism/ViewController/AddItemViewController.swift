@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 private let reuseIdentifer = "AddItemCell"
 
@@ -17,6 +18,10 @@ class AddItemViewController : UITableViewController {
     var name : String?
     var desc : String?
     
+//    var enableImageButton : Int{
+//        return itemImages.count
+//    }
+//
     
     //MARK: - Parts
     let headerView = AddItemHeaderView()
@@ -63,6 +68,14 @@ class AddItemViewController : UITableViewController {
         
         view.addGestureRecognizer(tappedGesture)
         
+        enableImageButton(imageArray: itemImages)
+    }
+    
+    private func enableImageButton(imageArray : [UIImage]) {
+        
+        let enableButtonCount = imageArray.count
+        headerView.buttons[enableButtonCount].isEnabled = true
+        headerView.buttons[enableButtonCount].setTitleColor(.cyan, for: .normal)
     }
     
     //MARK: - Actions
@@ -81,14 +94,40 @@ class AddItemViewController : UITableViewController {
             return
         }
         
+        self.navigationController?.showPresentLoadindView(true)
+        
         let itemId = UUID().uuidString
         
-        let value = [kITEMID : itemId,
-                     kUSERID : User.currentId(),
-                     kITEMNAME : name,
-                     kDESCRIPTION : desc]
-        
-        print(value)
+        uploadImages(images: itemImages, itemId: itemId) { (imageLinkArray) in
+            
+            let value = [kITEMID : itemId,
+                         kUSERID : User.currentId(),
+                         kITEMNAME : name,
+                         kDESCRIPTION : desc,
+                         kTIMESTAMP : Timestamp(date: Date()),
+                         kIMAGELINKS : imageLinkArray] as [String : Any]
+            
+            saveItemToFirestore(itemId: itemId, value: value) { (error) in
+                
+                if error != nil {
+                    
+                    self.showAlert(title: "Error", message: error!.localizedDescription)
+                    self.navigationController?.showPresentLoadindView(false)
+                    return
+                }
+                
+                self.navigationController?.showPresentLoadindView(false)
+                
+                self.dismiss(animated: true, completion: nil)
+                
+                
+            }
+            
+            
+            
+            
+             
+        }
     }
     
     @objc func handleDismiss() {
@@ -162,17 +201,15 @@ extension AddItemViewController : AddItemHeaderViewDelegate, UIImagePickerContro
         guard let selectedImage = info[.originalImage] as? UIImage else {return}
         
         headerView.buttons[imageIndex].setImage(selectedImage.withRenderingMode(.alwaysOriginal), for: .normal)
-        
+//
         if itemImages.indices.contains(imageIndex){
             self.itemImages.remove(at: imageIndex)
         }
-        
+
         /// uploadPhoto
         self.itemImages.insert(selectedImage, at: imageIndex)
         
-    
-        
-        print(itemImages)
+        enableImageButton(imageArray: itemImages)
         
         dismiss(animated: true, completion: nil)
     }

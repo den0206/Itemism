@@ -78,4 +78,26 @@ class AuthService {
     
 }
 
-//MARK: - API
+//MARK: - ITRM Service
+
+class ItemService {
+    
+    static func fetchAllITems( completion : @escaping(_ items : [Item]) -> Void) {
+        
+        firebaseReference(.Item).order(by: kTIMESTAMP, descending: true).getDocuments { (snapshot, error) in
+            
+            if error != nil {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            guard let snapshot = snapshot else {return}
+            
+            
+        }
+        
+    }
+    
+}
+
+

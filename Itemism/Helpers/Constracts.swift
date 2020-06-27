@@ -26,6 +26,7 @@ public let kCURRENTUSER = "currentUser"
 public let kITEMID = "itemId"
 public let kITEMNAME = "itemName"
 public let kDESCRIPTION = "description"
-public let kIMGELINKS = "imageLinks"
+public let kIMAGELINKS = "imageLinks"
 public let kFILEREFERENCE = "gs://instagram-clone-9c6fe.appspot.com"
+public let kTIMESTAMP = "timeStamp"
  

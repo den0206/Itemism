@@ -22,7 +22,12 @@ struct Item {
         userId = dictionry[kUSERID] as? String ?? ""
         name = dictionry[kITEMNAME] as? String ?? ""
         description = dictionry[kDESCRIPTION] as? String ?? ""
-        imageLinks = dictionry[kIMGELINKS] as? [String] ?? [String()]
+        imageLinks = dictionry[kIMAGELINKS] as? [String] ?? [String()]
     }
     
+}
+
+func saveItemToFirestore(itemId : String,value : [String : Any], completion :  @escaping(_ Error : Error?) -> Void){
+    
+    firebaseReference(.Item).document(itemId).setData(value, completion: completion)
 }
