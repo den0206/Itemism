@@ -10,7 +10,21 @@ import UIKit
 
 class DetailItemViewController : UIViewController {
     
+    
+    //MARK: - Property
+    
     let item : Item
+    
+    //MARK: - Parts
+    private let bottomStack = BottomControlsStackView()
+    
+    
+    private let deckView : UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        return view
+    }()
     
     init(item : Item) {
         self.item = item
@@ -24,8 +38,7 @@ class DetailItemViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .red
-        print(item)
+        configureUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +52,26 @@ class DetailItemViewController : UIViewController {
         super.viewWillAppear(animated)
         
         tabBarController?.tabBar.isHidden = false
+        
+    }
+    
+    //MARK: - UI
+    
+    private func configureUI() {
+        
+        navigationItem.title = item.name
+        
+        view.backgroundColor = .systemGroupedBackground
+        
+        let stack = UIStackView(arrangedSubviews: [deckView, bottomStack])
+        stack.axis = .vertical
+        
+        view.addSubview(stack)
+        view.addSubview(stack)
+        stack.anchor(top : view.safeAreaLayoutGuide.topAnchor,left : view.leftAnchor,bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor)
+        stack.isLayoutMarginsRelativeArrangement = true
+        stack.layoutMargins = .init(top: 0, left: 12, bottom: 0, right: 12)
+        stack.bringSubviewToFront(deckView)
         
     }
 }

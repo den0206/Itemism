@@ -48,6 +48,9 @@ class FeedViewController : UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tabBarController?.showPresentLoadindView(true)
+
+        
         configureCV()
         fetchItems()
 
@@ -85,15 +88,19 @@ class FeedViewController : UICollectionViewController {
     
     private func fetchItems() {
         
-        self.tabBarController?.showPresentLoadindView(true)
-        
-        ItemService.fetchAllItems { (items) in
+        if Reachabilty.HasConnection() {
+            ItemService.fetchAllItems { (items) in
+                
+                self.items = items
+                
+                self.tabBarController?.showPresentLoadindView(false)
+                
+            }
+        } else {
             
-            self.items = items
-            
-            self.tabBarController?.showPresentLoadindView(false)
-
+            self.showAlert(title: "Recheck", message: "No Internet Connections")
         }
+     
     }
     
     //MARK: - Actions

@@ -107,7 +107,7 @@ func uploadImages(images : [UIImage?], itemId : String, completion : @escaping(_
         }
         
     } else {
-        print("NI Internet Connections")
+        print("No Internet Connections")
     }
 }
 
