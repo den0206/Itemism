@@ -39,6 +39,7 @@ class DetailItemViewController : UIViewController {
         super.viewDidLoad()
         
         configureUI()
+        configureCardView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,11 +68,18 @@ class DetailItemViewController : UIViewController {
         stack.axis = .vertical
         
         view.addSubview(stack)
-        view.addSubview(stack)
         stack.anchor(top : view.safeAreaLayoutGuide.topAnchor,left : view.leftAnchor,bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor)
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layoutMargins = .init(top: 0, left: 12, bottom: 0, right: 12)
         stack.bringSubviewToFront(deckView)
         
+    }
+    
+    private func configureCardView() {
+        
+        let cardView = CardView(item: item)
+
+        deckView.addSubview(cardView)
+        cardView.fillSuperview()
     }
 }

@@ -18,6 +18,7 @@
 		3AC396DB24A4CD330088C622 /* Reachbility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC396DA24A4CD330088C622 /* Reachbility.swift */; };
 		3AD3327E24A83FE9002A2672 /* BottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3327D24A83FE9002A2672 /* BottomControlsStackView.swift */; };
 		3AD3328024A84360002A2672 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3327F24A84360002A2672 /* CardView.swift */; };
+		3AD3328224A8470F002A2672 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3328124A8470F002A2672 /* CardViewModel.swift */; };
 		3ADB97DE249DD56A000AB412 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB97DD249DD56A000AB412 /* FeedCell.swift */; };
 		3ADB97E0249DD60A000AB412 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB97DF249DD60A000AB412 /* Extensions.swift */; };
 		3ADB97E2249DD67F000AB412 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB97E1249DD67F000AB412 /* MainTabController.swift */; };
@@ -51,6 +52,7 @@
 		3AC396DA24A4CD330088C622 /* Reachbility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachbility.swift; sourceTree = "<group>"; };
 		3AD3327D24A83FE9002A2672 /* BottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomControlsStackView.swift; sourceTree = "<group>"; };
 		3AD3327F24A84360002A2672 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		3AD3328124A8470F002A2672 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		3ADB97DD249DD56A000AB412 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		3ADB97DF249DD60A000AB412 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3ADB97E1249DD67F000AB412 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				3AA04B8724A23D7B00886E65 /* AddItemViewModel.swift */,
+				3AD3328124A8470F002A2672 /* CardViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				3AA04B8824A23D7B00886E65 /* AddItemViewModel.swift in Sources */,
 				3AC396DB24A4CD330088C622 /* Reachbility.swift in Sources */,
 				3AF97672249DB9BC00A7BA80 /* AppDelegate.swift in Sources */,
+				3AD3328224A8470F002A2672 /* CardViewModel.swift in Sources */,
 				3AA04B7E24A22B1B00886E65 /* AddItemHeaderView.swift in Sources */,
 				3AA04B8524A23A4E00886E65 /* InputTextView.swift in Sources */,
 				3AEE21B3249F2F9D002CB2F1 /* SettingViewController.swift in Sources */,
