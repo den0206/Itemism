@@ -16,6 +16,7 @@
 		3AA04B8824A23D7B00886E65 /* AddItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA04B8724A23D7B00886E65 /* AddItemViewModel.swift */; };
 		3AC396D924A4B94A0088C622 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC396D824A4B94A0088C622 /* Item.swift */; };
 		3AC396DB24A4CD330088C622 /* Reachbility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC396DA24A4CD330088C622 /* Reachbility.swift */; };
+		3AD31B7424A85CDA00BD78D3 /* MyItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD31B7324A85CDA00BD78D3 /* MyItemsViewController.swift */; };
 		3AD3327E24A83FE9002A2672 /* BottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3327D24A83FE9002A2672 /* BottomControlsStackView.swift */; };
 		3AD3328024A84360002A2672 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3327F24A84360002A2672 /* CardView.swift */; };
 		3AD3328224A8470F002A2672 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3328124A8470F002A2672 /* CardViewModel.swift */; };
@@ -50,6 +51,7 @@
 		3AA04B8724A23D7B00886E65 /* AddItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewModel.swift; sourceTree = "<group>"; };
 		3AC396D824A4B94A0088C622 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		3AC396DA24A4CD330088C622 /* Reachbility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachbility.swift; sourceTree = "<group>"; };
+		3AD31B7324A85CDA00BD78D3 /* MyItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyItemsViewController.swift; sourceTree = "<group>"; };
 		3AD3327D24A83FE9002A2672 /* BottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomControlsStackView.swift; sourceTree = "<group>"; };
 		3AD3327F24A84360002A2672 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		3AD3328124A8470F002A2672 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				3AEE21B2249F2F9D002CB2F1 /* SettingViewController.swift */,
 				3A04834224A0DF8C008F1BC2 /* AddItemViewController.swift */,
 				3AE001EA24A79541009BD9B5 /* DetailItemViewController.swift */,
+				3AD31B7324A85CDA00BD78D3 /* MyItemsViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				3AEE21B3249F2F9D002CB2F1 /* SettingViewController.swift in Sources */,
 				3AA04B8324A2343D00886E65 /* AddItemCell.swift in Sources */,
 				3A0AA474249EF87D009BE640 /* SignUpViewController.swift in Sources */,
+				3AD31B7424A85CDA00BD78D3 /* MyItemsViewController.swift in Sources */,
 				3ADB97E0249DD60A000AB412 /* Extensions.swift in Sources */,
 				3AD3328024A84360002A2672 /* CardView.swift in Sources */,
 				3AEE21AD249F25A9002CB2F1 /* FirebaseReferences.swift in Sources */,

@@ -98,6 +98,7 @@ class FeedViewController : UICollectionViewController {
             }
         } else {
             
+            self.tabBarController?.showPresentLoadindView(false)
             self.showAlert(title: "Recheck", message: "No Internet Connections")
         }
      

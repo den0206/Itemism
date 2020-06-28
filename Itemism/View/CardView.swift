@@ -13,13 +13,16 @@ class CardView : UIView {
     //MARK: - Property
     
     let item : Item
+    var imageIndex = 0
+    var imageUrl : URL?
+
     
     //MARK: - Parts
     
     private let gradientLayer = CAGradientLayer()
+    private let barStackView = UIStackView()
     
     private let itemImageView : UIImageView = {
-        
         let iv = UIImageView()
 //        iv.contentMode = .scaleAspectFill
         return iv
@@ -44,6 +47,11 @@ class CardView : UIView {
         addSubview(itemImageView)
         itemImageView.fillSuperview()
         
+        /// bar View
+        
+        if item.imageLinks.count > 1 {
+            configureBarStackView()
+        }
         /// add layer & gesture
         configureGradientLayer()
         
@@ -65,7 +73,26 @@ class CardView : UIView {
     
     @objc func handleChangePhoto(sender : UITapGestureRecognizer) {
         
-       
+        let location = sender.location(in: nil).x
+        let shouldShowNextPhoto = location > self.frame.width / 2
+        
+        if shouldShowNextPhoto {
+            
+            guard imageIndex < item.imageLinks.count - 1 else {return}
+            
+            imageIndex += 1
+            imageUrl = URL(string: item.imageLinks[imageIndex])
+            
+        } else {
+            guard imageIndex > 0 else {return}
+            
+            imageIndex -= 1
+            imageUrl = URL(string: item.imageLinks[imageIndex])
+        }
+        
+        itemImageView.sd_setImage(with: imageUrl)
+        barStackView.arrangedSubviews.forEach({$0.backgroundColor = UIColor(white: 0, alpha: 0.1)})
+        barStackView.arrangedSubviews[imageIndex].backgroundColor = .white
         
     }
     
@@ -74,7 +101,7 @@ class CardView : UIView {
     private func configureGradientLayer() {
         configureGestureRecoganizer()
         
-        let imageUrl = URL(string: item.imageLinks[0])
+        imageUrl = URL(string: item.imageLinks[0])
         itemImageView.sd_setImage(with: imageUrl)
         
         gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
@@ -87,6 +114,25 @@ class CardView : UIView {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleChangePhoto))
         addGestureRecognizer(tap)
+    }
+    
+    private func configureBarStackView() {
+        
+        (0 ..< item.imageLinks.count).forEach { (_) in
+            
+            let barView = UIView()
+            barView.backgroundColor = UIColor(white: 0, alpha: 0.1)
+            
+            barStackView.addArrangedSubview(barView)
+            
+        }
+        
+        barStackView.arrangedSubviews.first?.backgroundColor = .white
+        addSubview(barStackView)
+        barStackView.anchor(top : topAnchor,left: leftAnchor,right: rightAnchor,paddingTop: 8,paddingLeft: 8,paddingRight: 8,height: 4)
+        barStackView.spacing = 4
+        barStackView.distribution = .fillEqually
+               
     }
     
     

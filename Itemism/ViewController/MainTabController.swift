@@ -50,16 +50,19 @@ class MainTabController : UITabBarController {
     private func configureTabController() {
         
         let feedVC = FeedViewController()
-        let nav = createNavController(image: UIImage(systemName: "house.fill"), title: "Items", rootViewController: feedVC)
+        let nav = createNavController(image: UIImage(systemName: "house.fill"), title: "Feeds", rootViewController: feedVC)
+        
+        let itemVC = MyItemsViewController()
+        let nav1 = createNavController(image: UIImage(systemName: "gift.fill"), title: "Items", rootViewController: itemVC)
         
         let settingVC = SettingViewController()
-        let nav1 = UINavigationController(rootViewController: settingVC)
+        let nav2 = UINavigationController(rootViewController: settingVC)
         
         
         settingVC.tabBarItem.image = UIImage(systemName: "person.crop.rectangle")
         settingVC.tabBarItem.title = "Settings"
         
-        viewControllers = [nav, nav1]
+        viewControllers = [nav, nav1, nav2]
         
         UITabBar.appearance().tintColor = .black
         tabBar.unselectedItemTintColor = .lightGray
