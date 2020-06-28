@@ -8,11 +8,17 @@
 
 import UIKit
 
+enum CardViewType {
+    case Detail
+    case Default
+}
+
 class CardView : UIView {
     
     //MARK: - Property
     
     let item : Item
+    let type : CardViewType
     var imageIndex = 0
     var imageUrl : URL?
 
@@ -37,8 +43,9 @@ class CardView : UIView {
     }()
     
     
-    init(item : Item) {
+    init(type : CardViewType, item : Item) {
         self.item = item
+        self.type = type
         super.init(frame: .zero)
         
         layer.cornerRadius = 10
@@ -69,6 +76,53 @@ class CardView : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+
+    //MARK: - UI
+    
+    private func configureGradientLayer() {
+        configureGestureRecoganizer()
+        
+        imageUrl = URL(string: item.imageLinks[0])
+        itemImageView.sd_setImage(with: imageUrl)
+        
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.5, 1,1]
+        layer.addSublayer(gradientLayer)
+        
+    }
+    
+    private func configureGestureRecoganizer() {
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleChangePhoto))
+        addGestureRecognizer(tap)
+        
+        
+        /// excecude
+        if type == .Default {
+            let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
+            addGestureRecognizer(pan)
+        }
+    }
+    
+    private func configureBarStackView() {
+        
+        (0 ..< item.imageLinks.count).forEach { (_) in
+            
+            let barView = UIView()
+            barView.backgroundColor = UIColor(white: 0, alpha: 0.1)
+            
+            barStackView.addArrangedSubview(barView)
+            
+        }
+        
+        barStackView.arrangedSubviews.first?.backgroundColor = .white
+        addSubview(barStackView)
+        barStackView.anchor(top : topAnchor,left: leftAnchor,right: rightAnchor,paddingTop: 8,paddingLeft: 8,paddingRight: 8,height: 4)
+        barStackView.spacing = 4
+        barStackView.distribution = .fillEqually
+               
+    }
+    
     //MARK: - Actions
     
     @objc func handleChangePhoto(sender : UITapGestureRecognizer) {
@@ -96,43 +150,11 @@ class CardView : UIView {
         
     }
     
-    //MARK: - Helpers
-    
-    private func configureGradientLayer() {
-        configureGestureRecoganizer()
+    @objc func handlePanGesture(sender : UIPanGestureRecognizer) {
         
-        imageUrl = URL(string: item.imageLinks[0])
-        itemImageView.sd_setImage(with: imageUrl)
-        
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradientLayer.locations = [0.5, 1,1]
-        layer.addSublayer(gradientLayer)
-        
-    }
-    
-    private func configureGestureRecoganizer() {
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleChangePhoto))
-        addGestureRecognizer(tap)
-    }
-    
-    private func configureBarStackView() {
-        
-        (0 ..< item.imageLinks.count).forEach { (_) in
-            
-            let barView = UIView()
-            barView.backgroundColor = UIColor(white: 0, alpha: 0.1)
-            
-            barStackView.addArrangedSubview(barView)
-            
-        }
-        
-        barStackView.arrangedSubviews.first?.backgroundColor = .white
-        addSubview(barStackView)
-        barStackView.anchor(top : topAnchor,left: leftAnchor,right: rightAnchor,paddingTop: 8,paddingLeft: 8,paddingRight: 8,height: 4)
-        barStackView.spacing = 4
-        barStackView.distribution = .fillEqually
-               
+        // TODO: - edit Pan Gesture
+
+        print("Pangesture")
     }
     
     

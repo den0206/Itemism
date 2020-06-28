@@ -10,6 +10,17 @@ import UIKit
 
 class MyItemsViewController : UIViewController {
     
+    //MARK: - Property
+    
+    var items = [Item]() {
+        didSet {
+            configureCardView()
+        }
+    }
+    
+    private var cardViews = [CardView]()
+    private var topCardView : CardView?
+    
     //MARK: - Parts
     private let headerView : UIView = {
         let view = UIView()
@@ -18,7 +29,6 @@ class MyItemsViewController : UIViewController {
     }()
     
     private let bottomStack = BottomControlsStackView()
-    
     
     private let deckView : UIView = {
         let view = UIView()
@@ -31,7 +41,11 @@ class MyItemsViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tabBarController?.showPresentLoadindView(true)
+        
         configureUI()
+        
+        fetchCurrentItems()
         
     }
     
@@ -57,5 +71,32 @@ class MyItemsViewController : UIViewController {
         stack.layoutMargins = .init(top: 0, left: 12, bottom: 0, right: 12)
         stack.bringSubviewToFront(deckView)
         
+    }
+    
+    private func configureCardView() {
+        
+        items.forEach { (item) in
+            
+            let cardView = CardView(type: .Default, item: item)
+            deckView.addSubview(cardView)
+            cardView.fillSuperview()
+        }
+        
+        cardViews = deckView.subviews.map({($0 as? CardView)!})
+        print(cardViews)
+        topCardView = cardViews.last
+        
+        
+    }
+    //MARK: - API
+    
+    func fetchCurrentItems() {
+        
+        ItemService.fetchAllItems { (items) in
+            self.items = items
+            
+            self.tabBarController?.showPresentLoadindView(false)
+
+        }
     }
 }

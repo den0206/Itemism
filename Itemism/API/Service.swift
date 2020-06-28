@@ -149,6 +149,39 @@ class ItemService {
         
     }
     
+    
+    static func fetchCurrentItems( completion :  @escaping([Item]) -> Void) {
+        
+        firebaseReference(.Item).whereField(kUSERID, isEqualTo: User.currentId()).getDocuments { (snapshot, error) in
+            
+            if error != nil {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            guard let snapshot = snapshot else {return}
+            
+            if !snapshot.isEmpty {
+                var items = [Item]()
+                
+                snapshot.documents.forEach { (document) in
+                    var item = Item(dictionry: document.data())
+                    
+                    /// set user property
+                    item.user = User.currentUser()
+                    
+                    items.append(item)
+                    
+                    if snapshot.documents.count == items.count {
+                        completion(items)
+                    }
+                }
+            } else {
+                print("No Item")
+            }
+        }
+    }
+    
 }
 
 

@@ -77,7 +77,7 @@ class DetailItemViewController : UIViewController {
     
     private func configureCardView() {
         
-        let cardView = CardView(item: item)
+        let cardView = CardView(type: .Detail, item: item)
 
         deckView.addSubview(cardView)
         cardView.fillSuperview()
