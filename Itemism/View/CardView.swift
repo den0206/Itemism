@@ -13,6 +13,11 @@ enum CardViewType {
     case Default
 }
 
+enum SwipeDirection : Int{
+    case left = -1
+    case right = 1
+}
+
 class CardView : UIView {
     
     //MARK: - Property
@@ -153,8 +158,58 @@ class CardView : UIView {
     @objc func handlePanGesture(sender : UIPanGestureRecognizer) {
         
         // TODO: - edit Pan Gesture
-
-        print("Pangesture")
+        
+        switch sender.state {
+        
+        case .began:
+            superview?.subviews.forEach({ (view) in
+                view.layer.removeAllAnimations()
+            })
+            
+        case .changed:
+            panCard(sender: sender)
+        case .ended:
+            resetCardPosition(sender: sender)
+       
+        default:
+            break
+        }
+    }
+    
+    private func panCard(sender : UIPanGestureRecognizer) {
+        
+        let transration = sender.translation(in: nil)
+        
+        let degrees : CGFloat = transration.x / 20
+        let angle = degrees * .pi / 180
+        let rotaionalTrabsform = CGAffineTransform(rotationAngle: angle)
+        
+        self.transform = rotaionalTrabsform.translatedBy(x: transration.x, y: transration.y)
+    }
+    
+    private func resetCardPosition(sender : UIPanGestureRecognizer) {
+        
+        let direction : SwipeDirection = sender.translation(in: nil).x > 100 ? .right : .left
+        let showldDismissCard = abs(sender.translation(in: nil).x) > 150
+        
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
+            
+            if showldDismissCard {
+                
+                let xTranslation = CGFloat(direction.rawValue) * 1000
+                let ofScreenTransform = self.transform.translatedBy(x: xTranslation, y: 0)
+                self.transform = ofScreenTransform
+            } else {
+                self.transform = .identity
+            }
+        }) { (_) in
+            
+            /// add Like
+            if showldDismissCard {
+                let didlike = direction == .right
+                print(didlike)
+            }
+        }
     }
     
     
