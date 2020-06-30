@@ -12,6 +12,8 @@ class MyItemsViewController : UIViewController {
     
     //MARK: - Property
     
+    let user : User
+    
     var items = [Item]() {
         didSet {
             configureCardView()
@@ -37,21 +39,33 @@ class MyItemsViewController : UIViewController {
         return view
     }()
     
+    init(user : User) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         self.tabBarController?.showPresentLoadindView(true)
         
         configureUI()
         
-        fetchCurrentItems()
+        fetchUserItems()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+        
+        
     }
     
     //MARK: - UI
@@ -87,16 +101,19 @@ class MyItemsViewController : UIViewController {
         topCardView = cardViews.last
         
         
+
+        
+        
     }
     //MARK: - API
     
-    func fetchCurrentItems() {
+    func fetchUserItems() {
         
-        ItemService.fetchAllItems { (items) in
+        ItemService.fetchUserItems(user: user) { (items) in
             self.items = items
             
             self.tabBarController?.showPresentLoadindView(false)
-
+            print(items.count)
         }
     }
 }

@@ -132,6 +132,7 @@ extension FeedViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifer, for: indexPath) as! FeedCell
         cell.item = items[indexPath.item]
         
+        cell.delegate = self
         return cell
     }
     
@@ -160,4 +161,18 @@ extension FeedViewController : UICollectionViewDelegateFlowLayout {
         
         return 25
     }
+}
+
+//MARK: - Feed Cell delegate
+
+extension FeedViewController : FeedCellDelegate {
+    
+    func tappedUserImage(feedCell: FeedCell, user: User) {
+        
+        let itemsVC = MyItemsViewController(user: user)
+        
+        navigationController?.pushViewController(itemsVC, animated: true)
+    }
+    
+    
 }

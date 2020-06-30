@@ -12,6 +12,8 @@ import FirebaseAuth
 
 class MainTabController : UITabBarController {
     
+//    var currentUser : User?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +54,7 @@ class MainTabController : UITabBarController {
         let feedVC = FeedViewController()
         let nav = createNavController(image: UIImage(systemName: "house.fill"), title: "Feeds", rootViewController: feedVC)
         
-        let itemVC = MyItemsViewController()
+        let itemVC = MyItemsViewController(user: User.currentUser()!)
         let nav1 = createNavController(image: UIImage(systemName: "gift.fill"), title: "Items", rootViewController: itemVC)
         
         let settingVC = SettingViewController()
@@ -77,7 +79,7 @@ class MainTabController : UITabBarController {
        
         AuthService.fetchCurrentUser(uid: uid) { (user) in
            
-            print("Set")
+            
         }
     }
     

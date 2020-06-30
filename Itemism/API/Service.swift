@@ -150,9 +150,9 @@ class ItemService {
     }
     
     
-    static func fetchCurrentItems( completion :  @escaping([Item]) -> Void) {
+    static func fetchUserItems(user : User, completion :  @escaping([Item]) -> Void) {
         
-        firebaseReference(.Item).whereField(kUSERID, isEqualTo: User.currentId()).getDocuments { (snapshot, error) in
+        firebaseReference(.Item).whereField(kUSERID, isEqualTo: user.uid).order(by: kTIMESTAMP, descending: true).getDocuments { (snapshot, error) in
             
             if error != nil {
                 print(error!.localizedDescription)
@@ -168,7 +168,7 @@ class ItemService {
                     var item = Item(dictionry: document.data())
                     
                     /// set user property
-                    item.user = User.currentUser()
+                    item.user = user
                     
                     items.append(item)
                     

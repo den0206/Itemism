@@ -9,7 +9,13 @@
 import UIKit
 import SDWebImage
 
+protocol FeedCellDelegate : class {
+    func tappedUserImage(feedCell : FeedCell, user : User)
+}
+
 class FeedCell : UICollectionViewCell {
+    
+    var delegate : FeedCellDelegate?
     
     var item : Item? {
         didSet {
@@ -32,6 +38,20 @@ class FeedCell : UICollectionViewCell {
         
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
+        return iv
+    }()
+    
+    private lazy var userImageView : UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.setDimensions(height: 38, width: 38)
+        iv.backgroundColor = .lightGray
+        iv.clipsToBounds = true
+        iv.layer.cornerRadius =  38 / 2
+        iv.isUserInteractionEnabled = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedUserImage))
+        iv.addGestureRecognizer(tap)
         return iv
     }()
     
@@ -60,7 +80,8 @@ class FeedCell : UICollectionViewCell {
         
         addSubview(itemImageView)
         itemImageView.fillSuperview()
-
+        
+        
        
 
         addSubview(infoLabel)
@@ -70,6 +91,10 @@ class FeedCell : UICollectionViewCell {
         infoButton.centerY(inView: infoLabel)
         infoButton.setDimensions(height: 40, width: 40)
         infoButton.anchor(right : rightAnchor,paddingRight: 16)
+        
+        addSubview(userImageView)
+        userImageView.centerY(inView: infoLabel)
+        userImageView.anchor(left : infoLabel.rightAnchor,right: infoButton.leftAnchor,paddingLeft: 16,paddingRight: 16 )
         
     }
     
@@ -83,6 +108,11 @@ class FeedCell : UICollectionViewCell {
         print("Info")
     }
     
+    @objc func tappedUserImage() {
+        guard let user = item?.user else {return}
+        delegate?.tappedUserImage(feedCell: self, user: user)
+    }
+    
     private func configure() {
         
         guard let item = item else {return}
@@ -93,6 +123,9 @@ class FeedCell : UICollectionViewCell {
         itemImageView.layer.addSublayer(gradientLayer)
         
         infoLabel.text = item.name
+        
+        guard let imageData = item.user?.profileImageData else {return}
+        userImageView.image = downloadImageFromData(picturedata: imageData)
         
         
         
