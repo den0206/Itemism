@@ -57,14 +57,18 @@ class MainTabController : UITabBarController {
         let itemVC = MyItemsViewController(user: User.currentUser()!)
         let nav1 = createNavController(image: UIImage(systemName: "gift.fill"), title: "Items", rootViewController: itemVC)
         
+        
+        let rentVC = WantRentViewController()
+        let nav2 = createNavController(image: UIImage(systemName: "guitars"), title: "Want", rootViewController: rentVC)
+        
         let settingVC = SettingViewController()
-        let nav2 = UINavigationController(rootViewController: settingVC)
+        let nav3 = UINavigationController(rootViewController: settingVC)
         
         
         settingVC.tabBarItem.image = UIImage(systemName: "person.crop.rectangle")
         settingVC.tabBarItem.title = "Settings"
         
-        viewControllers = [nav, nav1, nav2]
+        viewControllers = [nav, nav1,nav2,nav3]
         
         UITabBar.appearance().tintColor = .black
         tabBar.unselectedItemTintColor = .lightGray

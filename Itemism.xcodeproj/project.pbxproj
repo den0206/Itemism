@@ -20,6 +20,7 @@
 		3AD3327E24A83FE9002A2672 /* BottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3327D24A83FE9002A2672 /* BottomControlsStackView.swift */; };
 		3AD3328024A84360002A2672 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3327F24A84360002A2672 /* CardView.swift */; };
 		3AD3328224A8470F002A2672 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3328124A8470F002A2672 /* CardViewModel.swift */; };
+		3AD4211C24AB724A00CC88E9 /* WantRentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4211B24AB724A00CC88E9 /* WantRentViewController.swift */; };
 		3ADB97DE249DD56A000AB412 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB97DD249DD56A000AB412 /* FeedCell.swift */; };
 		3ADB97E0249DD60A000AB412 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB97DF249DD60A000AB412 /* Extensions.swift */; };
 		3ADB97E2249DD67F000AB412 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB97E1249DD67F000AB412 /* MainTabController.swift */; };
@@ -55,6 +56,7 @@
 		3AD3327D24A83FE9002A2672 /* BottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomControlsStackView.swift; sourceTree = "<group>"; };
 		3AD3327F24A84360002A2672 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		3AD3328124A8470F002A2672 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		3AD4211B24AB724A00CC88E9 /* WantRentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WantRentViewController.swift; sourceTree = "<group>"; };
 		3ADB97DD249DD56A000AB412 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		3ADB97DF249DD60A000AB412 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3ADB97E1249DD67F000AB412 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				3A04834224A0DF8C008F1BC2 /* AddItemViewController.swift */,
 				3AE001EA24A79541009BD9B5 /* DetailItemViewController.swift */,
 				3AD31B7324A85CDA00BD78D3 /* MyItemsViewController.swift */,
+				3AD4211B24AB724A00CC88E9 /* WantRentViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				3AA04B8524A23A4E00886E65 /* InputTextView.swift in Sources */,
 				3AEE21B3249F2F9D002CB2F1 /* SettingViewController.swift in Sources */,
 				3AA04B8324A2343D00886E65 /* AddItemCell.swift in Sources */,
+				3AD4211C24AB724A00CC88E9 /* WantRentViewController.swift in Sources */,
 				3A0AA474249EF87D009BE640 /* SignUpViewController.swift in Sources */,
 				3AD31B7424A85CDA00BD78D3 /* MyItemsViewController.swift in Sources */,
 				3ADB97E0249DD60A000AB412 /* Extensions.swift in Sources */,

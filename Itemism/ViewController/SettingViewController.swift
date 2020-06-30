@@ -13,6 +13,8 @@ class SettingViewController : UITableViewController {
     
     //MARK: - Parts
     
+    
+    
     private let footeView = SettingFooterView()
     
     override func viewDidLoad() {
@@ -31,7 +33,18 @@ class SettingViewController : UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .black
         
+        
+        /// set current user image (left bar button)
+        let userImage = downloadImageFromData(picturedata: User.currentUser()!.profileImageData)
+        let iv = UIImageView(image: userImage)
+        iv.setDimensions(height: 32, width: 32)
+        iv.layer.cornerRadius = 32 / 2
+        iv.clipsToBounds = true
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: iv)
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
+        
         
         
     }

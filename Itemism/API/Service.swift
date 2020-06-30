@@ -152,7 +152,7 @@ class ItemService {
     
     static func fetchUserItems(user : User, completion :  @escaping([Item]) -> Void) {
         
-        firebaseReference(.Item).whereField(kUSERID, isEqualTo: user.uid).order(by: kTIMESTAMP, descending: true).getDocuments { (snapshot, error) in
+        firebaseReference(.Item).whereField(kUSERID, isEqualTo: user.uid).order(by: kTIMESTAMP, descending: false).getDocuments { (snapshot, error) in
             
             if error != nil {
                 print(error!.localizedDescription)
