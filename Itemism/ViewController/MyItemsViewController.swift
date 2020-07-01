@@ -14,6 +14,14 @@ class MyItemsViewController : UIViewController {
     
     let user : User
     
+    var userType : UserType {
+        if user.uid == User.currentId() {
+            return .current
+        } else {
+            return .another
+        }
+    }
+    
     var items = [Item]() {
         didSet {
             configureCardView()
@@ -30,7 +38,7 @@ class MyItemsViewController : UIViewController {
         return view
     }()
     
-    private let bottomStack = BottomControlsStackView()
+    private lazy var bottomStack = BottomControlsStackView(type: userType)
     
     private let deckView : UIView = {
         let view = UIView()
@@ -78,6 +86,7 @@ class MyItemsViewController : UIViewController {
         
         let stack = UIStackView(arrangedSubviews: [headerView, deckView, bottomStack])
         stack.axis = .vertical
+        bottomStack.delegate = self
         
         view.addSubview(stack)
         stack.anchor(top : view.safeAreaLayoutGuide.topAnchor,left : view.leftAnchor,bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor)
@@ -116,4 +125,18 @@ class MyItemsViewController : UIViewController {
             print(items.count)
         }
     }
+}
+
+extension MyItemsViewController : BottomControlsStackViewDelegate {
+    
+    func handleEdit() {
+        print("Edit")
+    }
+    
+    func handleDelete() {
+        print("Delete")
+    }
+
+    
+    
 }

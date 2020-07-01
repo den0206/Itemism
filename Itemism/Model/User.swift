@@ -43,3 +43,8 @@ class User {
     }
     
 }
+
+enum UserType {
+    case current
+    case another
+}

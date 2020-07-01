@@ -109,7 +109,7 @@ class ItemService {
     
     static func fetchAllItems( completion : @escaping([Item]) -> Void) {
         
-        firebaseReference(.Item).order(by: kTIMESTAMP, descending: true).getDocuments { (snapshot, error) in
+        firebaseReference(.Item).order(by: kTIMESTAMP, descending: false).getDocuments { (snapshot, error) in
             
             if error != nil {
                 print(error!.localizedDescription)
@@ -161,8 +161,9 @@ class ItemService {
             
             guard let snapshot = snapshot else {return}
             
+            var items = [Item]()
             if !snapshot.isEmpty {
-                var items = [Item]()
+               
                 
                 snapshot.documents.forEach { (document) in
                     var item = Item(dictionry: document.data())
@@ -178,6 +179,7 @@ class ItemService {
                 }
             } else {
                 print("No Item")
+                completion(items)
             }
         }
     }

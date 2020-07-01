@@ -15,8 +15,18 @@ class DetailItemViewController : UIViewController {
     
     let item : Item
     
+    var userType : UserType {
+        guard let user = item.user else {return .another}
+        
+        if user.uid == User.currentId() {
+            return .current
+        } else {
+            return .another
+        }
+    }
+    
     //MARK: - Parts
-    private let bottomStack = BottomControlsStackView()
+    private lazy var bottomStack = BottomControlsStackView(type: userType)
     
     
     private let deckView : UIView = {
@@ -67,6 +77,7 @@ class DetailItemViewController : UIViewController {
         let stack = UIStackView(arrangedSubviews: [deckView, bottomStack])
         stack.axis = .vertical
         
+        bottomStack.delegate = self
         view.addSubview(stack)
         stack.anchor(top : view.safeAreaLayoutGuide.topAnchor,left : view.leftAnchor,bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor)
         stack.isLayoutMarginsRelativeArrangement = true
@@ -82,4 +93,25 @@ class DetailItemViewController : UIViewController {
         deckView.addSubview(cardView)
         cardView.fillSuperview()
     }
+}
+
+extension DetailItemViewController : BottomControlsStackViewDelegate {
+    
+    func handleEdit() {
+        print("Edit")
+    }
+    func handleDelete() {
+        print("delete")
+
+    }
+    
+    func handleFavorite() {
+        print("Fav")
+    }
+    
+    func handleUnfavorite() {
+        print("unFav")
+
+    }
+    
 }
