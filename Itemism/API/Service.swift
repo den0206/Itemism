@@ -184,6 +184,17 @@ class ItemService {
         }
     }
     
+    
+    //MARK: - Delete & Edit Items
+    
+    static func deleteItem(itemId : String, completion :  @escaping(Error?) -> Void) {
+        
+        firebaseReference(.Item).document(itemId).delete(completion: completion)
+        
+        // TODO: - delete from storoge
+
+    }
+    
 }
 
 

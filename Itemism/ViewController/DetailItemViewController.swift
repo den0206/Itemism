@@ -14,19 +14,19 @@ class DetailItemViewController : UIViewController {
     //MARK: - Property
     
     let item : Item
-    
-    var userType : UserType {
-        guard let user = item.user else {return .another}
-        
-        if user.uid == User.currentId() {
-            return .current
-        } else {
-            return .another
-        }
-    }
+//
+//    var userType : UserType {
+//        guard let user = item.user else {return .another}
+//        
+//        if user.uid == User.currentId() {
+//            return .current
+//        } else {
+//            return .another
+//        }
+//    }
     
     //MARK: - Parts
-    private lazy var bottomStack = BottomControlsStackView(type: userType)
+    private lazy var bottomStack = BottomControlsStackView(type: item.user!.userType)
     
     
     private let deckView : UIView = {
@@ -101,7 +101,7 @@ extension DetailItemViewController : BottomControlsStackViewDelegate {
         print("Edit")
     }
     func handleDelete() {
-        print("delete")
+        
 
     }
     

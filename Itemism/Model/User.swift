@@ -17,6 +17,14 @@ class User {
     let uid : String
     let profileImageData : String
     
+    var userType : UserType {
+        if self.uid == User.currentId() {
+            return .current
+        } else {
+            return .another
+        }
+    }
+    
     init(dictionary : [String : Any]) {
         self.name = dictionary[kFULLNAME] as? String ?? ""
         self.email = dictionary[kEMAIL] as? String ?? ""

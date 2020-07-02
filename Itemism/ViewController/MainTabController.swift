@@ -42,10 +42,14 @@ class MainTabController : UITabBarController {
             
             if UserDefaults.standard.object(forKey: kCURRENTUSER) == nil {
                 /// set currentUser
+          
                 fetchCurrentUser(uid: Auth.auth().currentUser!.uid)
+                
+                return
             }
             
             configureTabController()
+            
         }
     }
     
@@ -83,6 +87,7 @@ class MainTabController : UITabBarController {
        
         AuthService.fetchCurrentUser(uid: uid) { (user) in
            
+            self.configureTabController()
             
         }
     }

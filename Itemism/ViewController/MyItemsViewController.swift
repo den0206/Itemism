@@ -14,13 +14,7 @@ class MyItemsViewController : UIViewController {
     
     let user : User
     
-    var userType : UserType {
-        if user.uid == User.currentId() {
-            return .current
-        } else {
-            return .another
-        }
-    }
+  
     
     var items = [Item]() {
         didSet {
@@ -38,7 +32,7 @@ class MyItemsViewController : UIViewController {
         return view
     }()
     
-    private lazy var bottomStack = BottomControlsStackView(type: userType)
+    private lazy var bottomStack = BottomControlsStackView(type: user.userType)
     
     private let deckView : UIView = {
         let view = UIView()
@@ -129,14 +123,66 @@ class MyItemsViewController : UIViewController {
 
 extension MyItemsViewController : BottomControlsStackViewDelegate {
     
+    
+    /// currentType only for now
+    
     func handleEdit() {
         print("Edit")
     }
     
     func handleDelete() {
-        print("Delete")
+        guard let topCard = topCardView else {return}
+        
+        let alert = UIAlertController(title: "確認", message: "\(topCard.item.name)を削除してもよろしいでしょうか?", preferredStyle: .alert)
+        
+        let ok = UIAlertAction(title: "OK", style: .default) { (_) in
+            self.deleteSwipeAnimation()
+            
+            /// delete firestore
+            ItemService.deleteItem(itemId: topCard.item.id) { (error) in
+                
+                if error != nil {
+                    self.showAlert(title: "Recheck", message: error!.localizedDescription)
+                    
+                    return
+                }
+            }
+            
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+        
+        
+        
+        print(topCard.item.name)
     }
 
     
     
+}
+
+//MARK: - For Items Actiuons
+
+extension MyItemsViewController {
+    
+    func deleteSwipeAnimation() {
+        /// swipe Left
+        let translation : CGFloat = -700
+        
+        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
+            self.topCardView?.frame = CGRect(x: translation, y: 0, width: (self.topCardView?.frame.width)!, height: (self.topCardView?.frame.height)!)
+            
+        }) { (_) in
+            self.topCardView?.removeFromSuperview()
+            
+            guard !self.cardViews.isEmpty else {return}
+            self.cardViews.remove(at: self.cardViews.count - 1)
+            self.topCardView = self.cardViews.last
+        }
+    }
 }
