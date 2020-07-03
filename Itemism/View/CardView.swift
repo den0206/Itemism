@@ -18,6 +18,10 @@ enum SwipeDirection : Int{
     case right = 1
 }
 
+protocol CardViewDelegate : class {
+    func handleCardView(cardView : CardView, didLike : Bool)
+}
+
 class CardView : UIView {
     
     //MARK: - Property
@@ -26,6 +30,8 @@ class CardView : UIView {
     let type : CardViewType
     var imageIndex = 0
     var imageUrl : URL?
+    
+    weak var delegate : CardViewDelegate?
 
     
     //MARK: - Parts
@@ -207,7 +213,7 @@ class CardView : UIView {
             /// add Like
             if showldDismissCard {
                 let didlike = direction == .right
-                print(didlike)
+                self.delegate?.handleCardView(cardView: self, didLike: didlike)
             }
         }
     }

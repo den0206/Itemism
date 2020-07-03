@@ -191,7 +191,28 @@ class ItemService {
         
         firebaseReference(.Item).document(itemId).delete(completion: completion)
         
-        // TODO: - delete from storoge
+        // TODO: - delete image from storoge
+        
+        let strogeRef = Storage.storage().reference()
+        strogeRef.child("ItemImages").child(itemId).listAll { (result, error) in
+            if error != nil {
+                completion(error)
+                return
+            }
+            
+            for ref in result.items {
+                ref.delete { (error) in
+                    
+                    if error != nil {
+                        completion(error)
+                        return
+                    }
+                    
+                    print("Delete")
+                }
+            }
+            
+        }
 
     }
     

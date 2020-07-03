@@ -95,6 +95,7 @@ class MyItemsViewController : UIViewController {
         items.forEach { (item) in
             
             let cardView = CardView(type: .Default, item: item)
+            cardView.delegate = self
             deckView.addSubview(cardView)
             cardView.fillSuperview()
         }
@@ -127,7 +128,7 @@ extension MyItemsViewController : BottomControlsStackViewDelegate {
     /// currentType only for now
     
     func handleEdit() {
-        print("Edit")
+        swipeAnimation(right: true)
     }
     
     func handleDelete() {
@@ -136,7 +137,7 @@ extension MyItemsViewController : BottomControlsStackViewDelegate {
         let alert = UIAlertController(title: "確認", message: "\(topCard.item.name)を削除してもよろしいでしょうか?", preferredStyle: .alert)
         
         let ok = UIAlertAction(title: "OK", style: .default) { (_) in
-            self.deleteSwipeAnimation()
+            self.swipeAnimation(right: false)
             
             /// delete firestore
             ItemService.deleteItem(itemId: topCard.item.id) { (error) in
@@ -157,11 +158,24 @@ extension MyItemsViewController : BottomControlsStackViewDelegate {
         
         present(alert, animated: true, completion: nil)
         
-        
-        
-        print(topCard.item.name)
     }
 
+    
+    
+}
+
+extension MyItemsViewController : CardViewDelegate {
+    
+    func handleCardView(cardView: CardView, didLike: Bool) {
+        
+        cardView.removeFromSuperview()
+        
+        self.cardViews.removeAll(where: {cardView == $0})
+        
+        self.topCardView = cardViews.last
+        
+        print(topCardView)
+    }
     
     
 }
@@ -170,9 +184,9 @@ extension MyItemsViewController : BottomControlsStackViewDelegate {
 
 extension MyItemsViewController {
     
-    func deleteSwipeAnimation() {
+    func swipeAnimation(right : Bool) {
         /// swipe Left
-        let translation : CGFloat = -700
+        let translation : CGFloat = right ? 700 : -700
         
         UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
             self.topCardView?.frame = CGRect(x: translation, y: 0, width: (self.topCardView?.frame.width)!, height: (self.topCardView?.frame.height)!)
