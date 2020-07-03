@@ -16,6 +16,7 @@
 		3AA04B8824A23D7B00886E65 /* AddItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA04B8724A23D7B00886E65 /* AddItemViewModel.swift */; };
 		3AC396D924A4B94A0088C622 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC396D824A4B94A0088C622 /* Item.swift */; };
 		3AC396DB24A4CD330088C622 /* Reachbility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC396DA24A4CD330088C622 /* Reachbility.swift */; };
+		3AD20ED524AF6F1000BA0D00 /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD20ED424AF6F1000BA0D00 /* EditItemViewController.swift */; };
 		3AD31B7424A85CDA00BD78D3 /* MyItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD31B7324A85CDA00BD78D3 /* MyItemsViewController.swift */; };
 		3AD3327E24A83FE9002A2672 /* BottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3327D24A83FE9002A2672 /* BottomControlsStackView.swift */; };
 		3AD3328024A84360002A2672 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3327F24A84360002A2672 /* CardView.swift */; };
@@ -52,6 +53,7 @@
 		3AA04B8724A23D7B00886E65 /* AddItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewModel.swift; sourceTree = "<group>"; };
 		3AC396D824A4B94A0088C622 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		3AC396DA24A4CD330088C622 /* Reachbility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachbility.swift; sourceTree = "<group>"; };
+		3AD20ED424AF6F1000BA0D00 /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
 		3AD31B7324A85CDA00BD78D3 /* MyItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyItemsViewController.swift; sourceTree = "<group>"; };
 		3AD3327D24A83FE9002A2672 /* BottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomControlsStackView.swift; sourceTree = "<group>"; };
 		3AD3327F24A84360002A2672 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				3AE001EA24A79541009BD9B5 /* DetailItemViewController.swift */,
 				3AD31B7324A85CDA00BD78D3 /* MyItemsViewController.swift */,
 				3AD4211B24AB724A00CC88E9 /* WantRentViewController.swift */,
+				3AD20ED424AF6F1000BA0D00 /* EditItemViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				3AEE21AB249F2541002CB2F1 /* Constracts.swift in Sources */,
 				3AEE21AF249F2B7A002CB2F1 /* Downloader.swift in Sources */,
 				3AC396D924A4B94A0088C622 /* Item.swift in Sources */,
+				3AD20ED524AF6F1000BA0D00 /* EditItemViewController.swift in Sources */,
 				3AA04B8824A23D7B00886E65 /* AddItemViewModel.swift in Sources */,
 				3AC396DB24A4CD330088C622 /* Reachbility.swift in Sources */,
 				3AF97672249DB9BC00A7BA80 /* AppDelegate.swift in Sources */,

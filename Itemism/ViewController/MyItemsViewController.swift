@@ -128,7 +128,14 @@ extension MyItemsViewController : BottomControlsStackViewDelegate {
     /// currentType only for now
     
     func handleEdit() {
-        swipeAnimation(right: true)
+        guard let topCard = topCardView else {return}
+        
+        let editVC = EditItemViewController(item: topCard.item)
+        let nav = UINavigationController(rootViewController: editVC)
+        nav.modalPresentationStyle = .fullScreen
+        
+        present(nav, animated: true, completion: nil)
+        
     }
     
     func handleDelete() {
@@ -166,7 +173,9 @@ extension MyItemsViewController : BottomControlsStackViewDelegate {
 
 extension MyItemsViewController : CardViewDelegate {
     
+
     func handleCardView(cardView: CardView, didLike: Bool) {
+        /// configure topCardView
         
         cardView.removeFromSuperview()
         
@@ -174,7 +183,6 @@ extension MyItemsViewController : CardViewDelegate {
         
         self.topCardView = cardViews.last
         
-        print(topCardView)
     }
     
     

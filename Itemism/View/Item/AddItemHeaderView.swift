@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol AddItemHeaderViewDelegate : class {
     func selectedPhoto(_ header : AddItemHeaderView, didSelect : Int)
@@ -14,11 +15,20 @@ protocol AddItemHeaderViewDelegate : class {
 
 class AddItemHeaderView : UIView {
     
+    /// for edit
+    var item : Item? {
+        didSet {
+            loadItem()
+        }
+    }
+    
+    
     weak var delegate : AddItemHeaderViewDelegate?
     
     //MARK: - parts
     
     var buttons = [UIButton]()
+    
     
     lazy var button1 = createButton(0)
     lazy var button2 = createButton(1)
@@ -72,6 +82,17 @@ class AddItemHeaderView : UIView {
         button.isEnabled = false
         
         return button
+    }
+    
+    func loadItem() {
+        guard let item = item else {return}
+        let imageUrls = item.imageLinks.map({URL(string: $0)})
+        
+        for(index, url) in imageUrls.enumerated() {
+            SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
+                self.buttons[index].setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+            }
+        }
     }
     
     //MARK: - Actions

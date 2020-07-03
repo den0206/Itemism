@@ -36,7 +36,7 @@ class AddItemViewController : UITableViewController {
     
     //MARK: - UI
     
-    private func configureNav() {
+    func configureNav() {
         
 //        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.lightGray]
         navigationItem.title = "Add Item"
