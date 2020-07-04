@@ -9,15 +9,22 @@
 import UIKit
 
 protocol AddItemCellDelegate : class {
-    func updateItemInfo(cell : AddItemCell, value : String, section : AddItemSections)
+    func updateItemInfo(cell : AddItemCell, value : String, section : itemtemSections)
     func updateDescription(cell : AddItemCell, description : String)
 }
 
 class AddItemCell : UITableViewCell {
     
-    var viewModel : AddItemViewModel! {
+    var newItemVM : AddItemViewModel? {
         didSet {
             congigure()
+        }
+    }
+    
+    var editItemVM : EditItemViewModel? {
+        didSet {
+            congigure()
+            
         }
     }
     
@@ -64,11 +71,22 @@ class AddItemCell : UITableViewCell {
     
     private func congigure() {
         
+        guard let viewModel : ItemViewModel = newItemVM ?? editItemVM else {return}
+        
+        
         inputField.placeholder = viewModel.placeholder
         descriptionTextView.placeholderLabel.text = viewModel.placeholder
         
         inputField.isHidden = viewModel.shoulHideInputField
         descriptionTextView.isHidden = viewModel.shoulHideTextView
+        
+        
+        if editItemVM != nil {
+            inputField.text = editItemVM?.value
+            descriptionTextView.text = editItemVM?.value
+            descriptionTextView.placeholderLabel.isHidden = true
+        }
+        
         
     }
     
@@ -77,7 +95,10 @@ class AddItemCell : UITableViewCell {
     @objc func editindDidEnd(sender : UITextField) {
         guard let value = sender.text else {return}
         
+        guard let viewModel : ItemViewModel = newItemVM ?? editItemVM else {return}
+        
         delegate?.updateItemInfo(cell: self, value: value, section: viewModel.section)
+
     }
 }
 

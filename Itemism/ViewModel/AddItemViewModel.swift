@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum AddItemSections : Int, CaseIterable {
+enum itemtemSections : Int, CaseIterable {
     case name
     case description
     
@@ -22,10 +22,9 @@ enum AddItemSections : Int, CaseIterable {
     }
 }
 
-struct AddItemViewModel {
-    
-    let section : AddItemSections
-    let placeholder : String
+class ItemViewModel {
+    var section : itemtemSections
+    var placeholder : String
     
     var shoulHideInputField : Bool {
         return section == .description
@@ -36,10 +35,59 @@ struct AddItemViewModel {
         
     }
     
-    init(section : AddItemSections) {
+    init(section : itemtemSections) {
         self.section = section
         
         placeholder = section.title
+    }
+}
+
+//MARK: - New Item
+
+class AddItemViewModel : ItemViewModel{
+    
+//    let section : itemtemSections
+//    let placeholder : String
+//
+//    var shoulHideInputField : Bool {
+//        return section == .description
+//    }
+//
+//    var shoulHideTextView : Bool {
+//        return section != .description
+//
+//    }
+//
+//    init(section : itemtemSections) {
+//        self.section = section
+//
+//        placeholder = section.title
+//    }
+}
+
+//MARK: - Edit Item
+
+class EditItemViewModel : ItemViewModel{
+    
+    private let item : Item
+    var value : String?
+   
+ 
+    
+    init(item : Item,section : itemtemSections) {
+        self.item = item
+        super.init(section: section)
+        
+//        self.section = section
+        
+//        placeholder = section.title
+        
+        switch section {
+        case .name:
+            value = item.name
+        case .description:
+            value = item.description
+        }
     }
 }
 

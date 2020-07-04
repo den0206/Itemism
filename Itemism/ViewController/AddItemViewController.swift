@@ -11,7 +11,7 @@ import Firebase
 
 private let reuseIdentifer = "AddItemCell"
 
-class AddItemViewController : UITableViewController {
+class AddItemViewController : UITableViewController, AddItemCellDelegate {
     
     //MARK: - Item property
     var itemImages : [UIImage] = []
@@ -71,7 +71,7 @@ class AddItemViewController : UITableViewController {
         enableImageButton(imageArray: itemImages)
     }
     
-    private func enableImageButton(imageArray : [UIImage]) {
+    func enableImageButton(imageArray : [UIImage]) {
         
         let enableButtonCount = imageArray.count
         headerView.buttons[enableButtonCount].isEnabled = true
@@ -138,6 +138,25 @@ class AddItemViewController : UITableViewController {
     @objc func tappedBackground() {
         self.view.endEditing(false)
     }
+    
+    //MARK: - AddItem Cell Delegate
+    // TODO: - swift not supprted Extension Procotol method (For EditItemVM)
+    
+    func updateItemInfo(cell: AddItemCell, value: String, section: itemtemSections) {
+           switch section {
+          
+           case .name:
+               self.name = value
+           case .description:
+               return
+           }
+       }
+       
+       func updateDescription(cell: AddItemCell, description: String) {
+           self.desc = description
+       }
+       
+
 }
 
 //MARK: - Tableview delegte
@@ -145,7 +164,7 @@ class AddItemViewController : UITableViewController {
 extension AddItemViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        AddItemSections.allCases.count
+        itemtemSections.allCases.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -156,11 +175,11 @@ extension AddItemViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifer, for: indexPath) as! AddItemCell
         
-        guard let section = AddItemSections(rawValue: indexPath.section) else {return cell}
+        guard let section = itemtemSections(rawValue: indexPath.section) else {return cell}
         let viewModel = AddItemViewModel(section: section)
         
         cell.delegate = self
-        cell.viewModel = viewModel
+        cell.newItemVM = viewModel
         return cell
     }
     
@@ -169,13 +188,13 @@ extension AddItemViewController {
        }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let section = AddItemSections(rawValue: section) else {return nil}
+        guard let section = itemtemSections(rawValue: section) else {return nil}
         
         return section.title
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let section = AddItemSections(rawValue: indexPath.section) else {return 0}
+        guard let section = itemtemSections(rawValue: indexPath.section) else {return 0}
         
         if section == .description {
             return 200
@@ -183,6 +202,8 @@ extension AddItemViewController {
         
         return 45
     }
+    
+
     
 }
 
@@ -217,21 +238,3 @@ extension AddItemViewController : AddItemHeaderViewDelegate, UIImagePickerContro
     
 }
 
-extension AddItemViewController : AddItemCellDelegate {
-    
-    func updateItemInfo(cell: AddItemCell, value: String, section: AddItemSections) {
-        switch section {
-       
-        case .name:
-            self.name = value
-        case .description:
-            return
-        }
-    }
-    
-    func updateDescription(cell: AddItemCell, description: String) {
-        self.desc = description
-    }
-    
-    
-}
