@@ -25,7 +25,7 @@ class AddItemViewController : UITableViewController, AddItemCellDelegate {
     
     //MARK: - Parts
     let headerView = AddItemHeaderView()
-    private var imageIndex = 0
+    var imageIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()

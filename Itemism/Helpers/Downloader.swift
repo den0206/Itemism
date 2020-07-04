@@ -79,6 +79,7 @@ func fileExistPath(path : String) -> Bool {
 
 //MARK: - upload ItemImages
 
+/// for new
 func uploadImages(images : [UIImage?], itemId : String, completion : @escaping(_ imageLinks : [String]) -> Void) {
     
     if Reachabilty.HasConnection() {
@@ -108,6 +109,36 @@ func uploadImages(images : [UIImage?], itemId : String, completion : @escaping(_
         
     } else {
         print("No Internet Connections")
+    }
+}
+
+
+/// for edit
+func uploadImages(imageDic : [Int : UIImage], item : Item, completion :  @escaping(Item) -> Void) {
+    
+    var item = item
+    
+    var uploadImageCount = 0
+    let sortedKeys = imageDic.keys.sorted()
+    
+    for key in sortedKeys {
+        /// UIImage
+        let fileName =  "ItemImages/" + item.id + "/" + "\(key)" + ".jpg"
+        let imageData = imageDic[key]?.jpegData(compressionQuality: 0.3)
+        
+        
+        savaImageInFirestore(imageData: imageData!, fileName: fileName) { (imageLink) in
+            
+            if imageLink != nil {
+                item.imageLinks.insert(imageLink!, at: key)
+                uploadImageCount += 1
+                
+                if uploadImageCount == sortedKeys.count {
+                    completion(item)
+                }
+            }
+        }
+        
     }
 }
 

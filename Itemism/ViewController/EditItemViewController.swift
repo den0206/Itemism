@@ -14,6 +14,8 @@ class EditItemViewController : AddItemViewController {
     
     //MARK: - Propert
     private var item : Item
+    private var changeImageDictionary = [Int : UIImage]()
+    private var isEdit = false
     
     init(item : Item) {
         self.item = item
@@ -59,7 +61,43 @@ class EditItemViewController : AddItemViewController {
     //MARK: - Actions
     
     override func handleDone() {
-        print("Done")
+        view.endEditing(true)
+        
+        uploadImages(imageDic: changeImageDictionary, item: item) { (item) in
+            
+            print(item)
+            
+            /// save firestore
+        }
+        
+//        var uploadImageCount = 0
+//        let sortedKeys = changeImageDictionary.keys.sorted()
+//
+//        for key in sortedKeys {
+//            /// UIImage
+//            let fileName =  "ItemImages/" + item.id + "/" + "\(key)" + ".jpg"
+//            let imageData = changeImageDictionary[key]?.jpegData(compressionQuality: 0.3)
+//
+//
+//            savaImageInFirestore(imageData: imageData!, fileName: fileName) { (imageLink) in
+//
+//                if imageLink != nil {
+//                    self.item.imageLinks.insert(imageLink!, at: key)
+//                    uploadImageCount += 1
+//
+//                    if uploadImageCount == sortedKeys.count {
+//                        print(self.item)
+//                        /// completion(item)
+//                    }
+//                }
+//            }
+//
+//        }
+
+//        for (imageIndex,image) in changeImageDictionary {
+//            print(imageIndex,image)
+//        }
+        
     }
     
     
@@ -70,20 +108,18 @@ class EditItemViewController : AddItemViewController {
     
     override func updateItemInfo(cell: AddItemCell, value: String, section: itemtemSections) {
         switch section {
-        
-         case .name:
+            
+        case .name:
             item.name = value
-         case .description:
-             return
-         }
-        
-        print(item.name)
+            isEdit = true
+        case .description:
+            return
+        }
     }
     
     override func updateDescription(cell: AddItemCell, description: String) {
         item.description = description
-        
-        print(item.description)
+        isEdit = true
     }
 }
 
@@ -103,5 +139,26 @@ extension EditItemViewController {
     }
     
 
+}
+//
+extension EditItemViewController {
+    
+    override func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let selectedImage = info[.originalImage] as? UIImage else {return}
+        
+        
+        headerView.buttons[imageIndex].setImage(selectedImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        
+        self.changeImageDictionary[imageIndex] = selectedImage
+        
+        enableImageButton(imageArray: itemImages)
+        isEdit = true
+        
+        dismiss(animated: true, completion: nil)
+        
+        print(changeImageDictionary)
+        //        print(changeImageDictionary.keys.sorted())
+        
+    }
 }
 
