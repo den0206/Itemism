@@ -115,7 +115,7 @@ class CardView : UIView {
         }
     }
     
-    private func configureBarStackView() {
+    func configureBarStackView() {
         
         (0 ..< item.imageLinks.count).forEach { (_) in
             

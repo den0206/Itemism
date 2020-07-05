@@ -213,8 +213,13 @@ extension MyItemsViewController {
 extension MyItemsViewController : EditItemViewControllerDelegate {
     func compDelete(item: Item) {
          guard let topCard = topCardView else {return}
+        topCard.item.imageLinks = []
         
         topCard.item = item
+        if topCard.item.imageLinks.count > 1 {
+            topCard.configureBarStackView()
+
+        }
     }
     
     

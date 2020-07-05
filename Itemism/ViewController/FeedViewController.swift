@@ -10,8 +10,10 @@ import UIKit
 import FirebaseAuth
 
 private let reuseIdentifer = "FeedCell"
+private let headerIdentifer = "headerIdentifer"
 
 class FeedViewController : UICollectionViewController {
+    
     
     //MARK: - Property
     
@@ -23,12 +25,24 @@ class FeedViewController : UICollectionViewController {
     
     //MARK: - Parts
     
+    
     let actionButton : UIButton = {
         let button = UIButton(type: .system)
-        button.tintColor = .white
-        button.backgroundColor = .lightGray
+        button.tintColor = .black
+//        button.backgroundColor = .lightGray
         button.setImage(#imageLiteral(resourceName: "new_tweet"), for: .normal)
         button.addTarget(self, action: #selector(handleTappedAddItem), for: .touchUpInside)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.black.cgColor
+        
+        return button
+    }()
+    
+    let refreshButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "refresh_circle").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
+        
         
         return button
     }()
@@ -67,15 +81,19 @@ class FeedViewController : UICollectionViewController {
     
     private func configureCV() {
         
-        
         view.addSubview(actionButton)
-        actionButton.anchor( bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingBottom: 64, paddingRight: 16, width: 56, height: 56)
-        actionButton.layer.cornerRadius = 56 / 2
+        actionButton.anchor( bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingBottom: 16, paddingRight: 16, width: 48, height: 48)
+        actionButton.layer.cornerRadius = 48 / 2
+        
+        view.addSubview(refreshButton)
+        refreshButton.anchor(top : view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, paddingTop: 16, paddingLeft: 16,width: 56, height: 56)
+        refreshButton.layer.cornerRadius = 56 / 2
         
         
         collectionView.backgroundColor = .systemGroupedBackground
 
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifer)
+//        collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifer)
         
         collectionView.contentInset = UIEdgeInsets(top: 50, left: 25, bottom: 25, right: 24)
         collectionView.horizontalScrollIndicatorInsets = UIEdgeInsets(top: 50, left: 25, bottom: 25, right: 24)
@@ -115,6 +133,12 @@ class FeedViewController : UICollectionViewController {
         present(nav, animated: true, completion: nil)
     }
     
+    @objc func handleRefresh() {
+        self.tabBarController?.showPresentLoadindView(true)
+        fetchItems()
+        
+    }
+    
 }
 
 
@@ -144,6 +168,15 @@ extension FeedViewController {
         navigationController?.pushViewController(itemVC, animated: true)
     }
     
+    //MARK: - header & footer
+    
+//    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//
+//        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifer, for: indexPath)
+//
+//        return header
+//    }
+    
     
 }
 
@@ -161,6 +194,12 @@ extension FeedViewController : UICollectionViewDelegateFlowLayout {
         
         return 25
     }
+    
+    ///headerSize
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        return CGSize(width: 100, height: 0)
+//    }
 }
 
 //MARK: - Feed Cell delegate
