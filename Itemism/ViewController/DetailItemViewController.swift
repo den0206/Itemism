@@ -40,6 +40,8 @@ class DetailItemViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(item.wanted)
+        
         configureUI()
         configureCardView()
     }
@@ -143,12 +145,33 @@ extension DetailItemViewController : BottomControlsStackViewDelegate, EditItemVi
     }
     
     func handleFavorite() {
-        HUD.flash(.labeledSuccess(title: "お気に入り", subtitle: "追加しました"), delay: 1.0)
+        
+        guard !item.wanted else {
+            HUD.flash(.label("申請済みです。"), delay: 1.0)
+            return
+        }
+        
+        ItemService.wantItem(item: item, wanted: false) { (error) in
+            self.item.wanted = true
+            HUD.flash(.labeledSuccess(title: "お気に入り", subtitle: "追加しました"), delay: 1.0)
+        }
+        
+        
+        //        item.wanted.toggle()
         
     }
     
     func handleUnfavorite() {
-        print("unFav")
+        guard item.wanted else {
+            HUD.flash(.label("まだ申請していません。"), delay: 1.0)
+            return
+        }
+        
+        ItemService.wantItem(item: item, wanted: true) { (error) in
+            self.item.wanted = false
+            HUD.flash(.labeledSuccess(title: "お気に入り", subtitle: "から削除しました"), delay: 1.0)
+        }
+        
         
     }
     

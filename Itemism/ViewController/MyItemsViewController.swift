@@ -93,6 +93,8 @@ class MyItemsViewController : UIViewController {
         items.forEach { (item) in
             
             let cardView = CardView(type: .Default, item: item)
+            // TODO: - add item var
+
             cardView.delegate = self
             deckView.addSubview(cardView)
             cardView.fillSuperview()
@@ -166,6 +168,13 @@ extension MyItemsViewController : BottomControlsStackViewDelegate {
         
         present(alert, animated: true, completion: nil)
         
+    }
+    
+    
+    /// no currentUser func
+    
+    func handleFavorite() {
+        return
     }
 
     

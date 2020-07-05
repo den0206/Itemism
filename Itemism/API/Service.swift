@@ -103,13 +103,14 @@ class UserService {
     }
 }
 
-//MARK: - ITRM Service
+//MARK: - ITEM Service
 
 class ItemService {
     
     static func fetchAllItems( completion : @escaping([Item]) -> Void) {
         
-        firebaseReference(.Item).order(by: kTIMESTAMP, descending: false).getDocuments { (snapshot, error) in
+        firebaseReference(.Item).order(by: kTIMESTAMP, descending: true
+        ).getDocuments { (snapshot, error) in
             
             if error != nil {
                 print(error!.localizedDescription)
@@ -133,12 +134,19 @@ class ItemService {
                         
                         item.user = user
                         
-                        items.append(item)
-                        
-                        if items.count == documents.count {
-                            print("Set")
-                            completion(items)
+                        ItemService.checkWanted(item: item) { (wanted) in
+                            item.wanted = wanted
+                            
+                            items.append(item)
+                            
+                            if items.count == documents.count {
+                                print("Set")
+                                completion(items)
+                            }
                         }
+                        
+                        
+                        
                     }
 
 
@@ -183,6 +191,60 @@ class ItemService {
             }
         }
     }
+    
+    //MARK: - Add Wants
+    
+    static func checkWanted(item : Item, completion : @escaping(_ wanted : Bool) -> Void) {
+        
+        guard User.currentId() != item.userId else {
+            completion(false)
+            return
+        }
+        
+        let itemId = item.id
+
+        firebaseReference(.Item).document(itemId).collection(kWANT).document(User.currentId()).getDocument { (snapshot, error) in
+            guard let snapshot = snapshot else {
+                completion(false)
+                return
+            }
+            
+            if snapshot.exists {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+        
+        
+    }
+    
+    static func wantItem(item : Item, wanted : Bool,completion : @escaping(Error?) -> Void) {
+        
+        guard User.currentId() != item.userId else {
+            return
+        }
+        
+        
+        let itemId = item.id
+        let currentUserId = User.currentId()
+        
+        if !wanted {
+            let value = [kITEMID : itemId,
+                         kUSERID : currentUserId,
+                         kTIMESTAMP : Timestamp(date: Date())] as [String : Any]
+            
+            firebaseReference(.Item).document(itemId).collection(kWANT).document(currentUserId).setData(value) { (error) in
+                completion(error)
+            }
+        } else {
+            firebaseReference(.Item).document(itemId).collection(kWANT).document(currentUserId).delete(completion: completion)
+        }
+        
+        
+        
+    }
+    
     
     
     //MARK: - Delete & Edit Items

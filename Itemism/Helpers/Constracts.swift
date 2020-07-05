@@ -29,4 +29,5 @@ public let kDESCRIPTION = "description"
 public let kIMAGELINKS = "imageLinks"
 public let kFILEREFERENCE = "gs://instagram-clone-9c6fe.appspot.com"
 public let kTIMESTAMP = "timeStamp"
+public let kWANT = "Want"
  

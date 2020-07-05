@@ -14,6 +14,7 @@ struct Item {
     var name : String
     var description : String
     var imageLinks : [String]
+    var wanted = false
     
     let userId : String
     
