@@ -26,7 +26,7 @@ class CardView : UIView {
     
     //MARK: - Property
     
-    let item : Item
+    var item : Item
     let type : CardViewType
     var imageIndex = 0
     var imageUrl : URL?

@@ -7,23 +7,15 @@
 //
 
 import UIKit
+import PKHUD
 
 class DetailItemViewController : UIViewController {
     
     
     //MARK: - Property
     
-    let item : Item
-//
-//    var userType : UserType {
-//        guard let user = item.user else {return .another}
-//        
-//        if user.uid == User.currentId() {
-//            return .current
-//        } else {
-//            return .another
-//        }
-//    }
+    var item : Item
+
     
     //MARK: - Parts
     private lazy var bottomStack = BottomControlsStackView(type: item.user!.userType)
@@ -95,31 +87,48 @@ class DetailItemViewController : UIViewController {
     }
 }
 
-extension DetailItemViewController : BottomControlsStackViewDelegate {
-    
+extension DetailItemViewController : BottomControlsStackViewDelegate, EditItemViewControllerDelegate {
+   
     func handleEdit() {
         
         let editVC = EditItemViewController(item: item)
+        editVC.delegate = self
         let nav = UINavigationController(rootViewController: editVC)
         nav.modalPresentationStyle = .fullScreen
-
+        
         present(nav, animated: true, completion: nil)
         
     }
+    
+    func compDelete(item: Item) {
+        self.item = item
+        configureUI()
+        configureCardView()
+    }
+    
+    
     func handleDelete() {
         
         let alert = UIAlertController(title: "確認", message: "\(item.name)を削除してもよろしいでしょうか?", preferredStyle: .alert)
         
         let ok = UIAlertAction(title: "OK", style: .default) { (_) in
+            
+            self.navigationController?.showPresentLoadindView(true, message: "Delete...")
 
             /// delete firestore
             ItemService.deleteItem(itemId: self.item.id) { (error) in
                 
                 if error != nil {
+                    self.navigationController?.showPresentLoadindView(false)
                     self.showAlert(title: "Recheck", message: error!.localizedDescription)
                     
                     return
                 }
+                
+                self.navigationController?.showPresentLoadindView(false)
+
+                
+                self.navigationController?.popViewController(animated: true)
             }
             
         }
@@ -130,16 +139,17 @@ extension DetailItemViewController : BottomControlsStackViewDelegate {
         alert.addAction(cancel)
         
         present(alert, animated: true, completion: nil)
-
+        
     }
     
     func handleFavorite() {
-        print("Fav")
+        HUD.flash(.labeledSuccess(title: "お気に入り", subtitle: "追加しました"), delay: 1.0)
+        
     }
     
     func handleUnfavorite() {
         print("unFav")
-
+        
     }
     
 }

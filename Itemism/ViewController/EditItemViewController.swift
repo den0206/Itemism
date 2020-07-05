@@ -10,12 +10,18 @@ import UIKit
 
 private let reuseIdentifer = "AddItemCell"
 
+protocol EditItemViewControllerDelegate : class {
+    func compDelete(item : Item)
+}
+
 class EditItemViewController : AddItemViewController {
     
     //MARK: - Propert
     private var item : Item
     private var changeImageDictionary = [Int : UIImage]()
     private var isEdit = false
+    
+    weak var delegate : EditItemViewControllerDelegate?
     
     init(item : Item) {
         self.item = item
@@ -50,7 +56,7 @@ class EditItemViewController : AddItemViewController {
         
         var enableButtonCount = item.imageLinks.count
         
-        if item.imageLinks.count <= 3 {
+        if item.imageLinks.count >= 3 {
             enableButtonCount = item.imageLinks.count - 1
         }
         
@@ -93,7 +99,9 @@ class EditItemViewController : AddItemViewController {
                 
                 self.navigationController?.showPresentLoadindView(false)
                 
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true, completion: {
+                    self.delegate?.compDelete(item: item)
+                })
             }
         }
         
@@ -150,7 +158,11 @@ extension EditItemViewController {
         
         self.changeImageDictionary[imageIndex] = selectedImage
         
-        enableImageButton(imageArray: itemImages)
+        if imageIndex != 2 {
+            headerView.buttons[imageIndex + 1].isEnabled = true
+            headerView.buttons[imageIndex + 1].setTitleColor(.cyan, for: .normal)
+        }
+        
         isEdit = true
         
         dismiss(animated: true, completion: nil)

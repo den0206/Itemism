@@ -14,8 +14,6 @@ class MyItemsViewController : UIViewController {
     
     let user : User
     
-  
-    
     var items = [Item]() {
         didSet {
             configureCardView()
@@ -132,6 +130,8 @@ extension MyItemsViewController : BottomControlsStackViewDelegate {
         
         
         let editVC = EditItemViewController(item: topCard.item)
+        editVC.delegate = self
+        
         let nav = UINavigationController(rootViewController: editVC)
         nav.modalPresentationStyle = .fullScreen
 
@@ -208,4 +208,14 @@ extension MyItemsViewController {
             self.topCardView = self.cardViews.last
         }
     }
+}
+
+extension MyItemsViewController : EditItemViewControllerDelegate {
+    func compDelete(item: Item) {
+         guard let topCard = topCardView else {return}
+        
+        topCard.item = item
+    }
+    
+    
 }
