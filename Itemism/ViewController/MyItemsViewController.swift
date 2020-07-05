@@ -130,10 +130,11 @@ extension MyItemsViewController : BottomControlsStackViewDelegate {
     func handleEdit() {
         guard let topCard = topCardView else {return}
         
+        
         let editVC = EditItemViewController(item: topCard.item)
         let nav = UINavigationController(rootViewController: editVC)
         nav.modalPresentationStyle = .fullScreen
-        
+
         present(nav, animated: true, completion: nil)
         
     }

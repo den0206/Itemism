@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 struct Item {
     let id : String
@@ -32,4 +33,14 @@ struct Item {
 func saveItemToFirestore(itemId : String,value : [String : Any], completion :  @escaping(_ Error : Error?) -> Void){
     
     firebaseReference(.Item).document(itemId).setData(value, completion: completion)
+}
+
+func updateItemToFireStore(item : Item, completion : @escaping(Error?) -> Void) {
+    
+    let value = [kITEMNAME : item.name,
+                 kDESCRIPTION : item.description,
+                 kTIMESTAMP : Timestamp(date: Date()),
+                 kIMAGELINKS : item.imageLinks] as [String : Any]
+    
+    firebaseReference(.Item).document(item.id).updateData(value, completion: completion)
 }

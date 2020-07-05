@@ -98,10 +98,38 @@ class DetailItemViewController : UIViewController {
 extension DetailItemViewController : BottomControlsStackViewDelegate {
     
     func handleEdit() {
-        print("Edit")
+        
+        let editVC = EditItemViewController(item: item)
+        let nav = UINavigationController(rootViewController: editVC)
+        nav.modalPresentationStyle = .fullScreen
+
+        present(nav, animated: true, completion: nil)
+        
     }
     func handleDelete() {
         
+        let alert = UIAlertController(title: "確認", message: "\(item.name)を削除してもよろしいでしょうか?", preferredStyle: .alert)
+        
+        let ok = UIAlertAction(title: "OK", style: .default) { (_) in
+
+            /// delete firestore
+            ItemService.deleteItem(itemId: self.item.id) { (error) in
+                
+                if error != nil {
+                    self.showAlert(title: "Recheck", message: error!.localizedDescription)
+                    
+                    return
+                }
+            }
+            
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
 
     }
     

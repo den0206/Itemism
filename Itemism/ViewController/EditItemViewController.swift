@@ -48,12 +48,17 @@ class EditItemViewController : AddItemViewController {
     
     override func enableImageButton(imageArray: [UIImage]) {
         
-        for i in 0 ..< item.imageLinks.count {
-            headerView.buttons[i].isEnabled = true
+        var enableButtonCount = item.imageLinks.count
+        
+        if item.imageLinks.count <= 3 {
+            enableButtonCount = item.imageLinks.count - 1
         }
         
-        
-        let enableButtonCount = self.item.imageLinks.count
+        for i in 0 ..< enableButtonCount {
+            headerView.buttons[i].isEnabled = true
+        }
+
+
         headerView.buttons[enableButtonCount].isEnabled = true
         headerView.buttons[enableButtonCount].setTitleColor(.cyan, for: .normal)
     }
@@ -61,42 +66,36 @@ class EditItemViewController : AddItemViewController {
     //MARK: - Actions
     
     override func handleDone() {
+        
         view.endEditing(true)
+        
+        self.navigationController?.showPresentLoadindView(true)
+        
+        guard isEdit == true else {
+            showAlert(title: "Recheck", message: "変更がありません")
+            self.navigationController?.showPresentLoadindView(false)
+            
+            return
+            
+        }
         
         uploadImages(imageDic: changeImageDictionary, item: item) { (item) in
             
             print(item)
-            
-            /// save firestore
+            updateItemToFireStore(item: item) { (error) in
+                
+                if error != nil {
+                    self.showAlert(title: "Error", message: error!.localizedDescription)
+                    self.navigationController?.showPresentLoadindView(false)
+                    
+                    return
+                }
+                
+                self.navigationController?.showPresentLoadindView(false)
+                
+                self.dismiss(animated: true, completion: nil)
+            }
         }
-        
-//        var uploadImageCount = 0
-//        let sortedKeys = changeImageDictionary.keys.sorted()
-//
-//        for key in sortedKeys {
-//            /// UIImage
-//            let fileName =  "ItemImages/" + item.id + "/" + "\(key)" + ".jpg"
-//            let imageData = changeImageDictionary[key]?.jpegData(compressionQuality: 0.3)
-//
-//
-//            savaImageInFirestore(imageData: imageData!, fileName: fileName) { (imageLink) in
-//
-//                if imageLink != nil {
-//                    self.item.imageLinks.insert(imageLink!, at: key)
-//                    uploadImageCount += 1
-//
-//                    if uploadImageCount == sortedKeys.count {
-//                        print(self.item)
-//                        /// completion(item)
-//                    }
-//                }
-//            }
-//
-//        }
-
-//        for (imageIndex,image) in changeImageDictionary {
-//            print(imageIndex,image)
-//        }
         
     }
     

@@ -130,6 +130,12 @@ func uploadImages(imageDic : [Int : UIImage], item : Item, completion :  @escapi
         savaImageInFirestore(imageData: imageData!, fileName: fileName) { (imageLink) in
             
             if imageLink != nil {
+                
+                /// delete if exist index
+                if item.imageLinks.indices.contains(key) {
+                    item.imageLinks.remove(at: key)
+                }
+                
                 item.imageLinks.insert(imageLink!, at: key)
                 uploadImageCount += 1
                 

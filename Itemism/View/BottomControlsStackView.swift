@@ -35,17 +35,19 @@ class BottomControlsStackView : UIStackView {
     
     let editButton : UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "pencil.circle.fill")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(UIImage(systemName: "pencil.circle")?.withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: #selector(handleEdit), for: .touchUpInside)
-
+   
         return button
     }()
     
     let deleteButton : UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "dismiss_circle").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "dustbox").withRenderingMode(.alwaysTemplate), for: .normal)
+        
+        button.imageView?.setDimensions(height: 30, width: 30)
         button.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
-
+        button.tintColor = .red
         return button
     }()
     
@@ -55,7 +57,8 @@ class BottomControlsStackView : UIStackView {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "dismiss_circle").withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: #selector(handleUnfavorite), for: .touchUpInside)
-
+      
+        
         return button
     }()
     
