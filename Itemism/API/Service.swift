@@ -69,8 +69,8 @@ class AuthService {
                 UserDefaults.standard.setValue(snapshot.data()! as [String : Any], forKey: kCURRENTUSER)
                 UserDefaults.standard.synchronize()
                 
-                   let user = User(dictionary: dictionary)
-                   completion(user)
+                let user = User(dictionary: dictionary)
+                completion(user)
             }
         }
         
@@ -109,7 +109,7 @@ class ItemService {
     
     static func fetchAllItems( completion : @escaping([Item]) -> Void) {
         
-        firebaseReference(.Item).order(by: kTIMESTAMP, descending: true
+        firebaseReference(.Item).order(by: kTIMESTAMP, descending: false
         ).getDocuments { (snapshot, error) in
             
             if error != nil {
@@ -120,7 +120,7 @@ class ItemService {
             guard let snapshot = snapshot else {return}
             
             var items = [Item]()
-//            var itemsCount = 0
+            //            var itemsCount = 0
             
             if !snapshot.isEmpty {
                 let documents = snapshot.documents
@@ -134,24 +134,19 @@ class ItemService {
                         
                         item.user = user
                         
-                        ItemService.checkWanted(item: item) { (wanted) in
-                            item.wanted = wanted
-                            
-                            items.append(item)
-                            
-                            if items.count == documents.count {
-                                print("Set")
-                                completion(items)
-                            }
+                        items.append(item)
+                        
+                        if items.count == documents.count {
+                            print("Set")
+                            completion(items)
                         }
                         
                         
-                        
                     }
-
-
+                    
+                    
                 }
-//                completion(items)
+                //                completion(items)
             }
         }
         
@@ -280,4 +275,29 @@ class ItemService {
     
 }
 
+//MARK: - Item fetch Wants
+
+extension ItemService {
+    
+    static func fetchUserWants(user : User, completion : @escaping([Item]) -> Void) {
+        /// sub collection
+        
+        Firestore.firestore().collectionGroup(kWANT).whereField(kUSERID, isEqualTo: user.uid).getDocuments { (snapshopt, error) in
+            
+            if error != nil {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            guard let snapshopt = snapshopt else {return}
+//            var items = [Item]()
+            
+            snapshopt.documents.forEach({ (document) in
+                let data = document.data()
+                print(snapshopt.documents.count)
+            })
+        }
+        
+    }
+}
 

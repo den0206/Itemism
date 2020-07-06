@@ -144,6 +144,8 @@ extension MyItemsViewController : BottomControlsStackViewDelegate {
     func handleDelete() {
         guard let topCard = topCardView else {return}
         
+        checkInternetConnection()
+        
         let alert = UIAlertController(title: "確認", message: "\(topCard.item.name)を削除してもよろしいでしょうか?", preferredStyle: .alert)
         
         let ok = UIAlertAction(title: "OK", style: .default) { (_) in

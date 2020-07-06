@@ -31,6 +31,11 @@ class DetailItemViewController : UIViewController {
     init(item : Item) {
         self.item = item
         super.init(nibName: nil, bundle: nil)
+        
+        ItemService.checkWanted(item: item) { (wanted) in
+            self.item.wanted = wanted
+            print(item.wanted)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -40,10 +45,10 @@ class DetailItemViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(item.wanted)
-        
         configureUI()
         configureCardView()
+        
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {

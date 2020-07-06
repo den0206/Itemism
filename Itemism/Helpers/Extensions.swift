@@ -306,6 +306,26 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    func checkInternetConnection(nav : UINavigationController? = nil, tab : UITabBarController? = nil) {
+        
+        guard Reachabilty.HasConnection() else {
+            showAlert(title: "Error", message: "No Internet Connection")
+            
+            if nav != nil {
+                nav?.showPresentLoadindView(false)
+                return
+            } else if tab != nil {
+                tab?.showPresentLoadindView(false)
+                return
+            }
+            self.showPresentLoadindView(false)
+            return
+        }
+        
+        print("connect internt")
+        
+    }
+    
     func showPresentLoadindView(_ present : Bool, message : String? = nil) {
         
         if present {

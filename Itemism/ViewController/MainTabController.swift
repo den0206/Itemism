@@ -62,7 +62,7 @@ class MainTabController : UITabBarController {
         let nav1 = createNavController(image: UIImage(systemName: "gift.fill"), title: "Items", rootViewController: itemVC)
         
         
-        let rentVC = WantRentViewController()
+        let rentVC = WantRentViewController(user: User.currentUser()!)
         let nav2 = createNavController(image: UIImage(systemName: "guitars"), title: "Want", rootViewController: rentVC)
         
         let settingVC = SettingViewController()

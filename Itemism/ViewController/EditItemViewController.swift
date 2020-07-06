@@ -85,6 +85,8 @@ class EditItemViewController : AddItemViewController {
             
         }
         
+        checkInternetConnection(nav: navigationController)
+        
         uploadImages(imageDic: changeImageDictionary, item: item) { (item) in
             
             print(item)
