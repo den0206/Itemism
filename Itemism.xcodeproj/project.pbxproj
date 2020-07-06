@@ -210,8 +210,8 @@
 				3A04834224A0DF8C008F1BC2 /* AddItemViewController.swift */,
 				3AE001EA24A79541009BD9B5 /* DetailItemViewController.swift */,
 				3AD31B7324A85CDA00BD78D3 /* MyItemsViewController.swift */,
-				3AD4211B24AB724A00CC88E9 /* WantRentViewController.swift */,
 				3AD20ED424AF6F1000BA0D00 /* EditItemViewController.swift */,
+				3AD4211B24AB724A00CC88E9 /* WantRentViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";

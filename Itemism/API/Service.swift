@@ -152,6 +152,25 @@ class ItemService {
         
     }
     
+    static func fetchItem(itemId : String, completion :  @escaping(Item) -> Void) {
+        
+        firebaseReference(.Item).document(itemId).getDocument { (snapshot, error) in
+            
+            if error != nil {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            guard let snapshot = snapshot else {return}
+            
+            if snapshot.exists {
+                let dic = snapshot.data()
+                let item = Item(dictionry: dic!)
+                completion(item)
+            }
+        }
+    }
+    
     
     static func fetchUserItems(user : User, completion :  @escaping([Item]) -> Void) {
         
@@ -282,6 +301,8 @@ extension ItemService {
     static func fetchUserWants(user : User, completion : @escaping([Item]) -> Void) {
         /// sub collection
         
+        
+        
         Firestore.firestore().collectionGroup(kWANT).whereField(kUSERID, isEqualTo: user.uid).getDocuments { (snapshopt, error) in
             
             if error != nil {
@@ -290,11 +311,24 @@ extension ItemService {
             }
             
             guard let snapshopt = snapshopt else {return}
-//            var items = [Item]()
+            
+            var items = [Item]()
             
             snapshopt.documents.forEach({ (document) in
-                let data = document.data()
-                print(snapshopt.documents.count)
+                let dic = document.data()
+                let itemId = dic[kITEMID] as! String
+                
+                ItemService.fetchItem(itemId: itemId) { (item) in
+                    var item = item
+                    item.wanted = true
+                    
+                    items.append(item)
+                    
+                    if snapshopt.documents.count == items.count {
+                        completion(items)
+                    }
+                    
+                }
             })
         }
         
