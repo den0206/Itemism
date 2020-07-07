@@ -23,6 +23,8 @@ class WantRentViewController : UICollectionViewController {
         }
     }
     
+    private let refreshController = UIRefreshControl()
+    
     
     init(user : User) {
         self.user = user
@@ -36,10 +38,10 @@ class WantRentViewController : UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.tabBarController?.showPresentLoadindView(true)
+        self.tabBarController?.showPresentLoadindView(true)
         
         configureCV()
-//        fetchWants()
+        fetchWants()
     }
     
     //MARK: - UI
@@ -48,13 +50,26 @@ class WantRentViewController : UICollectionViewController {
         navigationItem.title = "お気に入り"
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemGroupedBackground
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuserIdentifer)
+        /// refresh controller
+        collectionView.refreshControl = refreshController
+        refreshController.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        
+        collectionView.register(WantRentCell.self, forCellWithReuseIdentifier: reuserIdentifer)
         
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
     }
+    
+    //MARK: - Actions
+    
+    @objc func handleRefresh() {
+        refreshController.beginRefreshing()
+        fetchWants()
+    }
+    
+    //MARK: - API
     
     private func fetchWants() {
         
@@ -65,6 +80,7 @@ class WantRentViewController : UICollectionViewController {
             self.wantsItems = items
             
             self.tabBarController?.showPresentLoadindView(false)
+            self.refreshController.endRefreshing()
         }
     }
 }
@@ -75,17 +91,23 @@ extension WantRentViewController {
     
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return wantsItems.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuserIdentifer, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuserIdentifer, for: indexPath) as! WantRentCell
         
-        cell.backgroundColor = .lightGray
-        cell.layer.cornerRadius = 13 / 2
-        
+        cell.item = wantsItems[indexPath.item]
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let item = wantsItems[indexPath.item]
+        
+        let itemVC = DetailItemViewController(item: item)
+        navigationController?.pushViewController(itemVC, animated: true)
     }
     
 }
@@ -95,7 +117,7 @@ extension WantRentViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width = (view.frame.width - lineSpacing) / 3
-        return CGSize(width: width, height: width)
+        return CGSize(width: width, height: width + 20)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

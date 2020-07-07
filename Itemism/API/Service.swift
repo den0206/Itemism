@@ -164,9 +164,16 @@ class ItemService {
             guard let snapshot = snapshot else {return}
             
             if snapshot.exists {
-                let dic = snapshot.data()
-                let item = Item(dictionry: dic!)
-                completion(item)
+                let dic = snapshot.data()!
+                let uid = dic[kUSERID] as! String
+                
+                var item = Item(dictionry: dic)
+                
+                UserService.fetchUser(uid: uid) { (user) in
+                    item.user = user
+                    completion(item)
+                }
+                
             }
         }
     }
@@ -314,22 +321,27 @@ extension ItemService {
             
             var items = [Item]()
             
-            snapshopt.documents.forEach({ (document) in
-                let dic = document.data()
-                let itemId = dic[kITEMID] as! String
-                
-                ItemService.fetchItem(itemId: itemId) { (item) in
-                    var item = item
-                    item.wanted = true
+            if !snapshopt.isEmpty {
+                snapshopt.documents.forEach({ (document) in
+                    let dic = document.data()
+                    let itemId = dic[kITEMID] as! String
                     
-                    items.append(item)
-                    
-                    if snapshopt.documents.count == items.count {
-                        completion(items)
+                    ItemService.fetchItem(itemId: itemId) { (item) in
+                        var item = item
+                        item.wanted = true
+                        
+                        items.append(item)
+                        
+                        if snapshopt.documents.count == items.count {
+                            completion(items)
+                        }
+                        
                     }
-                    
-                }
-            })
+                })
+            } else {
+                completion(items)
+            }
+            
         }
         
     }
