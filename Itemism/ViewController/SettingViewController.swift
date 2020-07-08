@@ -25,6 +25,8 @@ class SettingViewController : UITableViewController {
         
     }
     
+    
+  
     //MARK: - UI
     
     private func configureUI() {
@@ -40,6 +42,10 @@ class SettingViewController : UITableViewController {
         iv.setDimensions(height: 32, width: 32)
         iv.layer.cornerRadius = 32 / 2
         iv.clipsToBounds = true
+        iv.isUserInteractionEnabled = false
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedUserImage))
+        iv.addGestureRecognizer(tap)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: iv)
         
@@ -64,6 +70,12 @@ class SettingViewController : UITableViewController {
     
     @objc func handleDone() {
         print("Done")
+    }
+    
+    @objc func tappedUserImage() {
+        
+        let myItemVC = MyItemsViewController(user: User.currentUser()!)
+        navigationController?.pushViewController(myItemVC, animated: true)
     }
 }
 

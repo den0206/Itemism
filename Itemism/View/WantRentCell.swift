@@ -27,13 +27,27 @@ class WantRentCell : UICollectionViewCell {
         return iv
     }()
     
+    private let userImageView : UIImageView = {
+        let iv = UIImageView()
+        iv.backgroundColor = .lightGray
+        iv.setDimensions(height: 35, width: 35)
+        iv.layer.cornerRadius = 35 / 2
+        iv.clipsToBounds = true
+        iv.contentMode = .scaleAspectFill
+        return iv
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         layer.cornerRadius = 13 / 2
+        clipsToBounds = true
         
         addSubview(itemImageView)
         itemImageView.fillSuperview()
+        
+        addSubview(userImageView)
+        userImageView.anchor(top : itemImageView.topAnchor,right: itemImageView.rightAnchor, paddingTop: 8,paddingRight: 8)
         
         
     }
@@ -46,9 +60,14 @@ class WantRentCell : UICollectionViewCell {
     
     private func configure() {
         
+        ///image url
         guard let item = item else {return}
         let imageUrl = URL(string: item.imageLinks[0])
         itemImageView.sd_setImage(with: imageUrl)
+        
+        ///image data
+        let userImage = downloadImageFromData(picturedata: item.user!.profileImageData)
+        userImageView.image = userImage
     }
 }
 

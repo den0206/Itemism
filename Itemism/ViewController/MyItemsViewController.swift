@@ -61,17 +61,20 @@ class MyItemsViewController : UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = true
-        
-        
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        navigationController?.navigationBar.isHidden = true
+//
+//
+//    }
     
     //MARK: - UI
     
     private func configureUI() {
         view.backgroundColor = .systemGroupedBackground
+        
+        navigationItem.title = "\(user.name)さんのアイテム"
+        navigationController?.navigationBar.prefersLargeTitles = false
         
         /// blank view
         headerView.heightAnchor.constraint(equalToConstant: 50).isActive = true

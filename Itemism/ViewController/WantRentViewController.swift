@@ -66,6 +66,7 @@ class WantRentViewController : UICollectionViewController {
     
     @objc func handleRefresh() {
         refreshController.beginRefreshing()
+        
         fetchWants()
     }
     
@@ -97,6 +98,9 @@ extension WantRentViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuserIdentifer, for: indexPath) as! WantRentCell
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPress(_:)))
+        
+        cell.addGestureRecognizer(longPress)
         
         cell.item = wantsItems[indexPath.item]
         return cell
@@ -105,10 +109,50 @@ extension WantRentViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let item = wantsItems[indexPath.item]
+       
         
         let itemVC = DetailItemViewController(item: item)
         navigationController?.pushViewController(itemVC, animated: true)
     }
+    
+    //MARK: - long Press Cell (delete)
+    
+    @objc func longPress(_ longpressGestureRecognizer : UILongPressGestureRecognizer) {
+        
+        if longpressGestureRecognizer.state == UIGestureRecognizer.State.began {
+            let touchPoint = longpressGestureRecognizer.location(in: collectionView)
+            if let index = collectionView.indexPathForItem(at: touchPoint) {
+                deleteWanItemt(index: index)
+            }
+        }
+        
+    }
+    
+    private func deleteWanItemt(index : IndexPath) {
+        let item = wantsItems[index.item]
+        let alert = UIAlertController(title: "Delete", message: "\(item.name)を削除してもよろしいでしょうか？", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
+            self.collectionView.deleteItems(at: [index])
+            ///  reload    simultaneously
+            self.wantsItems.remove(at: index.item)
+            
+            // TODO: - delete item from Firestore
+            ItemService.wantItem(item: item, wanted: true) { (error) in
+                if error != nil {
+                    let mess = error!.localizedDescription
+                    self.showAlert(title: "Error", message: mess)
+                    
+                    return
+                }
+                
+            }
+            
+        }))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     
 }
 

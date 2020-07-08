@@ -58,8 +58,8 @@ class MainTabController : UITabBarController {
         let feedVC = FeedViewController()
         let nav = createNavController(image: UIImage(systemName: "house.fill"), title: "Feeds", rootViewController: feedVC)
         
-        let itemVC = MyItemsViewController(user: User.currentUser()!)
-        let nav1 = createNavController(image: UIImage(systemName: "gift.fill"), title: "Items", rootViewController: itemVC)
+        let requestVC = RequestedViewController()
+        let nav1 = createNavController(image: UIImage(systemName: "gift.fill"), title: "Items", rootViewController: requestVC)
         
         
         let rentVC = WantRentViewController(user: User.currentUser()!)
