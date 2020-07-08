@@ -11,6 +11,7 @@
 		3A04834324A0DF8C008F1BC2 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A04834224A0DF8C008F1BC2 /* AddItemViewController.swift */; };
 		3A07F13A24B501700046D649 /* WantRentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07F13924B501700046D649 /* WantRentCell.swift */; };
 		3A0AA474249EF87D009BE640 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0AA473249EF87D009BE640 /* SignUpViewController.swift */; };
+		3A605C0224B6001B000794C3 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A605C0124B6001B000794C3 /* Request.swift */; };
 		3AA04B7E24A22B1B00886E65 /* AddItemHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA04B7D24A22B1B00886E65 /* AddItemHeaderView.swift */; };
 		3AA04B8324A2343D00886E65 /* AddItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA04B8224A2343D00886E65 /* AddItemCell.swift */; };
 		3AA04B8524A23A4E00886E65 /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA04B8424A23A4E00886E65 /* InputTextView.swift */; };
@@ -49,6 +50,7 @@
 		3A04834224A0DF8C008F1BC2 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		3A07F13924B501700046D649 /* WantRentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WantRentCell.swift; sourceTree = "<group>"; };
 		3A0AA473249EF87D009BE640 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		3A605C0124B6001B000794C3 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		3AA04B7D24A22B1B00886E65 /* AddItemHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemHeaderView.swift; sourceTree = "<group>"; };
 		3AA04B8224A2343D00886E65 /* AddItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemCell.swift; sourceTree = "<group>"; };
 		3AA04B8424A23A4E00886E65 /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			children = (
 				3AEE21B0249F2BDD002CB2F1 /* User.swift */,
 				3AC396D824A4B94A0088C622 /* Item.swift */,
+				3A605C0124B6001B000794C3 /* Request.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				3AEE21AF249F2B7A002CB2F1 /* Downloader.swift in Sources */,
 				3AC396D924A4B94A0088C622 /* Item.swift in Sources */,
 				3AD20ED524AF6F1000BA0D00 /* EditItemViewController.swift in Sources */,
+				3A605C0224B6001B000794C3 /* Request.swift in Sources */,
 				3AA04B8824A23D7B00886E65 /* AddItemViewModel.swift in Sources */,
 				3AC396DB24A4CD330088C622 /* Reachbility.swift in Sources */,
 				3AF97672249DB9BC00A7BA80 /* AppDelegate.swift in Sources */,

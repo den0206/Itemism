@@ -109,7 +109,7 @@ class ItemService {
     
     static func fetchAllItems( completion : @escaping([Item]) -> Void) {
         
-        firebaseReference(.Item).order(by: kTIMESTAMP, descending: false
+        firebaseReference(.Item).order(by: kTIMESTAMP, descending: true
         ).getDocuments { (snapshot, error) in
             
             if error != nil {
@@ -252,6 +252,7 @@ class ItemService {
         
         if !wanted {
             let value = [kITEMID : itemId,
+                         kOWNERID : item.userId,
                          kUSERID : currentUserId,
                          kTIMESTAMP : Timestamp(date: Date())] as [String : Any]
             
@@ -348,3 +349,50 @@ extension ItemService {
     
 }
 
+//MARK: - Fetch Request
+
+extension ItemService {
+    
+    static func fetchRequest(user : User, completion : @escaping([Request]) -> Void) {
+        
+        Firestore.firestore().collectionGroup(kWANT).whereField(kOWNERID, isEqualTo: user.uid).getDocuments { (snapshot, error) in
+            
+            if error != nil {
+                print(error!.localizedDescription)
+                return
+            }
+            guard let snapshot = snapshot else {return}
+            
+            var requests = [Request]()
+            
+            if !snapshot.isEmpty {
+                snapshot.documents.forEach { (document) in
+                    let doc = document.data()
+                    
+                    /// except Current user
+                    guard user.uid == doc[kOWNERID] as? String else {return}
+                    let itemId = doc[kITEMID] as! String
+                    let userID = doc[kUSERID] as! String
+                    
+                    ItemService.fetchItem(itemId: itemId) { (item) in
+                        var item = item
+                        item.user = User.currentUser()
+                        
+                        UserService.fetchUser(uid: userID) { (requestUser) in
+                            let request = Request(item: item, requestUser: requestUser, message: nil)
+                            
+                            requests.append(request)
+                            if snapshot.documents.count == requests.count {
+                                completion(requests)
+                            }
+                        }
+                    }
+                    
+                }
+            } else {
+                completion(requests)
+            }
+        }
+        
+    }
+}
