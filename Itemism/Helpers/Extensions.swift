@@ -381,3 +381,51 @@ extension UIViewController {
 }
 
 
+public struct AttributedString: ExpressibleByStringLiteral, ExpressibleByStringInterpolation, CustomStringConvertible {
+    public struct StringInterpolation: StringInterpolationProtocol {
+        public var attributedString: NSMutableAttributedString
+        public init(literalCapacity: Int, interpolationCount: Int) {
+            attributedString = NSMutableAttributedString()
+        }
+
+        public func appendLiteral(_ literal: String) {
+            attributedString.append(NSAttributedString(string: literal))
+        }
+
+        public func appendInterpolation(_ linkText: String? = nil, URL url: URL) {
+            let text = linkText ?? url.absoluteString
+            attributedString.append(NSAttributedString(string: text, attributes: [.link: url]))
+        }
+
+        public func appendInterpolation(_ image: UIImage, bounds: CGRect? = nil) {
+            let textAttachment = NSTextAttachment()
+            textAttachment.image = image
+            if let bounds = bounds {
+                textAttachment.bounds = bounds
+            }
+            attributedString.append(NSAttributedString(attachment: textAttachment))
+        }
+
+        func appendInterpolation(_ text: String, attributes: [NSAttributedString.Key: Any]) {
+            attributedString.append(NSAttributedString(string: text, attributes: attributes))
+        }
+    }
+    public var attributedString: NSAttributedString
+    public init(stringLiteral value: String) {
+        attributedString = NSAttributedString(string: value)
+    }
+
+    public init(stringInterpolation: StringInterpolation) {
+        attributedString = NSAttributedString(attributedString: stringInterpolation.attributedString)
+    }
+
+    public init(attributedString: NSAttributedString) {
+        self.attributedString = attributedString
+    }
+
+    public var description: String {
+        return attributedString.description
+    }
+
+}
+

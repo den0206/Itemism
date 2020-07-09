@@ -8,12 +8,19 @@
 
 import UIKit
 
+private let reuseIdetifer = "RequestCell"
+
 class RequestedViewController : UITableViewController {
     
     //MARK: - Property
     let user : User
     
-    var requests = [Request]()
+    var requests = [Request]() {
+        
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     init(user : User) {
         self.user = user
@@ -27,7 +34,23 @@ class RequestedViewController : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        configureTV()
         fetchRequest()
+    }
+    
+    //MARK: - UI
+    
+    private func configureTV() {
+        
+        navigationItem.title = "リクエスト一覧"
+        
+        tableView.backgroundColor = .systemGroupedBackground
+        tableView.rowHeight = 80
+        tableView.tableFooterView = UIView()
+        
+        tableView.register(RerquestCell.self, forCellReuseIdentifier: reuseIdetifer)
+        
     }
     
     //MARK: - API
@@ -36,11 +59,29 @@ class RequestedViewController : UITableViewController {
         
         checkInternetConnection()
         
+        self.tabBarController?.showPresentLoadindView(true)
+        
         ItemService.fetchRequest(user: user) { (requests) in
             self.requests = requests
             
-            print(requests.count)
-            
+            self.tabBarController?.showPresentLoadindView(false)
+
         }
+    }
+}
+
+//MARK: - UI TableView Delegate
+
+extension RequestedViewController {
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return requests.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdetifer, for: indexPath) as! RerquestCell
+        
+        return cell
     }
 }
