@@ -10,6 +10,12 @@ import UIKit
 
 class RerquestCell : UITableViewCell {
     
+    var request : Request? {
+        didSet {
+            configure()
+        }
+    }
+    
     //MARK: - Parts
     
    
@@ -28,7 +34,7 @@ class RerquestCell : UITableViewCell {
     private let middleText : UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
-        label.text = " さんから"
+        label.text = "さんから"
         return label
     }()
     
@@ -46,7 +52,7 @@ class RerquestCell : UITableViewCell {
     private let lastLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
-        label.text = " へのリクエスト"
+        label.text = "へのリクエストがあります。"
 //        label.numberOfLines = 2
         return label
     }()
@@ -78,13 +84,20 @@ class RerquestCell : UITableViewCell {
         
         addSubview(stack)
         stack.centerY(inView: self, leftAnchor: leftAnchor, paddingLeft: 12)
-//        stack.anchor(right : accceptButton.leftAnchor, paddingRight: 8)
+        stack.anchor(right : accceptButton.leftAnchor, paddingRight: 8)
 
         
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configure() {
+        guard let request = request else {return}
+        
+        userImageView.image = downloadImageFromData(picturedata: request.requestUser.profileImageData)
+        itemImageView.sd_setImage(with: URL(string: request.item.imageLinks[0]))
     }
     
     //MARK: - Actions

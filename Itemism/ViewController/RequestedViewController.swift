@@ -82,6 +82,25 @@ extension RequestedViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdetifer, for: indexPath) as! RerquestCell
         
+        cell.request = requests[indexPath.row]
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let request = requests[indexPath.row]
+        
+        let popupViewController = PopupViewController(request: request)
+        
+        popupViewController.popView.alpha = 0
+        
+        self.tabBarController?.view.addSubview(popupViewController.view)
+        
+        UIView.animate(withDuration: 1) {
+            popupViewController.popView.alpha = 1
+        }
+        
     }
 }
