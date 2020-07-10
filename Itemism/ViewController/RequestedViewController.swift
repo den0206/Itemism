@@ -22,6 +22,8 @@ class RequestedViewController : UITableViewController {
         }
     }
     
+
+    
     init(user : User) {
         self.user = user
         super.init(nibName: nil, bundle: nil)
@@ -33,10 +35,12 @@ class RequestedViewController : UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//
+//        self.tabBarController?.addChild(popupViewController)
+//        popupViewController.didMove(toParent: self.tabBarController)
         
         configureTV()
-        fetchRequest()
+//        fetchRequest()
     }
     
     //MARK: - UI
@@ -75,14 +79,14 @@ class RequestedViewController : UITableViewController {
 extension RequestedViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return requests.count
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdetifer, for: indexPath) as! RerquestCell
         
-        cell.request = requests[indexPath.row]
+//        cell.request = requests[indexPath.row]
         return cell
     }
     
@@ -90,17 +94,21 @@ extension RequestedViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let request = requests[indexPath.row]
+//        let request = requests[indexPath.row]
         
-        let popupViewController = PopupViewController(request: request)
+//        popupViewController.request = request
         
-        popupViewController.popView.alpha = 0
+        let popviewController = PopupViewController()
+        popviewController.modalPresentationStyle = .custom
+        popviewController.transitioningDelegate = self
+        present(popviewController, animated: true, completion: nil)
         
-        self.tabBarController?.view.addSubview(popupViewController.view)
-        
-        UIView.animate(withDuration: 1) {
-            popupViewController.popView.alpha = 1
-        }
-        
+    }
+}
+
+extension RequestedViewController : UIViewControllerTransitioningDelegate {
+    
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return CustomPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }
