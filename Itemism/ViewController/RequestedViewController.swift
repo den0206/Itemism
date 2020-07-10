@@ -98,7 +98,7 @@ extension RequestedViewController {
         
 //        popupViewController.request = request
         
-        let popviewController = PopupViewController()
+        let popviewController = RequestPopupController()
         popviewController.modalPresentationStyle = .custom
         popviewController.transitioningDelegate = self
         present(popviewController, animated: true, completion: nil)

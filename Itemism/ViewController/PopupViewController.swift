@@ -8,27 +8,22 @@
 
 import UIKit
 
-class PopupViewController : UIViewController {
+class RequestPopupController : UITableViewController {
     
     var request : Request?
-    let sampleBtn = UIButton()
+    
+    //MARK: - Parts
+    
+    
+    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .red
+        view.backgroundColor = .systemGroupedBackground
         
-        self.sampleBtn.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
-        self.sampleBtn.backgroundColor = UIColor.red
-        self.sampleBtn.setTitle("button", for: .normal)
-        self.sampleBtn.addTarget(
-          self,
-          action: #selector(self.btnTapped(sender:)),
-          for: .touchUpInside
-        )
-
-        self.view.addSubview(self.sampleBtn)
+       
     }
    
     @objc func btnTapped(sender : UIButton) {
@@ -37,5 +32,8 @@ class PopupViewController : UIViewController {
     
     
 }
+
+extension RequestPopupController {
     
+}
 

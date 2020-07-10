@@ -32,7 +32,7 @@
 		3ADB97E7249DDD6F000AB412 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB97E6249DDD6F000AB412 /* LoginViewController.swift */; };
 		3AE001EB24A79541009BD9B5 /* DetailItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE001EA24A79541009BD9B5 /* DetailItemViewController.swift */; };
 		3AE1B04724B5DC7D004D7346 /* RequestedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1B04624B5DC7D004D7346 /* RequestedViewController.swift */; };
-		3AE61A8324B7613F00ADDE2A /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE61A8224B7613F00ADDE2A /* PopupViewController.swift */; };
+		3AE61A8324B7613F00ADDE2A /* RequestPopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE61A8224B7613F00ADDE2A /* RequestPopupController.swift */; };
 		3AEE21A9249F1E4B002CB2F1 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE21A8249F1E4B002CB2F1 /* Service.swift */; };
 		3AEE21AB249F2541002CB2F1 /* Constracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE21AA249F2541002CB2F1 /* Constracts.swift */; };
 		3AEE21AD249F25A9002CB2F1 /* FirebaseReferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE21AC249F25A9002CB2F1 /* FirebaseReferences.swift */; };
@@ -74,7 +74,7 @@
 		3ADB97E6249DDD6F000AB412 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3AE001EA24A79541009BD9B5 /* DetailItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemViewController.swift; sourceTree = "<group>"; };
 		3AE1B04624B5DC7D004D7346 /* RequestedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestedViewController.swift; sourceTree = "<group>"; };
-		3AE61A8224B7613F00ADDE2A /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		3AE61A8224B7613F00ADDE2A /* RequestPopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPopupController.swift; sourceTree = "<group>"; };
 		3AEE21A8249F1E4B002CB2F1 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		3AEE21AA249F2541002CB2F1 /* Constracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constracts.swift; sourceTree = "<group>"; };
 		3AEE21AC249F25A9002CB2F1 /* FirebaseReferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReferences.swift; sourceTree = "<group>"; };
@@ -149,6 +149,7 @@
 		3AAAA2F4249DBB0F00C2BD60 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				3AC7ED0624B88E0C007F18FF /* CustomPresentationController.swift */,
 				3ADB97DF249DD60A000AB412 /* Extensions.swift */,
 				3AEE21AA249F2541002CB2F1 /* Constracts.swift */,
 				3AEE21AC249F25A9002CB2F1 /* FirebaseReferences.swift */,
@@ -225,8 +226,7 @@
 				3AD20ED424AF6F1000BA0D00 /* EditItemViewController.swift */,
 				3AD4211B24AB724A00CC88E9 /* WantRentViewController.swift */,
 				3AE1B04624B5DC7D004D7346 /* RequestedViewController.swift */,
-				3AE61A8224B7613F00ADDE2A /* PopupViewController.swift */,
-				3AC7ED0624B88E0C007F18FF /* CustomPresentationController.swift */,
+				3AE61A8224B7613F00ADDE2A /* RequestPopupController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -375,7 +375,7 @@
 				3AD56FC424B72BD000D25FE6 /* RerquestCell.swift in Sources */,
 				3AC396DB24A4CD330088C622 /* Reachbility.swift in Sources */,
 				3AF97672249DB9BC00A7BA80 /* AppDelegate.swift in Sources */,
-				3AE61A8324B7613F00ADDE2A /* PopupViewController.swift in Sources */,
+				3AE61A8324B7613F00ADDE2A /* RequestPopupController.swift in Sources */,
 				3AA04B7E24A22B1B00886E65 /* AddItemHeaderView.swift in Sources */,
 				3AA04B8524A23A4E00886E65 /* InputTextView.swift in Sources */,
 				3AEE21B3249F2F9D002CB2F1 /* SettingViewController.swift in Sources */,
