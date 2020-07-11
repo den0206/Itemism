@@ -26,9 +26,6 @@ class RequestPopupController : UIViewController {
     }()
     
     
-    
-    
-    
     private let userIMageView : UIImageView = {
         let iv = UIImageView()
         
@@ -63,25 +60,23 @@ class RequestPopupController : UIViewController {
     }()
     
     let matchingButton : UIButton = {
-        let button = UIButton(type: .system)
-        
+        let button = GradientButton(leftColor: .green, rightColor: #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1))
         button.setTitle("Matching!", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
-        button.layer.cornerRadius = 13 / 2
-        button.clipsToBounds = true
+//        button.layer.cornerRadius = 13 / 2
+//        button.clipsToBounds = true
         
         button.addTarget(self, action: #selector(handleMatching), for: .touchUpInside)
         return button
     }()
     
     let cancelButton : UIButton = {
-        let button = UIButton(type: .system)
+        let button = GradientButton(leftColor: #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1), rightColor: #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1))
         button.setTitle("Cancel", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .red
-        button.layer.cornerRadius = 13 / 2
-        button.clipsToBounds = true
+//        button.layer.cornerRadius = 13 / 2
+//        button.clipsToBounds = true
         
         button.addTarget(self, action: #selector(handleCancel(sender:)), for: .touchUpInside)
 
@@ -92,6 +87,7 @@ class RequestPopupController : UIViewController {
         super.viewDidLoad()
         
         configureUI()
+        loadRequest()
        
     }
     
@@ -125,7 +121,7 @@ class RequestPopupController : UIViewController {
         buttonStack.distribution = .fillEqually
 
         view.addSubview(buttonStack)
-        buttonStack.anchor(top: messageTextView.bottomAnchor, left :view.leftAnchor, bottom : view.bottomAnchor, right: view.rightAnchor,paddingTop: 40, paddingLeft: 40, paddingBottom: 20, paddingRight: 40,width: view.frame.width,height: view.frame.height / 10 * 1)
+        buttonStack.anchor(top: messageTextView.bottomAnchor, left :view.leftAnchor, bottom : view.bottomAnchor, right: view.rightAnchor,paddingTop: 40, paddingLeft: 40, paddingBottom: 20, paddingRight: 40,width: view.frame.width,height: 60)
 
        
         

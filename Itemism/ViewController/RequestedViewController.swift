@@ -37,7 +37,7 @@ class RequestedViewController : UITableViewController {
         super.viewDidLoad()
         
         configureTV()
-//        fetchRequest()
+        fetchRequest()
     }
     
     //MARK: - UI
