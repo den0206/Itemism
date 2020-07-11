@@ -35,9 +35,6 @@ class RequestedViewController : UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//
-//        self.tabBarController?.addChild(popupViewController)
-//        popupViewController.didMove(toParent: self.tabBarController)
         
         configureTV()
 //        fetchRequest()
@@ -79,14 +76,14 @@ class RequestedViewController : UITableViewController {
 extension RequestedViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return requests.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdetifer, for: indexPath) as! RerquestCell
         
-//        cell.request = requests[indexPath.row]
+        cell.request = requests[indexPath.row]
         return cell
     }
     
@@ -94,11 +91,12 @@ extension RequestedViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-//        let request = requests[indexPath.row]
-        
-//        popupViewController.request = request
-        
+        let request = requests[indexPath.row]
+                
         let popviewController = RequestPopupController()
+        popviewController.delegate = self
+        
+        popviewController.request = request
         popviewController.modalPresentationStyle = .custom
         popviewController.transitioningDelegate = self
         present(popviewController, animated: true, completion: nil)
@@ -111,4 +109,26 @@ extension RequestedViewController : UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return CustomPresentationController(presentedViewController: presented, presenting: presenting)
     }
+}
+extension RequestedViewController : RequestPopupControllerDelegate {
+    func handleMatching(popup: RequestPopupController, matchedUser: User) {
+        
+        popup.dismiss(animated: true, completion: nil)
+
+        // TODO: - save matching fireStore
+        
+        // TODO: - present MatchVC
+        let viewModel = MatchViewModel(currentUser:  User.currentUser()!, matchUser: matchedUser)
+        let matchVC = MatchView(viewModel: viewModel)
+        
+        self.tabBarController?.view.addSubview(matchVC)
+        matchVC.fillSuperview()
+        
+
+
+    }
+    
+    
+
+    
 }
