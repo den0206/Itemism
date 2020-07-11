@@ -135,7 +135,6 @@ class RequestPopupController : UIViewController {
     
     @objc func handleMatching() {
         checkInternetConnection()
-        
         guard let user = request?.requestUser else {return}
         delegate?.handleMatching(popup: self, matchedUser: user)
     }

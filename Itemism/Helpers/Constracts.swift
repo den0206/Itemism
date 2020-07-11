@@ -32,3 +32,6 @@ public let kTIMESTAMP = "timeStamp"
 public let kWANT = "Want"
 public let kOWNERID = "ownerId"
  
+//MARK: - Match
+
+public let kMATCHES = "Matches"

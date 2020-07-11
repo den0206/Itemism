@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 private let reuseIdetifer = "RequestCell"
 
@@ -111,18 +112,32 @@ extension RequestedViewController : UIViewControllerTransitioningDelegate {
     }
 }
 extension RequestedViewController : RequestPopupControllerDelegate {
+    
     func handleMatching(popup: RequestPopupController, matchedUser: User) {
         
         popup.dismiss(animated: true, completion: nil)
 
         // TODO: - save matching fireStore
+        MatchService.checkMatchExist(user: matchedUser) { (accepted) in
+            
+            guard !accepted else {
+                HUD.flash(.label("メッセージを送ってみましょう"), delay: 1.0)
+                return
+            }
+            
+            MatchService.uploadMatch(currentUser: User.currentUser()!, mathedUser: matchedUser)
+            
+
+            // TODO: - present MatchVC
+            let viewModel = MatchViewModel(currentUser:  User.currentUser()!, matchUser: matchedUser)
+            let matchVC = MatchView(viewModel: viewModel)
+            
+            self.tabBarController?.view.addSubview(matchVC)
+            matchVC.fillSuperview()
+            
+            
+        }
         
-        // TODO: - present MatchVC
-        let viewModel = MatchViewModel(currentUser:  User.currentUser()!, matchUser: matchedUser)
-        let matchVC = MatchView(viewModel: viewModel)
-        
-        self.tabBarController?.view.addSubview(matchVC)
-        matchVC.fillSuperview()
         
 
 

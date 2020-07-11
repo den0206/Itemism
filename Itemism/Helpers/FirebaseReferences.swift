@@ -12,6 +12,7 @@ import FirebaseFirestore
 enum References : String {
     case User
     case Item
+    case Match
 }
 
 func firebaseReference(_ reference : References) -> CollectionReference {

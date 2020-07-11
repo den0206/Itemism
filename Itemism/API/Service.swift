@@ -396,3 +396,38 @@ extension ItemService {
         
     }
 }
+
+//MARK: - Match
+
+class MatchService {
+    
+    static func checkMatchExist(user : User, completion : @escaping(Bool) -> Void) {
+        
+        firebaseReference(.Match).document(User.currentId()).collection(kMATCHES).document(user.uid).getDocument { (snapshot, error) in
+            
+            guard let snapshot = snapshot else {return }
+            
+            completion(snapshot.exists)
+            
+            
+        }
+    }
+    
+    static func uploadMatch(currentUser : User, mathedUser : User) {
+        let matchedUserDate = [ kUSERID : mathedUser.uid,
+                                kFULLNAME : mathedUser.name,
+                                kPROFILE_IMAGE : mathedUser.profileImageData
+        ]
+        
+        firebaseReference(.Match).document(currentUser.uid).collection(kMATCHES).document(mathedUser.uid).setData(matchedUserDate)
+        
+        /// add matchUser DB
+        
+        let currentUserDate = [ kUSERID : currentUser.uid,
+                                kFULLNAME : currentUser.name,
+                                kPROFILE_IMAGE : currentUser.profileImageData
+        ]
+        
+        firebaseReference(.Match).document(mathedUser.uid).collection(kMATCHES).document(currentUser.uid).setData(currentUserDate)
+    }
+}
