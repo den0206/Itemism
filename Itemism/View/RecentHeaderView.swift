@@ -10,6 +10,10 @@ import UIKit
 
 private let recentIdentifier = "RecentCell"
 
+protocol RecentHeaderViewDelegate : class {
+    func handleMatch(match : Match)
+}
+
 class RecentHeaderView : UICollectionReusableView {
     
     //MARK: - property
@@ -19,6 +23,8 @@ class RecentHeaderView : UICollectionReusableView {
             collectionView.reloadData()
         }
     }
+    
+    weak var delegate : RecentHeaderViewDelegate?
     
     
     //MARK: - parts
@@ -83,7 +89,15 @@ extension RecentHeaderView : UICollectionViewDelegate,UICollectionViewDataSource
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: recentIdentifier, for: indexPath) as! RecentMatchCell
         cell.match = matches[indexPath.item]
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let match = matches[indexPath.item]
+        
+        delegate?.handleMatch(match: match)
+        
     }
     
     

@@ -35,3 +35,28 @@ public let kOWNERID = "ownerId"
 //MARK: - Match
 
 public let kMATCHES = "Matches"
+
+//MARK: - Message
+
+public let kPRIVATE = "private"
+public let kCHATROOMID = "chatRoomID"
+public let kDATE = "date"
+public let kGROUP = "group"
+public let kGROUPID = "groupId"
+public let kRECENTID = "recentId"
+public let kMEMBERS = "members"
+public let kMESSAGE = "message"
+public let kMEMBERSTOPUSH = "membersToPush"
+public let kDISCRIPTION = "discription"
+public let kLASTMESSAGE = "lastMessage"
+public let kCOUNTER = "counter"
+public let kTYPE = "type"
+public let kWITHUSERFULLNAME = "withUserFullName"
+public let kWITHUSERUSERID = "withUserUserID"
+public let kSTATUS = "status"
+public let kMESSAGEID = "messageId"
+public let kNAME = "name"
+public let kSENDERID = "senderId"
+public let kSENDERNAME = "senderName"
+public let kTHUMBNAIL = "thumbnail"
+public let kISDELETED = "isDeleted"

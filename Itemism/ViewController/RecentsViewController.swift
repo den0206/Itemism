@@ -33,6 +33,7 @@ class RecentsViewController : UITableViewController {
         
         /// no section header
         tableView.tableHeaderView = headerView
+        headerView.delegate = self
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
         
         
@@ -55,5 +56,24 @@ class RecentsViewController : UITableViewController {
 //MARK: - Table View Delegate
 
 extension RecentsViewController {
+    
+}
+
+//MARK: - Recent Header view Delegate
+
+extension RecentsViewController : RecentHeaderViewDelegate {
+    
+    func handleMatch(match: Match) {
+        
+        checkInternetConnection()
+        
+        /// start Chat
+        let chatRoomId = Recent.startPrivateChat(currentUserId: User.currentId(), match: match)
+        
+        
+        
+        
+    }
+    
     
 }

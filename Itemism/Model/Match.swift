@@ -19,4 +19,10 @@ struct Match {
         self.profileImageData = dictionary[kPROFILE_IMAGE] as? String ?? ""
         self.uid = dictionary[kUSERID] as? String ?? ""
     }
+    
+    init(uid : String,name: String, profileImageData : String) {
+        self.uid = uid
+        self.name = name
+        self.profileImageData = profileImageData
+    }
 }

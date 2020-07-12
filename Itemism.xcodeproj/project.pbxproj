@@ -25,6 +25,7 @@
 		3AC396DB24A4CD330088C622 /* Reachbility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC396DA24A4CD330088C622 /* Reachbility.swift */; };
 		3AC7ED0724B88E0C007F18FF /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC7ED0624B88E0C007F18FF /* CustomPresentationController.swift */; };
 		3AC7F18B24B980420000858D /* GradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC7F18A24B980420000858D /* GradientButton.swift */; };
+		3ACE771224BAD5BC00DFC744 /* Recent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE771124BAD5BC00DFC744 /* Recent.swift */; };
 		3AD20ED524AF6F1000BA0D00 /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD20ED424AF6F1000BA0D00 /* EditItemViewController.swift */; };
 		3AD31B7424A85CDA00BD78D3 /* MyItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD31B7324A85CDA00BD78D3 /* MyItemsViewController.swift */; };
 		3AD3327E24A83FE9002A2672 /* BottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3327D24A83FE9002A2672 /* BottomControlsStackView.swift */; };
@@ -74,6 +75,7 @@
 		3AC396DA24A4CD330088C622 /* Reachbility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachbility.swift; sourceTree = "<group>"; };
 		3AC7ED0624B88E0C007F18FF /* CustomPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
 		3AC7F18A24B980420000858D /* GradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientButton.swift; sourceTree = "<group>"; };
+		3ACE771124BAD5BC00DFC744 /* Recent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recent.swift; sourceTree = "<group>"; };
 		3AD20ED424AF6F1000BA0D00 /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
 		3AD31B7324A85CDA00BD78D3 /* MyItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyItemsViewController.swift; sourceTree = "<group>"; };
 		3AD3327D24A83FE9002A2672 /* BottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomControlsStackView.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				3AEE21AE249F2B7A002CB2F1 /* Downloader.swift */,
 				3AC396DA24A4CD330088C622 /* Reachbility.swift */,
 				3AC7F18A24B980420000858D /* GradientButton.swift */,
+				3ACE771124BAD5BC00DFC744 /* Recent.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				3A605C0224B6001B000794C3 /* Request.swift in Sources */,
 				3AA04B8824A23D7B00886E65 /* AddItemViewModel.swift in Sources */,
 				3AD56FC424B72BD000D25FE6 /* RerquestCell.swift in Sources */,
+				3ACE771224BAD5BC00DFC744 /* Recent.swift in Sources */,
 				3AC396DB24A4CD330088C622 /* Reachbility.swift in Sources */,
 				3A9F1CB924B970F600AE98B5 /* MatchView.swift in Sources */,
 				3A63534424BAAB5700C75443 /* RecentHeaderView.swift in Sources */,

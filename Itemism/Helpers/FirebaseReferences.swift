@@ -13,6 +13,7 @@ enum References : String {
     case User
     case Item
     case Match
+    case Recent
 }
 
 func firebaseReference(_ reference : References) -> CollectionReference {
