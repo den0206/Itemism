@@ -23,6 +23,7 @@
 		3AA04B8824A23D7B00886E65 /* AddItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA04B8724A23D7B00886E65 /* AddItemViewModel.swift */; };
 		3AC396D924A4B94A0088C622 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC396D824A4B94A0088C622 /* Item.swift */; };
 		3AC396DB24A4CD330088C622 /* Reachbility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC396DA24A4CD330088C622 /* Reachbility.swift */; };
+		3AC3E25B24BB2CFF00F5D4F5 /* RecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3E25A24BB2CFF00F5D4F5 /* RecentCell.swift */; };
 		3AC7ED0724B88E0C007F18FF /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC7ED0624B88E0C007F18FF /* CustomPresentationController.swift */; };
 		3AC7F18B24B980420000858D /* GradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC7F18A24B980420000858D /* GradientButton.swift */; };
 		3ACE771224BAD5BC00DFC744 /* Recent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE771124BAD5BC00DFC744 /* Recent.swift */; };
@@ -73,6 +74,7 @@
 		3AA04B8724A23D7B00886E65 /* AddItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewModel.swift; sourceTree = "<group>"; };
 		3AC396D824A4B94A0088C622 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		3AC396DA24A4CD330088C622 /* Reachbility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachbility.swift; sourceTree = "<group>"; };
+		3AC3E25A24BB2CFF00F5D4F5 /* RecentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCell.swift; sourceTree = "<group>"; };
 		3AC7ED0624B88E0C007F18FF /* CustomPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
 		3AC7F18A24B980420000858D /* GradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientButton.swift; sourceTree = "<group>"; };
 		3ACE771124BAD5BC00DFC744 /* Recent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recent.swift; sourceTree = "<group>"; };
@@ -153,16 +155,13 @@
 		3AAAA2F3249DBAF300C2BD60 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3ADB97DD249DD56A000AB412 /* FeedCell.swift */,
+				3AC3E25924BB2CD300F5D4F5 /* Cell */,
 				3AD3327F24A84360002A2672 /* CardView.swift */,
 				3A04834024A0CF28008F1BC2 /* SettingFooterView.swift */,
-				3A07F13924B501700046D649 /* WantRentCell.swift */,
 				3AA04B8124A2342000886E65 /* Item */,
 				3AD3327D24A83FE9002A2672 /* BottomControlsStackView.swift */,
-				3AD56FC324B72BD000D25FE6 /* RerquestCell.swift */,
 				3A9F1CB824B970F600AE98B5 /* MatchView.swift */,
 				3A63534324BAAB5700C75443 /* RecentHeaderView.swift */,
-				3A63534524BAB0A100C75443 /* RecentMatchCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -170,6 +169,7 @@
 		3AAAA2F4249DBB0F00C2BD60 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				3ACE771124BAD5BC00DFC744 /* Recent.swift */,
 				3AC7ED0624B88E0C007F18FF /* CustomPresentationController.swift */,
 				3ADB97DF249DD60A000AB412 /* Extensions.swift */,
 				3AEE21AA249F2541002CB2F1 /* Constracts.swift */,
@@ -177,9 +177,20 @@
 				3AEE21AE249F2B7A002CB2F1 /* Downloader.swift */,
 				3AC396DA24A4CD330088C622 /* Reachbility.swift */,
 				3AC7F18A24B980420000858D /* GradientButton.swift */,
-				3ACE771124BAD5BC00DFC744 /* Recent.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		3AC3E25924BB2CD300F5D4F5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3ADB97DD249DD56A000AB412 /* FeedCell.swift */,
+				3A07F13924B501700046D649 /* WantRentCell.swift */,
+				3AD56FC324B72BD000D25FE6 /* RerquestCell.swift */,
+				3A63534524BAB0A100C75443 /* RecentMatchCell.swift */,
+				3AC3E25A24BB2CFF00F5D4F5 /* RecentCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		3ADB97E5249DDD52000AB412 /* Authentification */ = {
@@ -397,6 +408,7 @@
 				3A605C0224B6001B000794C3 /* Request.swift in Sources */,
 				3AA04B8824A23D7B00886E65 /* AddItemViewModel.swift in Sources */,
 				3AD56FC424B72BD000D25FE6 /* RerquestCell.swift in Sources */,
+				3AC3E25B24BB2CFF00F5D4F5 /* RecentCell.swift in Sources */,
 				3ACE771224BAD5BC00DFC744 /* Recent.swift in Sources */,
 				3AC396DB24A4CD330088C622 /* Reachbility.swift in Sources */,
 				3A9F1CB924B970F600AE98B5 /* MatchView.swift in Sources */,

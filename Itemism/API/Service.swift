@@ -442,3 +442,39 @@ class MatchService {
         firebaseReference(.Match).document(mathedUser.uid).collection(kMATCHES).document(currentUser.uid).setData(currentUserDate)
     }
 }
+
+
+//MARK: - MessageService
+
+class MessageService {
+    
+    static func fetchRecent(userId : String, completion :  @escaping([Dictionary<String, Any>]) -> Void) -> ListenerRegistration?{
+        
+        return firebaseReference(.Recent).whereField(kUSERID, isEqualTo: userId).order(by: kDATE, descending: true).addSnapshotListener { (snapshot, error) in
+            
+            guard let snapshot = snapshot else {return}
+            
+            var recents = [[String : Any]]()
+            
+            if !snapshot.isEmpty {
+                snapshot.documents.forEach { (doc) in
+                    
+                    let recent = doc.data()
+                    
+                    if recent[kLASTMESSAGE] as! String != "" && recent[kCHATROOMID] != nil && recent[kRECENTID] != nil {
+                        recents.append(recent)
+                    }
+                    
+                }
+                
+                completion(recents)
+            } else {
+                
+                //// empty
+                completion(recents)
+            }
+            
+        }
+        
+    }
+}

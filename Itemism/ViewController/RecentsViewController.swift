@@ -7,16 +7,37 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
+private let recentReuseIdentifer = "recentCell"
 class RecentsViewController : UITableViewController {
     
+    //MARK: - Property
+    
+    var recents = [[String : Any]]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    var recentsListner : ListenerRegistration?
+    
+    //MARK: - Parts
+    
     private let headerView = RecentHeaderView()
+    
+    deinit {
+        recentsListner?.remove()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         congigureTV()
+        
         fetchMetch()
+        fetchRecents()
+        
     }
     
     //MARK: - UI
@@ -30,6 +51,8 @@ class RecentsViewController : UITableViewController {
         tableView.rowHeight = 100
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
+        
+        tableView.register(RecentCell.self, forCellReuseIdentifier: recentReuseIdentifer)
         
         /// no section header
         tableView.tableHeaderView = headerView
@@ -50,12 +73,35 @@ class RecentsViewController : UITableViewController {
         }
     }
     
+    private func fetchRecents() {
+        
+        recentsListner = MessageService.fetchRecent(userId: User.currentId(), completion: { (recents) in
+            
+            self.recents = recents
+            
+        })
+    }
+    
     
 }
 
 //MARK: - Table View Delegate
 
 extension RecentsViewController {
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        recents.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: recentReuseIdentifer, for: indexPath) as! RecentCell
+        
+        cell.recent = recents[indexPath.row]
+        
+        return cell
+    }
+    
     
 }
 
@@ -70,6 +116,7 @@ extension RecentsViewController : RecentHeaderViewDelegate {
         /// start Chat
         let chatRoomId = Recent.startPrivateChat(currentUserId: User.currentId(), match: match)
         
+        print(chatRoomId)
         
         
         

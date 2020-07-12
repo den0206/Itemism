@@ -48,6 +48,12 @@ class Recent {
                 }
             }
             
+            /// return if exist recent
+            
+            guard !tempMembers.isEmpty else {print("already")
+                return
+            }
+            
             /// no dupicate
             
             for userId in tempMembers {
