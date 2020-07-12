@@ -58,8 +58,8 @@ class WantRentViewController : UICollectionViewController {
         
         collectionView.register(WantRentCell.self, forCellWithReuseIdentifier: reuserIdentifer)
         
-        collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
-        collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+//        collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+//        collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
     }
     
     //MARK: - Actions
@@ -168,7 +168,13 @@ extension WantRentViewController : UICollectionViewDelegateFlowLayout {
         return lineSpacing / 2
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
+    }
+    //// cell margin
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 20 , left: 2 , bottom: 20 , right: 2 )
+
     }
 }

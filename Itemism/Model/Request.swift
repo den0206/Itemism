@@ -15,11 +15,7 @@ struct Request {
     
     /// not yet
     var message : String?
-
-
-    /// current user
-//    let ownerId : String
     
-    
+    var accepted = false
    
 }

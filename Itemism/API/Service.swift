@@ -120,34 +120,30 @@ class ItemService {
             guard let snapshot = snapshot else {return}
             
             var items = [Item]()
+            var currentItemsCount = 0
             //            var itemsCount = 0
             
             if !snapshot.isEmpty {
-                let documents = snapshot.documents
-                
-                documents.forEach { (snapshot) in
-                    let document = snapshot.data()
-                    var item = Item(dictionry: document)
+                for doc in snapshot.documents {
+                    let dic = doc.data()
+                    var item = Item(dictionry: dic)
                     
-                    /// add user objc
+                    /// anoid curentUser Item
+                    guard User.currentId() != item.userId else {
+                        currentItemsCount += 1
+                        continue}
+                    
                     UserService.fetchUser(uid: item.userId) { (user) in
-                        
                         item.user = user
-                        
                         items.append(item)
                         
-                        if items.count == documents.count {
-                            print("Set")
+                        if items.count == snapshot.documents.count - currentItemsCount{
                             completion(items)
                         }
-                        
-                        
                     }
-                    
-                    
                 }
-                //                completion(items)
             }
+
         }
         
     }
@@ -410,6 +406,21 @@ class MatchService {
             completion(snapshot.exists)
             
             
+        }
+    }
+    
+    static func fetchMatch(comletion :  @escaping([Match]) -> Void) {
+        
+        firebaseReference(.Match).document(User.currentId()).collection(kMATCHES).getDocuments { (snapshot, error) in
+            if error != nil {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            guard let snapshot = snapshot else {return}
+            
+            let matches = snapshot.documents.map({Match(dictionary: $0.data())})
+            comletion(matches)
         }
     }
     

@@ -12,6 +12,9 @@
 		3A07F13A24B501700046D649 /* WantRentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07F13924B501700046D649 /* WantRentCell.swift */; };
 		3A0AA474249EF87D009BE640 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0AA473249EF87D009BE640 /* SignUpViewController.swift */; };
 		3A605C0224B6001B000794C3 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A605C0124B6001B000794C3 /* Request.swift */; };
+		3A63534424BAAB5700C75443 /* RecentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63534324BAAB5700C75443 /* RecentHeaderView.swift */; };
+		3A63534624BAB0A100C75443 /* RecentMatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63534524BAB0A100C75443 /* RecentMatchCell.swift */; };
+		3A63534824BAB1F000C75443 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63534724BAB1F000C75443 /* Match.swift */; };
 		3A9F1CB924B970F600AE98B5 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9F1CB824B970F600AE98B5 /* MatchView.swift */; };
 		3A9F1CBB24B9798C00AE98B5 /* MatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9F1CBA24B9798C00AE98B5 /* MatchViewModel.swift */; };
 		3AA04B7E24A22B1B00886E65 /* AddItemHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA04B7D24A22B1B00886E65 /* AddItemHeaderView.swift */; };
@@ -26,6 +29,7 @@
 		3AD31B7424A85CDA00BD78D3 /* MyItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD31B7324A85CDA00BD78D3 /* MyItemsViewController.swift */; };
 		3AD3327E24A83FE9002A2672 /* BottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3327D24A83FE9002A2672 /* BottomControlsStackView.swift */; };
 		3AD3328024A84360002A2672 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3327F24A84360002A2672 /* CardView.swift */; };
+		3AD3850424B9C94000C3ECD0 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3850324B9C94000C3ECD0 /* RecentsViewController.swift */; };
 		3AD4211C24AB724A00CC88E9 /* WantRentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4211B24AB724A00CC88E9 /* WantRentViewController.swift */; };
 		3AD56FC424B72BD000D25FE6 /* RerquestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD56FC324B72BD000D25FE6 /* RerquestCell.swift */; };
 		3ADB97DE249DD56A000AB412 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB97DD249DD56A000AB412 /* FeedCell.swift */; };
@@ -57,6 +61,9 @@
 		3A07F13924B501700046D649 /* WantRentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WantRentCell.swift; sourceTree = "<group>"; };
 		3A0AA473249EF87D009BE640 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3A605C0124B6001B000794C3 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		3A63534324BAAB5700C75443 /* RecentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentHeaderView.swift; sourceTree = "<group>"; };
+		3A63534524BAB0A100C75443 /* RecentMatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMatchCell.swift; sourceTree = "<group>"; };
+		3A63534724BAB1F000C75443 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		3A9F1CB824B970F600AE98B5 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		3A9F1CBA24B9798C00AE98B5 /* MatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewModel.swift; sourceTree = "<group>"; };
 		3AA04B7D24A22B1B00886E65 /* AddItemHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemHeaderView.swift; sourceTree = "<group>"; };
@@ -71,6 +78,7 @@
 		3AD31B7324A85CDA00BD78D3 /* MyItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyItemsViewController.swift; sourceTree = "<group>"; };
 		3AD3327D24A83FE9002A2672 /* BottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomControlsStackView.swift; sourceTree = "<group>"; };
 		3AD3327F24A84360002A2672 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		3AD3850324B9C94000C3ECD0 /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
 		3AD4211B24AB724A00CC88E9 /* WantRentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WantRentViewController.swift; sourceTree = "<group>"; };
 		3AD56FC324B72BD000D25FE6 /* RerquestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RerquestCell.swift; sourceTree = "<group>"; };
 		3ADB97DD249DD56A000AB412 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
@@ -135,6 +143,7 @@
 				3AEE21B0249F2BDD002CB2F1 /* User.swift */,
 				3AC396D824A4B94A0088C622 /* Item.swift */,
 				3A605C0124B6001B000794C3 /* Request.swift */,
+				3A63534724BAB1F000C75443 /* Match.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -150,6 +159,8 @@
 				3AD3327D24A83FE9002A2672 /* BottomControlsStackView.swift */,
 				3AD56FC324B72BD000D25FE6 /* RerquestCell.swift */,
 				3A9F1CB824B970F600AE98B5 /* MatchView.swift */,
+				3A63534324BAAB5700C75443 /* RecentHeaderView.swift */,
+				3A63534524BAB0A100C75443 /* RecentMatchCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -236,6 +247,7 @@
 				3AD4211B24AB724A00CC88E9 /* WantRentViewController.swift */,
 				3AE1B04624B5DC7D004D7346 /* RequestedViewController.swift */,
 				3AE61A8224B7613F00ADDE2A /* RequestPopupController.swift */,
+				3AD3850324B9C94000C3ECD0 /* RecentsViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -384,6 +396,7 @@
 				3AD56FC424B72BD000D25FE6 /* RerquestCell.swift in Sources */,
 				3AC396DB24A4CD330088C622 /* Reachbility.swift in Sources */,
 				3A9F1CB924B970F600AE98B5 /* MatchView.swift in Sources */,
+				3A63534424BAAB5700C75443 /* RecentHeaderView.swift in Sources */,
 				3AF97672249DB9BC00A7BA80 /* AppDelegate.swift in Sources */,
 				3AE61A8324B7613F00ADDE2A /* RequestPopupController.swift in Sources */,
 				3AA04B7E24A22B1B00886E65 /* AddItemHeaderView.swift in Sources */,
@@ -394,6 +407,7 @@
 				3A0AA474249EF87D009BE640 /* SignUpViewController.swift in Sources */,
 				3AE1B04724B5DC7D004D7346 /* RequestedViewController.swift in Sources */,
 				3AD31B7424A85CDA00BD78D3 /* MyItemsViewController.swift in Sources */,
+				3AD3850424B9C94000C3ECD0 /* RecentsViewController.swift in Sources */,
 				3ADB97E0249DD60A000AB412 /* Extensions.swift in Sources */,
 				3AD3328024A84360002A2672 /* CardView.swift in Sources */,
 				3AEE21AD249F25A9002CB2F1 /* FirebaseReferences.swift in Sources */,
@@ -402,12 +416,14 @@
 				3AE001EB24A79541009BD9B5 /* DetailItemViewController.swift in Sources */,
 				3A9F1CBB24B9798C00AE98B5 /* MatchViewModel.swift in Sources */,
 				3AD3327E24A83FE9002A2672 /* BottomControlsStackView.swift in Sources */,
+				3A63534824BAB1F000C75443 /* Match.swift in Sources */,
 				3AEE21A9249F1E4B002CB2F1 /* Service.swift in Sources */,
 				3ADB97DE249DD56A000AB412 /* FeedCell.swift in Sources */,
 				3A07F13A24B501700046D649 /* WantRentCell.swift in Sources */,
 				3A04834324A0DF8C008F1BC2 /* AddItemViewController.swift in Sources */,
 				3AF97674249DB9BC00A7BA80 /* SceneDelegate.swift in Sources */,
 				3AC7F18B24B980420000858D /* GradientButton.swift in Sources */,
+				3A63534624BAB0A100C75443 /* RecentMatchCell.swift in Sources */,
 				3AF97686249DBA0600A7BA80 /* FeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
