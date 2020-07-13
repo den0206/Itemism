@@ -144,6 +144,8 @@ class LoginViewController : UIViewController  {
             return
         }
         
+        checkInternetConnection()
+        
         showPresentLoadindView(true)
         
         AuthService.loginUser(email: email, password: password) { (result, error) in

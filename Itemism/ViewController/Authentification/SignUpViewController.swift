@@ -84,7 +84,7 @@ class SignUpViewController : UIViewController {
     private let SignUpButton : UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .lightGray
-        button.setTitle("Login", for: .normal)
+        button.setTitle("Sign Up", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -149,8 +149,8 @@ class SignUpViewController : UIViewController {
         stack.spacing = 24
         
         view.addSubview(stack)
-        stack.centerY(inView: view, constant: 40)
-        stack.anchor(left : view.leftAnchor, right: view.rightAnchor,paddingTop: 40,paddingLeft: 16,paddingRight: 16)
+//        stack.centerY(inView: view, constant: 40)
+        stack.anchor(top : plusPhotoButton.bottomAnchor, left : view.leftAnchor, right: view.rightAnchor,paddingTop: 20,paddingLeft: 16,paddingRight: 16)
         
         view.addSubview(alreadyHaveAccountButton)
         alreadyHaveAccountButton.centerX(inView: view)
@@ -211,6 +211,8 @@ class SignUpViewController : UIViewController {
             showAlert(title: "Recheck", message: "確認用パスワードが一致しません")
             return
         }
+        
+        checkInternetConnection()
         
         let avatarData = selectedImage?.jpegData(compressionQuality: 0.3)
         let avatar = avatarData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))

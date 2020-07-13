@@ -82,6 +82,22 @@ class RecentsViewController : UITableViewController {
         })
     }
     
+    //MARK: - Helper
+    
+    private func presentMessageVC(chatroomId : String,members : [String], membersToPush : [String]) {
+        
+        let messageVC = MessageViewController()
+        messageVC.chatRoomId = chatroomId
+        messageVC.membersIds = members
+        messageVC.membersToPush = membersToPush
+        
+        /// avoid Delay
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(messageVC, animated: true)
+        }
+        
+    }
+    
     
 }
 
@@ -102,7 +118,22 @@ extension RecentsViewController {
         return cell
     }
     
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let recent = recents[indexPath.row]
+        
+        // TODO: - present MessageVC
+        
+        let chatRoomId = (recent[kCHATROOMID] as? String)!
+        let members = (recent[kMEMBERS] as? [String])!
+        let membersToPush = (recent[kMEMBERSTOPUSH] as? [String])!
+        
+        presentMessageVC(chatroomId: chatRoomId, members: members, membersToPush: membersToPush)
+
+        
+    }
 }
 
 //MARK: - Recent Header view Delegate
@@ -113,10 +144,15 @@ extension RecentsViewController : RecentHeaderViewDelegate {
         
         checkInternetConnection()
         
+        
+        // TODO: - present MessageVC
+
         /// start Chat
         let chatRoomId = Recent.startPrivateChat(currentUserId: User.currentId(), match: match)
+        let members = [User.currentId(), match.uid]
+        let membersToPush = [User.currentId(), match.uid]
         
-        print(chatRoomId)
+        presentMessageVC(chatroomId: chatRoomId, members: members, membersToPush: membersToPush)
         
         
         
