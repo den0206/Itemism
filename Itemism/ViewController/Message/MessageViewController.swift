@@ -194,7 +194,22 @@ extension MessageViewController : InputBarAccessoryViewDelegate {
 
 extension MessageViewController {
     
-    func showCamera() {
+   func configureAccesary() {
+        
+        let bubbleSwitch = UISwitch()
+        messageInputBar.addSubview(bubbleSwitch)
+    bubbleSwitch.addTarget(self, action: #selector(handleSwitch(_ :)), for: .valueChanged)
+        
+        
+        
+        messageInputBar.setLeftStackViewWidthConstant(to: 50, animated: true)
+    bubbleSwitch.anchor(top : messageInputBar.leftStackView.topAnchor,left: messageInputBar.leftAnchor, bottom: messageInputBar.leftStackView.bottomAnchor,right: messageInputBar.inputTextView.leftAnchor,paddingTop: 4,paddingLeft: 4,paddingBottom: 4,paddingRight: 4)
+        
+        showCamera()
+
+    }
+    
+    private func showCamera() {
         let cameraItem = InputBarButtonItem(type: .system)
         cameraItem.tintColor = .darkGray
         cameraItem.image = UIImage(systemName: "camera")
@@ -211,5 +226,12 @@ extension MessageViewController {
         
         // TODO: - image picker
 
+    }
+    
+    @objc func handleSwitch(_ sender : UISwitch) {
+        
+        if sender.isOn {
+            print("On")
+        }
     }
 }

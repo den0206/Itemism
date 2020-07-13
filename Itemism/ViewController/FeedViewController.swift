@@ -63,7 +63,8 @@ class FeedViewController : UICollectionViewController {
         super.viewDidLoad()
         
         self.tabBarController?.showPresentLoadindView(true)
-
+        
+//        print(UserDefaults.standard.dictionary(forKey: kCURRENTUSER))
         
         configureCV()
         fetchItems()

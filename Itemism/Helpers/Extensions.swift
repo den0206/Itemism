@@ -69,6 +69,12 @@ func isValidEmail(_ string: String) -> Bool {
        return result
 }
 
+func setUserDefaults(values : [String : Any], key : String) {
+    UserDefaults.standard.setValue(values, forKey: key)
+    UserDefaults.standard.synchronize()
+    
+}
+
 
 extension UIViewController {
     func configureGradientLayer() {

@@ -70,6 +70,13 @@ class SettingViewController : UITableViewController {
     
     @objc func handleDone() {
         print("Done")
+        
+        /// set as UserDefaults
+//
+//        var currentUserDic = UserDefaults.standard.dictionary(forKey: kCURRENTUSER)
+//        currentUserDic?[kNAME] = ""
+//
+//        UserDefaults.standard.setValue(currentUserDic, forKey: kCURRENTUSER)
     }
     
     @objc func tappedUserImage() {

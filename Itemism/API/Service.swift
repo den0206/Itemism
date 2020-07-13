@@ -40,8 +40,7 @@ class AuthService {
                            kPROFILE_IMAGE : credential.profileImage,
                            kUSERID : uid] as [String : Any]
             
-            UserDefaults.standard.setValue(values, forKey: kCURRENTUSER)
-            UserDefaults.standard.synchronize()
+           setUserDefaults(values: values, key: kCURRENTUSER)
             
             firebaseReference(.User).document(uid).setData(values, completion: completion)
             
@@ -65,9 +64,12 @@ class AuthService {
             
             if snapshot.exists {
                 let dictionary = snapshot.data()!
+                //
+                //                UserDefaults.standard.setValue(snapshot.data()! as [String : Any], forKey: kCURRENTUSER)
+                //                UserDefaults.standard.synchronize()
+                //
+                setUserDefaults(values: snapshot.data()! as [String : Any], key: kCURRENTUSER)
                 
-                UserDefaults.standard.setValue(snapshot.data()! as [String : Any], forKey: kCURRENTUSER)
-                UserDefaults.standard.synchronize()
                 
                 let user = User(dictionary: dictionary)
                 completion(user)
