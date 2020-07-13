@@ -12,6 +12,7 @@
 		3A06338B24BC78E2003C9D9F /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06338A24BC78E2003C9D9F /* MessageViewController.swift */; };
 		3A07F13A24B501700046D649 /* WantRentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07F13924B501700046D649 /* WantRentCell.swift */; };
 		3A0AA474249EF87D009BE640 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0AA473249EF87D009BE640 /* SignUpViewController.swift */; };
+		3A407C6B24BC86930031494B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A407C6A24BC86930031494B /* Message.swift */; };
 		3A605C0224B6001B000794C3 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A605C0124B6001B000794C3 /* Request.swift */; };
 		3A63534424BAAB5700C75443 /* RecentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63534324BAAB5700C75443 /* RecentHeaderView.swift */; };
 		3A63534624BAB0A100C75443 /* RecentMatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63534524BAB0A100C75443 /* RecentMatchCell.swift */; };
@@ -64,6 +65,7 @@
 		3A06338A24BC78E2003C9D9F /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		3A07F13924B501700046D649 /* WantRentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WantRentCell.swift; sourceTree = "<group>"; };
 		3A0AA473249EF87D009BE640 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		3A407C6A24BC86930031494B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3A605C0124B6001B000794C3 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		3A63534324BAAB5700C75443 /* RecentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentHeaderView.swift; sourceTree = "<group>"; };
 		3A63534524BAB0A100C75443 /* RecentMatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMatchCell.swift; sourceTree = "<group>"; };
@@ -133,6 +135,14 @@
 			path = Message;
 			sourceTree = "<group>";
 		};
+		3A407C6924BC86780031494B /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				3A407C6A24BC86930031494B /* Message.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
 		3AA04B8124A2342000886E65 /* Item */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +169,7 @@
 				3AC396D824A4B94A0088C622 /* Item.swift */,
 				3A605C0124B6001B000794C3 /* Request.swift */,
 				3A63534724BAB1F000C75443 /* Match.swift */,
+				3A407C6924BC86780031494B /* Message */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -421,6 +432,7 @@
 				3AD56FC424B72BD000D25FE6 /* RerquestCell.swift in Sources */,
 				3AC3E25B24BB2CFF00F5D4F5 /* RecentCell.swift in Sources */,
 				3ACE771224BAD5BC00DFC744 /* Recent.swift in Sources */,
+				3A407C6B24BC86930031494B /* Message.swift in Sources */,
 				3AC396DB24A4CD330088C622 /* Reachbility.swift in Sources */,
 				3A9F1CB924B970F600AE98B5 /* MatchView.swift in Sources */,
 				3A63534424BAAB5700C75443 /* RecentHeaderView.swift in Sources */,

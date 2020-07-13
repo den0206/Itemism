@@ -91,6 +91,7 @@ class RecentsViewController : UITableViewController {
         messageVC.membersIds = members
         messageVC.membersToPush = membersToPush
         
+        messageVC.showCamera()
         /// avoid Delay
         DispatchQueue.main.async {
             self.navigationController?.pushViewController(messageVC, animated: true)

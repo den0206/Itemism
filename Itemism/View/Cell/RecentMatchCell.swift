@@ -23,7 +23,7 @@ class RecentMatchCell : UICollectionViewCell {
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.layer.borderWidth = 2
-        iv.layer.backgroundColor = UIColor.white.cgColor
+        iv.layer.borderColor = UIColor.lightGray.cgColor
         iv.setDimensions(height: 80, width: 80)
         iv.layer.cornerRadius = 80 / 2
         

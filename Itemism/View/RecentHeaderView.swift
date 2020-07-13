@@ -57,6 +57,12 @@ class RecentHeaderView : UICollectionReusableView {
         addSubview(collectionView)
         collectionView.anchor(top : newMatchLabel.bottomAnchor,left: leftAnchor,bottom: bottomAnchor,right: rightAnchor,paddingTop: 4,paddingLeft: 12,paddingBottom: 24,paddingRight: 12)
         
+        let bottomLine = UIView()
+        bottomLine.backgroundColor = .lightGray
+        
+        addSubview(bottomLine)
+        bottomLine.anchor(top : collectionView.bottomAnchor, left : leftAnchor,right: rightAnchor,width: frame.width,height: 0.75)
+        
         configureCV()
         
     }
