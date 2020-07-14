@@ -50,6 +50,8 @@
 		3AEE21AF249F2B7A002CB2F1 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE21AE249F2B7A002CB2F1 /* Downloader.swift */; };
 		3AEE21B1249F2BDD002CB2F1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE21B0249F2BDD002CB2F1 /* User.swift */; };
 		3AEE21B3249F2F9D002CB2F1 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE21B2249F2F9D002CB2F1 /* SettingViewController.swift */; };
+		3AF646D524BDEADB00A4D8DA /* OutGoingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF646D424BDEADA00A4D8DA /* OutGoingMessage.swift */; };
+		3AF646D724BDEC4A00A4D8DA /* MessageViewController+Save&Load.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF646D624BDEC4A00A4D8DA /* MessageViewController+Save&Load.swift */; };
 		3AF97672249DB9BC00A7BA80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF97671249DB9BC00A7BA80 /* AppDelegate.swift */; };
 		3AF97674249DB9BC00A7BA80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF97673249DB9BC00A7BA80 /* SceneDelegate.swift */; };
 		3AF9767B249DB9BE00A7BA80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AF9767A249DB9BE00A7BA80 /* Assets.xcassets */; };
@@ -103,6 +105,8 @@
 		3AEE21AE249F2B7A002CB2F1 /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		3AEE21B0249F2BDD002CB2F1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3AEE21B2249F2F9D002CB2F1 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		3AF646D424BDEADA00A4D8DA /* OutGoingMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutGoingMessage.swift; sourceTree = "<group>"; };
+		3AF646D624BDEC4A00A4D8DA /* MessageViewController+Save&Load.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageViewController+Save&Load.swift"; sourceTree = "<group>"; };
 		3AF9766E249DB9BC00A7BA80 /* Itemism.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Itemism.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AF97671249DB9BC00A7BA80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AF97673249DB9BC00A7BA80 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 			children = (
 				3AD3850324B9C94000C3ECD0 /* RecentsViewController.swift */,
 				3A06338A24BC78E2003C9D9F /* MessageViewController.swift */,
+				3AF646D624BDEC4A00A4D8DA /* MessageViewController+Save&Load.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -139,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				3A407C6A24BC86930031494B /* Message.swift */,
+				3AF646D424BDEADA00A4D8DA /* OutGoingMessage.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -455,12 +461,14 @@
 				3A04834124A0CF28008F1BC2 /* SettingFooterView.swift in Sources */,
 				3AE001EB24A79541009BD9B5 /* DetailItemViewController.swift in Sources */,
 				3A9F1CBB24B9798C00AE98B5 /* MatchViewModel.swift in Sources */,
+				3AF646D524BDEADB00A4D8DA /* OutGoingMessage.swift in Sources */,
 				3AD3327E24A83FE9002A2672 /* BottomControlsStackView.swift in Sources */,
 				3A63534824BAB1F000C75443 /* Match.swift in Sources */,
 				3AEE21A9249F1E4B002CB2F1 /* Service.swift in Sources */,
 				3ADB97DE249DD56A000AB412 /* FeedCell.swift in Sources */,
 				3A07F13A24B501700046D649 /* WantRentCell.swift in Sources */,
 				3A04834324A0DF8C008F1BC2 /* AddItemViewController.swift in Sources */,
+				3AF646D724BDEC4A00A4D8DA /* MessageViewController+Save&Load.swift in Sources */,
 				3AF97674249DB9BC00A7BA80 /* SceneDelegate.swift in Sources */,
 				3AC7F18B24B980420000858D /* GradientButton.swift in Sources */,
 				3A63534624BAB0A100C75443 /* RecentMatchCell.swift in Sources */,

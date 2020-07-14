@@ -60,3 +60,17 @@ public let kSENDERID = "senderId"
 public let kSENDERNAME = "senderName"
 public let kTHUMBNAIL = "thumbnail"
 public let kISDELETED = "isDeleted"
+
+//message types
+public let kPICTURE = "picture"
+public let kTEXT = "text"
+public let kVIDEO = "video"
+public let kAUDIO = "audio"
+public let kLOCATION = "location"
+
+
+//message status
+public let kDELIVERED = "delivered"
+public let kREAD = "read"
+public let kREADDATE = "readDate"
+public let kDELETED = "deleted"

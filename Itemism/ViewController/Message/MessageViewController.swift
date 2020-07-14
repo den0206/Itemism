@@ -161,6 +161,21 @@ extension MessageViewController : MessageCellDelegate {
 
 extension MessageViewController : InputBarAccessoryViewDelegate {
     
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+        
+        checkInternetConnection()
+        
+        for component in inputBar.inputTextView.components {
+            if let text = component as? String {
+                self.send_message(text: text, picture: nil)
+            }
+        }
+        
+        finishSendMessage()
+    }
+    
+    
+    
     func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) {
         if text == "" {
             showCamera()
