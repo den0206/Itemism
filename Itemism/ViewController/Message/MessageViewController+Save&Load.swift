@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import FirebaseFirestore
+
+//MARK: - Send
+
 
 extension MessageViewController {
+    
     
     func send_message(text : String?, picture : UIImage?) {
         
@@ -24,4 +29,64 @@ extension MessageViewController {
         
         
     }
+}
+
+//MARK: - Load
+
+extension MessageViewController {
+    
+    func loadFirstMessage() {
+        
+        newChatListner = firebaseReference(.Message).document(User.currentId()).collection(chatRoomId).order(by: kDATE, descending: true).limit(to: 11).addSnapshotListener({ (snapshot, error) in
+            
+            guard let snapshot = snapshot else {return}
+            
+            if !snapshot.isEmpty {
+                
+                 let sorted = ((dictionaryFromSnapshots(snapshots: snapshot.documentChanges)) as NSArray).sortedArray(using: [NSSortDescriptor(key: kDATE, ascending: true)]) as! [NSDictionary]
+                
+                sorted.forEach { (message) in
+                    self.appendMessage(messageDictionary: message)
+                }
+                
+                self.lastDocument = snapshot.documents.last
+                
+                DispatchQueue.main.async {
+                    self.messagesCollectionView.scrollToLastItem()
+                }
+            }
+        })
+        
+    }
+    
+    //MARK: - Helpers
+    
+    private func appendMessage(messageDictionary : NSDictionary) {
+        let incomingMessage = IncomingMessage(_collectionView: self.messagesCollectionView)
+        
+        if isInComing(messageDictionary: messageDictionary) {
+            /// update read Status
+            
+        }
+        
+        let message = incomingMessage.createMessage(messageDictionary: messageDictionary, chatRoomId: chatRoomId)
+        
+        if message != nil {
+            
+            print(message!)
+            messageLists.append(message!)
+            objectMessages.append(messageDictionary)
+        }
+        
+        
+    }
+    
+    private func isInComing(messageDictionary : NSDictionary) -> Bool {
+        
+        var inComing = (User.currentId() == messageDictionary[kSENDERID] as! String) ? false : true
+        
+        return inComing
+    }
+    
+    
 }

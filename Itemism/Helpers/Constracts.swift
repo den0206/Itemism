@@ -8,6 +8,7 @@
 
 import Foundation
 
+let legitType = [kTEXT, kPICTURE]
 //MARK: - User
 
 public let kUSERID = "userID"

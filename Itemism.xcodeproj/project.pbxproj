@@ -44,6 +44,7 @@
 		3AE001EB24A79541009BD9B5 /* DetailItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE001EA24A79541009BD9B5 /* DetailItemViewController.swift */; };
 		3AE1B04724B5DC7D004D7346 /* RequestedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1B04624B5DC7D004D7346 /* RequestedViewController.swift */; };
 		3AE61A8324B7613F00ADDE2A /* RequestPopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE61A8224B7613F00ADDE2A /* RequestPopupController.swift */; };
+		3AEB26F924BF7631008102C9 /* IncomingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB26F824BF7631008102C9 /* IncomingMessage.swift */; };
 		3AEE21A9249F1E4B002CB2F1 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE21A8249F1E4B002CB2F1 /* Service.swift */; };
 		3AEE21AB249F2541002CB2F1 /* Constracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE21AA249F2541002CB2F1 /* Constracts.swift */; };
 		3AEE21AD249F25A9002CB2F1 /* FirebaseReferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE21AC249F25A9002CB2F1 /* FirebaseReferences.swift */; };
@@ -99,6 +100,7 @@
 		3AE001EA24A79541009BD9B5 /* DetailItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemViewController.swift; sourceTree = "<group>"; };
 		3AE1B04624B5DC7D004D7346 /* RequestedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestedViewController.swift; sourceTree = "<group>"; };
 		3AE61A8224B7613F00ADDE2A /* RequestPopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPopupController.swift; sourceTree = "<group>"; };
+		3AEB26F824BF7631008102C9 /* IncomingMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessage.swift; sourceTree = "<group>"; };
 		3AEE21A8249F1E4B002CB2F1 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		3AEE21AA249F2541002CB2F1 /* Constracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constracts.swift; sourceTree = "<group>"; };
 		3AEE21AC249F25A9002CB2F1 /* FirebaseReferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReferences.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			children = (
 				3A407C6A24BC86930031494B /* Message.swift */,
 				3AF646D424BDEADA00A4D8DA /* OutGoingMessage.swift */,
+				3AEB26F824BF7631008102C9 /* IncomingMessage.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				3AEE21A9249F1E4B002CB2F1 /* Service.swift in Sources */,
 				3ADB97DE249DD56A000AB412 /* FeedCell.swift in Sources */,
 				3A07F13A24B501700046D649 /* WantRentCell.swift in Sources */,
+				3AEB26F924BF7631008102C9 /* IncomingMessage.swift in Sources */,
 				3A04834324A0DF8C008F1BC2 /* AddItemViewController.swift in Sources */,
 				3AF646D724BDEC4A00A4D8DA /* MessageViewController+Save&Load.swift in Sources */,
 				3AF97674249DB9BC00A7BA80 /* SceneDelegate.swift in Sources */,

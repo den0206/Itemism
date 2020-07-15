@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageKit
+import FirebaseFirestore
 import InputBarAccessoryView
 
 struct Sender : SenderType {
@@ -22,14 +23,31 @@ class MessageViewController : MessagesViewController {
     var chatRoomId : String!
     var membersIds : [String]!
     var membersToPush : [String]!
+    
+    var messageLists = [Message]() {
+        didSet {
+            messagesCollectionView.reloadData()
+        }
+    }
+    
+    var objectMessages = [NSDictionary]()
+    
+    var newChatListner : ListenerRegistration?
+    var lastDocument : DocumentSnapshot?
 
     //MARK: - property
+    
+    deinit {
+        newChatListner?.remove()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureMessagekit()
         hideCurrentUserAvatar()
+        
+        loadFirstMessage()
     
     }
     
@@ -69,13 +87,12 @@ extension MessageViewController : MessagesDataSource {
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         
-        let message = Message(text: "Test", sender: Sender(senderId: User.currentId(), displayName: "AAA"), messageId: "111", date: Date())
-        return message
+        return messageLists[indexPath.section]
     }
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         
-        return 5
+        return messageLists.count
         
     }
     
@@ -88,10 +105,33 @@ extension MessageViewController : MessagesDataSource {
         return nil
     }
     
-    func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        
-        return NSAttributedString(string: MessageKitDateFormatter.shared.string(from: message.sentDate), attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption2)])
-    }
+    // TODO: - Add Read Status
+      
+      func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+          
+          let messageDictionary = objectMessages[indexPath.section]
+          let status : NSAttributedString
+          
+          if isFromCurrentSender(message: message) {
+              switch messageDictionary[kSTATUS] as! String{
+              case kDELIVERED:
+                  status = NSAttributedString(string: kDELIVERED, attributes:  [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption2), NSAttributedString.Key.foregroundColor : UIColor.lightGray] )
+              case kREAD :
+                  status = NSAttributedString(string: kREAD, attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption1), NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+              default:
+                  status = NSAttributedString(string: "✔︎", attributes:  [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption2)])
+              }
+              
+              return status
+          }
+          
+          return nil
+      }
+    
+//    func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+//
+//        return NSAttributedString(string: MessageKitDateFormatter.shared.string(from: message.sentDate), attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption2)])
+//    }
     
     
     
@@ -111,7 +151,7 @@ extension MessageViewController : MessagesDataSource {
 extension MessageViewController : MessagesLayoutDelegate {
     
     func cellTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        return 30
+        return 20
     }
     
     func cellBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
@@ -119,7 +159,7 @@ extension MessageViewController : MessagesLayoutDelegate {
     }
     
     func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        return 35
+        return 10
     }
     
     func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {

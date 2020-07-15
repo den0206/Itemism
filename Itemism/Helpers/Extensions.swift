@@ -8,6 +8,7 @@
 
 
 import UIKit
+import FirebaseFirestore
 
 public struct AnchoredConstraints {
     public var top, leading, bottom, trailing, width, height: NSLayoutConstraint?
@@ -59,6 +60,23 @@ func timeElapsed(date: Date) -> String {
     }
     
     return elapsed!
+}
+
+func dictionaryFromSnapshots(snapshots : [DocumentChange]) -> [NSDictionary] {
+    var allMessages : [NSDictionary] = []
+    
+    for diff in snapshots {
+        if (diff.type == .added) {
+            let dic = diff.document.data() as NSDictionary
+            if let type = dic[kTYPE] {
+                if legitType.contains(type as! String) {
+                    allMessages.append(dic)
+                }
+            }
+        }
+    }
+    
+    return allMessages
 }
 
 
