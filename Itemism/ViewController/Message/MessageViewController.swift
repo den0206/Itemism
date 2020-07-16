@@ -24,6 +24,8 @@ class MessageViewController : MessagesViewController {
     var membersIds : [String]!
     var membersToPush : [String]!
     
+    var profileImage : UIImage?
+    
     var messageLists = [Message]() {
         didSet {
             messagesCollectionView.reloadData()
@@ -127,6 +129,24 @@ extension MessageViewController : MessagesDataSource {
           
           return nil
       }
+    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        
+        let message = messageLists[indexPath.section]
+        
+        if !isFromCurrentSender(message: message) {
+            
+            if profileImage != nil {
+                
+                let avater = Avatar(image: profileImage!)
+                avatarView.set(avatar: avater)
+            } else {
+                let avater = Avatar(initials: "?")
+                avatarView.set(avatar: avater)
+            }
+            
+            
+        }
+    }
     
 //    func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
 //
@@ -205,13 +225,18 @@ extension MessageViewController : InputBarAccessoryViewDelegate {
         
         checkInternetConnection()
         
-        for component in inputBar.inputTextView.components {
-            if let text = component as? String {
-                self.send_message(text: text, picture: nil)
+        
+        if Reachabilty.HasConnection() {
+            
+            for component in inputBar.inputTextView.components {
+                if let text = component as? String {
+                    self.send_message(text: text, picture: nil)
+                }
             }
+            
+            finishSendMessage()
         }
         
-        finishSendMessage()
     }
     
     

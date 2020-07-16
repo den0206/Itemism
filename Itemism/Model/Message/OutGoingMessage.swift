@@ -40,6 +40,23 @@ class OutGoingMessage {
     
     //MARK: - update read status
     
+    class func updateMessageStatus(messageId : String, chatRoomId : String, membersIds : [String]) {
+        
+        let readDate = dateFormatter().string(from: Date())
+        let values = [kSTATUS : kREAD, kREADDATE : readDate]
+        
+        membersIds.forEach { (memberId) in
+            firebaseReference(.Message).document(memberId).collection(chatRoomId).document(messageId).getDocument { (snapshot, error) in
+                
+                guard let snapshot = snapshot else {return}
+                
+                if snapshot.exists {
+                    firebaseReference(.Message).document(memberId).collection(chatRoomId).document(messageId).updateData(values)
+                }
+            }
+        }
+    }
+    
     
     
 }

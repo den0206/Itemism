@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class RecentCell : UITableViewCell {
     
     var recent : [String : Any]? {
@@ -16,7 +17,7 @@ class RecentCell : UITableViewCell {
         }
     }
     
-    private let profileImageView : UIImageView = {
+    let profileImageView : UIImageView = {
         let iv = UIImageView()
         iv.clipsToBounds = true
         iv.setDimensions(height: 48, width: 48)
@@ -96,7 +97,9 @@ class RecentCell : UITableViewCell {
         self.dateLabel.text = timeElapsed(date: date)
         
         if let profileImage = recent[kPROFILE_IMAGE] {
-            self.profileImageView.image = downloadImageFromData(picturedata: profileImage as! String)
+            let profileImage = downloadImageFromData(picturedata: profileImage as! String)
+            
+            self.profileImageView.image = profileImage
         }
         
         

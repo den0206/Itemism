@@ -67,6 +67,10 @@ extension MessageViewController {
         if isInComing(messageDictionary: messageDictionary) {
             /// update read Status
             
+            let messageId = messageDictionary[kMESSAGEID] as! String
+            
+            OutGoingMessage.updateMessageStatus(messageId: messageId, chatRoomId: chatRoomId, membersIds: membersIds)
+            
         }
         
         let message = incomingMessage.createMessage(messageDictionary: messageDictionary, chatRoomId: chatRoomId)

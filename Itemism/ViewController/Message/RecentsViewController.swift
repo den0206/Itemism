@@ -20,6 +20,8 @@ class RecentsViewController : UITableViewController {
         }
     }
     
+    var profileImages = [UIImage]()
+    
     var recentsListner : ListenerRegistration?
     
     //MARK: - Parts
@@ -56,6 +58,7 @@ class RecentsViewController : UITableViewController {
         
         /// no section header
         tableView.tableHeaderView = headerView
+        
         headerView.delegate = self
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
         
@@ -84,19 +87,25 @@ class RecentsViewController : UITableViewController {
     
     //MARK: - Helper
     
-    private func presentMessageVC(chatroomId : String,members : [String], membersToPush : [String]) {
+    private func presentMessageVC(chatroomId : String,members : [String], membersToPush : [String], profileImage : UIImage?) {
         
         let messageVC = MessageViewController()
         messageVC.chatRoomId = chatroomId
         messageVC.membersIds = members
         messageVC.membersToPush = membersToPush
         
-        messageVC.configureAccesary()
-        /// avoid Delay
-        DispatchQueue.main.async {
-            self.navigationController?.pushViewController(messageVC, animated: true)
+        if profileImage != nil {
+            messageVC.profileImage = profileImage!
         }
         
+        messageVC.configureAccesary()
+        self.navigationController?.pushViewController(messageVC, animated: true)
+
+        /// avoid Delay
+//        DispatchQueue.main.async {
+//            self.navigationController?.pushViewController(messageVC, animated: true)
+//        }
+//        
     }
     
     
@@ -116,6 +125,10 @@ extension RecentsViewController {
         
         cell.recent = recents[indexPath.row]
         
+        if cell.profileImageView.image != nil {
+            self.profileImages.append(cell.profileImageView.image!)
+
+        }
         return cell
     }
     
@@ -125,13 +138,16 @@ extension RecentsViewController {
         
         let recent = recents[indexPath.row]
         
+        /// private chat image
+        let profileImage = profileImages[indexPath.row]
+        
         // TODO: - present MessageVC
         
         let chatRoomId = (recent[kCHATROOMID] as? String)!
         let members = (recent[kMEMBERS] as? [String])!
         let membersToPush = (recent[kMEMBERSTOPUSH] as? [String])!
-        
-        presentMessageVC(chatroomId: chatRoomId, members: members, membersToPush: membersToPush)
+
+        presentMessageVC(chatroomId: chatRoomId, members: members, membersToPush: membersToPush, profileImage : profileImage)
 
         
     }
@@ -139,7 +155,8 @@ extension RecentsViewController {
 
 //MARK: - Recent Header view Delegate
 
-extension RecentsViewController : RecentHeaderViewDelegate {
+extension RecentsViewController : RecentHeaderViewDelegate{
+ 
     
     func handleMatch(match: Match) {
         
@@ -153,7 +170,9 @@ extension RecentsViewController : RecentHeaderViewDelegate {
         let members = [User.currentId(), match.uid]
         let membersToPush = [User.currentId(), match.uid]
         
-        presentMessageVC(chatroomId: chatRoomId, members: members, membersToPush: membersToPush)
+        let profileImage = downloadImageFromData(picturedata: match.profileImageData)
+        
+        presentMessageVC(chatroomId: chatRoomId, members: members, membersToPush: membersToPush, profileImage: profileImage)
         
         
         
