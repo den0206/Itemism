@@ -30,6 +30,8 @@ class RecentsViewController : UITableViewController {
     
     deinit {
         recentsListner?.remove()
+        
+        print("DEBUG :Deinit")
     }
     
     override func viewDidLoad() {
@@ -125,10 +127,6 @@ extension RecentsViewController {
         
         cell.recent = recents[indexPath.row]
         
-        if cell.profileImageView.image != nil {
-            self.profileImages.append(cell.profileImageView.image!)
-
-        }
         return cell
     }
     
@@ -138,8 +136,11 @@ extension RecentsViewController {
         
         let recent = recents[indexPath.row]
         
+        
         /// private chat image
-        let profileImage = profileImages[indexPath.row]
+        let currentCell = tableView.cellForRow(at: indexPath) as! RecentCell
+
+        let profileImage = currentCell.profileImageView.image
         
         // TODO: - present MessageVC
         
@@ -161,7 +162,6 @@ extension RecentsViewController : RecentHeaderViewDelegate{
     func handleMatch(match: Match) {
         
         checkInternetConnection()
-        
         
         // TODO: - present MessageVC
 

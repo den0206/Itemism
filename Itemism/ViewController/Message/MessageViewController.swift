@@ -23,7 +23,6 @@ class MessageViewController : MessagesViewController {
     var chatRoomId : String!
     var membersIds : [String]!
     var membersToPush : [String]!
-    
     var profileImage : UIImage?
     
     var messageLists = [Message]() {
@@ -31,11 +30,17 @@ class MessageViewController : MessagesViewController {
             messagesCollectionView.reloadData()
         }
     }
-    
     var objectMessages = [NSDictionary]()
     
     var newChatListner : ListenerRegistration?
-    var lastDocument : DocumentSnapshot?
+    
+    var lastDocument : DocumentSnapshot? {
+        didSet {
+            configureRefresh()
+        }
+    }
+    
+    let refreshController = UIRefreshControl()
 
     //MARK: - property
     
@@ -76,6 +81,24 @@ class MessageViewController : MessagesViewController {
            messageInputBar.inputTextView.backgroundColor = .white
        }
     
+    private func configureRefresh() {
+        
+        if messageLists.count > 11 {
+            messagesCollectionView.refreshControl = refreshController
+            refreshController.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        }
+        
+    }
+    
+    //MARK: - Actions
+    @objc func handleRefresh() {
+        
+        fetchMoreMessage()
+        
+        refreshController.endRefreshing()
+    }
+
+    
 }
 
 
@@ -84,7 +107,12 @@ class MessageViewController : MessagesViewController {
 extension MessageViewController : MessagesDataSource {
     func currentSender() -> SenderType {
         
-        return Sender(senderId: User.currentId(), displayName: User.currentUser()!.name)
+        guard let currentUser = User.currentUser() else {
+            return Sender(senderId: "", displayName: "")
+            
+        }
+        
+        return Sender(senderId: User.currentId(), displayName: currentUser.name)
     }
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
@@ -147,12 +175,7 @@ extension MessageViewController : MessagesDataSource {
             
         }
     }
-    
-//    func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-//
-//        return NSAttributedString(string: MessageKitDateFormatter.shared.string(from: message.sentDate), attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption2)])
-//    }
-    
+
     
     
     func hideCurrentUserAvatar() {

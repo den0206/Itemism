@@ -35,7 +35,11 @@ extension MessageViewController {
 
 extension MessageViewController {
     
+    
+    
     func loadFirstMessage() {
+        
+        /// atach messageLisner 
         
         newChatListner = firebaseReference(.Message).document(User.currentId()).collection(chatRoomId).order(by: kDATE, descending: true).limit(to: 11).addSnapshotListener({ (snapshot, error) in
             
@@ -57,6 +61,12 @@ extension MessageViewController {
             }
         })
         
+    }
+    
+    func fetchMoreMessage() {
+        
+        guard let lastDocument = lastDocument else {return}
+        print(lastDocument)
     }
     
     //MARK: - Helpers

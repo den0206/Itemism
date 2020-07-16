@@ -74,6 +74,12 @@ func dictionaryFromSnapshots(snapshots : [DocumentChange]) -> [NSDictionary] {
                 }
             }
         }
+        //            else if (diff.type == .modified) {
+        //            let dic = diff.document.data() as NSDictionary
+        //            print(diff.oldIndex)
+        ////
+        //
+        //        }
     }
     
     return allMessages

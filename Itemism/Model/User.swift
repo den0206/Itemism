@@ -34,7 +34,9 @@ class User {
     
     class func currentId() -> String {
         
-        return Auth.auth().currentUser!.uid
+        guard let currentUser = Auth.auth().currentUser else {return ""}
+        
+        return currentUser.uid
     }
        
     
