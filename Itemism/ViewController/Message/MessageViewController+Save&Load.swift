@@ -24,9 +24,31 @@ extension MessageViewController {
             outGoingMessage = OutGoingMessage(message: text, senderId: currentUser.uid, senderName: currentUser.name, status: kDELIVERED, type: kTEXT)
         }
         
+        if let pic = picture {
+            
+            uploadMessageImage(image: pic, chatRoomId: chatRoomId) { (imageLink) in
+                
+                guard let imageLink = imageLink else {
+                    self.navigationController?.showPresentLoadindView(false)
+                    self.showAlert(title: "Error", message: "画像が送れませんでした。")
+                    return}
+                
+                let text = "画像が送信されました"
+                
+                let outGoingMessage = OutGoingMessage(message: text, pictureLink: imageLink, senderId: currentUser.uid, senderName: currentUser.name, status: kDELIVERED, type: kPICTURE)
+                
+                outGoingMessage.sendMessageToFireStore(chatRoomId: self.chatRoomId, messageDictionary: outGoingMessage.messageDictionary, membersIds: self.membersIds)
+                
+            }
+            
+            self.navigationController?.showPresentLoadindView(false)
+            finishSendMessage()
+
+            return
+        }
+        
         /// use only text & locationType
         outGoingMessage?.sendMessageToFireStore(chatRoomId: chatRoomId, messageDictionary: outGoingMessage!.messageDictionary, membersIds: membersIds)
-        
         
     }
 }
@@ -87,7 +109,6 @@ extension MessageViewController {
         
         if message != nil {
             
-            print(message!)
             messageLists.append(message!)
             objectMessages.append(messageDictionary)
         }

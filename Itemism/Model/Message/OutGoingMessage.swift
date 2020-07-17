@@ -20,6 +20,14 @@ class OutGoingMessage {
         messageDictionary = NSMutableDictionary(objects: [message, senderId, senderName,status,type], forKeys: [kMESSAGE as NSCopying, kSENDERID as NSCopying, kSENDERNAME as NSCopying, kSTATUS as NSCopying,kTYPE as NSCopying ])
     }
     
+    // pic
+    
+    init(message : String, pictureLink : String, senderId : String, senderName : String, status : String, type : String) {
+        
+        messageDictionary = NSMutableDictionary(objects: [message,pictureLink,senderId,senderName,status,type], forKeys: [kMESSAGE as NSCopying,kPICTURE as NSCopying,kSENDERID as NSCopying, kSENDERNAME as NSCopying, kSTATUS as NSCopying, kTYPE as NSCopying])
+        
+    }
+    
     func sendMessageToFireStore(chatRoomId : String, messageDictionary : NSMutableDictionary, membersIds : [String] ) {
         
         let messageId = UUID().uuidString

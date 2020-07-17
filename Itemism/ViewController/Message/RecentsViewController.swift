@@ -101,12 +101,11 @@ class RecentsViewController : UITableViewController {
         }
         
         messageVC.configureAccesary()
-        self.navigationController?.pushViewController(messageVC, animated: true)
 
         /// avoid Delay
-//        DispatchQueue.main.async {
-//            self.navigationController?.pushViewController(messageVC, animated: true)
-//        }
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(messageVC, animated: true)
+        }
 //        
     }
     

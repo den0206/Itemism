@@ -9,6 +9,8 @@
 
 import Foundation
 import MessageKit
+import SDWebImage
+
 
 struct IncomingMessage {
     
@@ -29,7 +31,7 @@ struct IncomingMessage {
         case kTEXT:
             message = textMessage(messageDictionary: messageDictionary, chatRoomId: chatRoomId)
         case kPICTURE:
-            print("Picture")
+            message = pictureMessage(messageDictionary: messageDictionary, chatRoomId: chatRoomId)
         default:
             print("Typeがわかりません")
         }
@@ -62,5 +64,39 @@ struct IncomingMessage {
         let text = messageDictionary[kMESSAGE] as! String
         
         return Message(text: text, sender: Sender(senderId: userid, displayName: name), messageId: messageId, date: date)
+    }
+    
+    func pictureMessage(messageDictionary : NSDictionary, chatRoomId : String) -> Message? {
+        
+        let name = messageDictionary[kSENDERNAME] as! String
+        let userid = messageDictionary[kSENDERID] as! String
+        let messageId = messageDictionary[kMESSAGEID] as! String
+        
+        var date : Date!
+        
+        if let created = messageDictionary[kDATE] {
+            if (created as! String).count !=  14 {
+                date = Date()
+            } else {
+                date = dateFormatter().date(from: created as! String)
+            }
+        } else {
+            date = Date()
+        }
+        
+        let imageurl = messageDictionary[kPICTURE] as! String
+        let image = downLoadImageFromUrl(imageLink: imageurl)
+        
+        SDWebImageManager.shared.loadImage(with: <#T##URL?#>, options: <#T##SDWebImageOptions#>, progress: <#T##SDImageLoaderProgressBlock?##SDImageLoaderProgressBlock?##(Int, Int, URL?) -> Void#>, completed: <#T##SDInternalCompletionBlock##SDInternalCompletionBlock##(UIImage?, Data?, Error?, SDImageCacheType, Bool, URL?) -> Void#>)
+        
+        if image != nil {
+            return Message(image: image!,sender: Sender(senderId: userid, displayName: name), messageId: messageId, date: date)
+        }
+        
+        return nil
+        
+        
+        
+        
     }
 }

@@ -98,7 +98,7 @@ class AddItemViewController : UITableViewController, AddItemCellDelegate {
         
         let itemId = UUID().uuidString
         
-        uploadImages(images: itemImages, itemId: itemId) { (imageLinkArray) in
+        uploadItemImages(images: itemImages, itemId: itemId) { (imageLinkArray) in
             
             let value = [kITEMID : itemId,
                          kUSERID : User.currentId(),

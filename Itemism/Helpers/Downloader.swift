@@ -48,6 +48,41 @@ func downloadImageFromData(picturedata : String) -> UIImage?{
 
 }
 
+func downLoadImageFromUrl(imageLink : String) -> UIImage?{
+    let imageUrl = NSURL(string: imageLink)
+    let imageFileName = (imageLink.components(separatedBy: "%").last!).components(separatedBy: "?").first!
+    
+    // check Exist
+    if fileExistPath(path: imageLink) {
+        
+        print("Exist")
+        if let componentsFile = UIImage(contentsOfFile: fileInDocumentDictionary(filename: imageFileName)) {
+            return componentsFile
+        } else {
+            return nil
+        }
+    } else {
+        let nsData = NSData(contentsOf: imageUrl! as URL)
+        
+        if nsData != nil {
+            // add To documentsUrl
+            var docURL = getDocumentUrl()
+            
+            docURL = docURL.appendingPathComponent(imageFileName, isDirectory: false)
+            nsData!.write(to: docURL, atomically: true)
+            
+            let imageToReturn = UIImage(data: nsData! as Data)
+            return imageToReturn
+            
+        } else {
+            print("No Image Database")
+            return nil
+        }
+    }
+
+    
+}
+
 func getDocumentUrl() -> URL {
     let documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
     return documentUrl!
@@ -80,7 +115,7 @@ func fileExistPath(path : String) -> Bool {
 //MARK: - upload ItemImages
 
 /// for new
-func uploadImages(images : [UIImage?], itemId : String, completion : @escaping(_ imageLinks : [String]) -> Void) {
+func uploadItemImages(images : [UIImage?], itemId : String, completion : @escaping(_ imageLinks : [String]) -> Void) {
     
     if Reachabilty.HasConnection() {
         
@@ -114,7 +149,7 @@ func uploadImages(images : [UIImage?], itemId : String, completion : @escaping(_
 
 
 /// for edit
-func uploadImages(imageDic : [Int : UIImage], item : Item, completion :  @escaping(Item) -> Void) {
+func uploadItemImages(imageDic : [Int : UIImage], item : Item, completion :  @escaping(Item) -> Void) {
     
     var item = item
     
@@ -146,6 +181,25 @@ func uploadImages(imageDic : [Int : UIImage], item : Item, completion :  @escapi
         }
         
     }
+}
+
+//MARK: - upload Message Pic
+
+func uploadMessageImage(image : UIImage?, chatRoomId : String,completion :  @escaping(String?) -> Void) {
+    
+    let dateString = dateFormatter().string(from: Date())
+    let photoFileName = "PictureMessages/" + User.currentId() + "/" + chatRoomId + "/" + dateString + ".jpg"
+    
+    guard let imageData = image?.jpegData(compressionQuality: 0.3) else {
+        completion(nil)
+        return }
+    
+    savaImageInFirestore(imageData: imageData, fileName: photoFileName) { (imageLink) in
+        completion(imageLink)
+        
+        
+    }
+    
 }
 
 func savaImageInFirestore(imageData : Data,fileName : String,completion :  @escaping(_ imageLink : String?) -> Void) {

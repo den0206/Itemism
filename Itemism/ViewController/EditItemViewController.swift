@@ -87,7 +87,7 @@ class EditItemViewController : AddItemViewController {
         
         checkInternetConnection(nav: navigationController)
         
-        uploadImages(imageDic: changeImageDictionary, item: item) { (item) in
+        uploadItemImages(imageDic: changeImageDictionary, item: item) { (item) in
             
             print(item)
             updateItemToFireStore(item: item) { (error) in

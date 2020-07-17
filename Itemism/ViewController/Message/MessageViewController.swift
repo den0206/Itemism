@@ -327,7 +327,11 @@ extension MessageViewController {
     
     @objc func handleCamera() {
         
-        // TODO: - image picker
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        
+        present(picker, animated: true, completion: nil)
 
     }
     
@@ -336,5 +340,36 @@ extension MessageViewController {
         if sender.isOn {
             print("On")
         }
+    }
+}
+
+extension MessageViewController : UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        
+        if Reachabilty.HasConnection() {
+            
+            self.navigationController?.showPresentLoadindView(true, message: "Updating")
+            
+            picker.dismiss(animated: true, completion: {
+                
+                sleep(2)
+                
+                let pic = info[.editedImage] as? UIImage
+                self.send_message(text: nil, picture: pic)
+                
+            })
+            
+        } else {
+            
+            picker.dismiss(animated: true) {
+                self.navigationController?.showPresentLoadindView(false)
+                self.showAlert(title: "Error", message: "No Internet Connection")
+            }
+            
+        }
+        
+        
+        
     }
 }
