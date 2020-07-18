@@ -9,6 +9,7 @@
 import UIKit
 import MessageKit
 import FirebaseFirestore
+import FirebaseStorage
 import InputBarAccessoryView
 import SDWebImage
 
@@ -98,8 +99,114 @@ class MessageViewController : MessagesViewController {
         
         refreshController.endRefreshing()
     }
-
     
+    //MARK: - long Tap
+    
+    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        let message = messageLists[indexPath.section]
+        
+        switch action {
+        case NSSelectorFromString("delete:"):
+            
+            if message.sender.senderId == User.currentId() {
+                return true
+            } else {
+                return super.collectionView(collectionView, canPerformAction: action, forItemAt: indexPath, withSender: sender)
+            }
+         default:
+            return super.collectionView(collectionView, canPerformAction: action, forItemAt: indexPath, withSender: sender)
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+        
+        let storage = Storage.storage()
+        
+        let message = messageLists[indexPath.section]
+        let messageId = objectMessages[indexPath.section][kMESSAGEID] as! String
+        
+        // delete message
+        
+        if action == NSSelectorFromString("delete:") {
+            
+            guard Reachabilty.HasConnection() else {
+                self.showAlert(title: "Error", message: "No Internet Connetction")
+                return
+                
+            }
+            
+            switch message.kind {
+            case .text:
+                print("Delete TExt")
+            case.photo(let photItem) :
+                guard let imageUrl = photItem.url else {return}
+                storage.reference(forURL: imageUrl.absoluteString).delete { (error) in
+                    
+                    if error != nil {
+                        self.showAlert(title: "Error", message: error!.localizedDescription)
+                        return
+                    }
+                    SDImageCache.shared.removeImage(forKey: imageUrl.absoluteString, withCompletion: nil)
+                }
+                
+            default:
+                return
+            }
+            
+            
+            /// reload via didSet
+            objectMessages.remove(at: indexPath.section)
+            messageLists.remove(at: indexPath.section)
+            
+            
+            /// delete from fireStore
+            
+            self.deleteMessageFromFirestore(withIds: membersIds, messageId: messageId)
+            
+            // get LastMessage
+            
+            firebaseReference(.Message).document(User.currentId()).collection(chatRoomId).order(by: kDATE, descending: true).limit(to: 1).getDocuments { (snapshot, error) in
+                
+                guard let snapshot = snapshot else {return}
+                
+                if !snapshot.isEmpty {
+                    let lastMessage = snapshot.documents[0][kMESSAGE] as! String
+                    Recent.updateRecent(chatRoomId: self.chatRoomId, lastMessage: lastMessage)
+                    
+                } else {
+                    Recent.updateRecent(chatRoomId: self.chatRoomId, lastMessage: "削除されました。")
+                }
+            }
+            
+        } else {
+            /// another action
+            
+            super.collectionView(collectionView, performAction: action, forItemAt: indexPath, withSender: sender)
+        }
+    }
+    
+    func deleteMessageFromFirestore(withIds : [String], messageId : String) {
+        
+        withIds.forEach { (userId) in
+            firebaseReference(.Message).document(userId).collection(chatRoomId).document(messageId).delete(completion: nil)
+        }
+    }
+ 
+}
+
+extension MessageCollectionViewCell {
+
+    override open func delete(_ sender: Any?) {
+        
+        // Get the collectionView
+        if let collectionView = self.superview as? UICollectionView {
+            // Get indexPath
+            if let indexPath = collectionView.indexPath(for: self) {
+                // Trigger action
+                collectionView.delegate?.collectionView?(collectionView, performAction: NSSelectorFromString("delete:"), forItemAt: indexPath, withSender: sender)
+            }
+        }
+    }
 }
 
 
