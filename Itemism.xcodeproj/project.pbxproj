@@ -149,6 +149,7 @@
 			children = (
 				3A1FAB0F24C2CA2B002E8F11 /* ProfileViewController.swift */,
 				3AD31B7324A85CDA00BD78D3 /* MyItemsViewController.swift */,
+				3AEE21B2249F2F9D002CB2F1 /* SettingViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -295,7 +296,6 @@
 				3ADB97E5249DDD52000AB412 /* Authentification */,
 				3ADB97E1249DD67F000AB412 /* MainTabController.swift */,
 				3AF97685249DBA0600A7BA80 /* FeedViewController.swift */,
-				3AEE21B2249F2F9D002CB2F1 /* SettingViewController.swift */,
 				3A04834224A0DF8C008F1BC2 /* AddItemViewController.swift */,
 				3AE001EA24A79541009BD9B5 /* DetailItemViewController.swift */,
 				3AD20ED424AF6F1000BA0D00 /* EditItemViewController.swift */,

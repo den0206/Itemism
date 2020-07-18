@@ -32,10 +32,11 @@ class MyItemsViewController : UIViewController {
     
     private lazy var bottomStack = BottomControlsStackView(type: user.userType)
     
-    private let deckView : UIView = {
+    private lazy var deckView : UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 10
+        
         return view
     }()
     
@@ -119,6 +120,14 @@ class MyItemsViewController : UIViewController {
         ItemService.fetchUserItems(user: user) { (items) in
             self.items = items
             
+            if items.isEmpty {
+                let label = UILabel()
+                label.text = "アイテムがありません"
+                
+                self.deckView.addSubview(label)
+                label.center(inView: self.deckView)
+            }
+            
             self.tabBarController?.showPresentLoadindView(false)
             print(items.count)
         }
@@ -179,7 +188,7 @@ extension MyItemsViewController : BottomControlsStackViewDelegate {
     /// no currentUser func
     
     func handleFavorite() {
-        return
+        print("Favorite")
     }
 
     

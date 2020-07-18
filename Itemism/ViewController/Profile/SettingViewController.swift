@@ -20,7 +20,7 @@ class SettingViewController : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureUI()
+//        configureUI()
         configureTableView()
         
     }

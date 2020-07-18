@@ -37,6 +37,12 @@ class ProfileViewController : UIViewController {
         return itemVC
     }()
     
+    private lazy var settingViewController : SettingViewController = {
+        let settingVC = SettingViewController()
+        
+        return settingVC
+    }()
+    
     private let exampleVIew : UIViewController = {
         let vc = UIViewController()
         vc.view.backgroundColor = .purple
@@ -55,8 +61,12 @@ class ProfileViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+            
+    }
     
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
     }
     
     override func viewWillLayoutSubviews() {
@@ -71,8 +81,27 @@ class ProfileViewController : UIViewController {
     //MARK: - UI
     
     private func configureUI() {
-        navigationItem.title = "Setting"
-//        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        if user.userType == .current {
+            navigationItem.title = "Setting"
+        } else {
+            navigationItem.title = "\(user.name) さん"
+        }
+        /// set current user image (left bar button)
+        let userImage = downloadImageFromData(picturedata: user.profileImageData)
+        let iv = UIImageView(image: userImage)
+        iv.setDimensions(height: 32, width: 32)
+        iv.layer.cornerRadius = 32 / 2
+        iv.clipsToBounds = true
+        iv.isUserInteractionEnabled = false
+        
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedUserImage))
+//        iv.addGestureRecognizer(tap)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: iv)
+        
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
+        
         navigationController?.navigationBar.tintColor = .black
         
        
@@ -115,11 +144,35 @@ class ProfileViewController : UIViewController {
     
     private func updateView() {
         if segmentrController.selectedSegmentIndex == 0 {
-            remove(viewController: exampleVIew)
-            add(viewController: myItemsViewController)
+            
+            switch user.userType {
+                
+                /// seting view
+            case .current:
+                remove(viewController: settingViewController)
+                add(viewController: myItemsViewController)
+            case .another:
+                /// user profileView (example = anotheruserVC)
+                remove(viewController: exampleVIew)
+                add(viewController: myItemsViewController)
+                return
+            }
+            
         } else {
-            remove(viewController: myItemsViewController)
-            add(viewController: exampleVIew)
+            
+            switch user.userType {
+                
+            case .current:
+                remove(viewController: myItemsViewController)
+                add(viewController: settingViewController)
+            case .another:
+                /// user profileView (example = anotheruserVC)
+                remove(viewController: myItemsViewController)
+                add(viewController: exampleVIew)
+
+                return
+            }
+            
         }
     }
     

@@ -208,10 +208,8 @@ extension FeedViewController : UICollectionViewDelegateFlowLayout {
 extension FeedViewController : FeedCellDelegate {
     
     func tappedUserImage(feedCell: FeedCell, user: User) {
-        
-        let itemsVC = MyItemsViewController(user: user)
-        
-        navigationController?.pushViewController(itemsVC, animated: true)
+        let profileVC  = ProfileViewController(user:user)
+        self.navigationController?.pushViewController(profileVC, animated: true)
     }
     
     
