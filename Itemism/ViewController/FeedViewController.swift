@@ -165,8 +165,16 @@ extension FeedViewController {
         
         let item = items[indexPath.item]
         
-        let itemVC = DetailItemViewController(item: item)
-        navigationController?.pushViewController(itemVC, animated: true)
+//        let detailVC = DetailItemView(item: item)
+//        self.tabBarController?.view.addSubview(detailVC)
+//        detailVC.fillSuperview()
+//
+//
+        let itemVC = exDetailItemViewController(item: item)
+        let nav = UINavigationController(rootViewController: itemVC)
+        nav.modalPresentationStyle = .overFullScreen
+        present(nav, animated: true, completion: nil)
+//        navigationController?.pushViewController(itemVC, animated: true)
     }
     
     //MARK: - header & footer
