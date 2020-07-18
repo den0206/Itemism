@@ -10,6 +10,7 @@ import UIKit
 import MessageKit
 import FirebaseFirestore
 import InputBarAccessoryView
+import SDWebImage
 
 struct Sender : SenderType {
     
@@ -174,6 +175,19 @@ extension MessageViewController : MessagesDataSource {
             
             
         }
+    }
+    
+    /// user SDWEB image
+    func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        switch message.kind {
+           case .photo:
+               guard case .photo(let mediaItem) = message.kind else { fatalError() }
+               if let url = mediaItem.url {
+                imageView.sd_setImage(with: url)
+               }
+           default:
+               break
+           }
     }
 
     

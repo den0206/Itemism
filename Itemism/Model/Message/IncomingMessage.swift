@@ -84,17 +84,20 @@ struct IncomingMessage {
             date = Date()
         }
         
+        /// use cach
         let imageurl = messageDictionary[kPICTURE] as! String
-        let image = downLoadImageFromUrl(imageLink: imageurl)
+//        let image = downLoadImageFromUrl(imageLink: imageurl)
         
-        SDWebImageManager.shared.loadImage(with: <#T##URL?#>, options: <#T##SDWebImageOptions#>, progress: <#T##SDImageLoaderProgressBlock?##SDImageLoaderProgressBlock?##(Int, Int, URL?) -> Void#>, completed: <#T##SDInternalCompletionBlock##SDInternalCompletionBlock##(UIImage?, Data?, Error?, SDImageCacheType, Bool, URL?) -> Void#>)
         
-        if image != nil {
-            return Message(image: image!,sender: Sender(senderId: userid, displayName: name), messageId: messageId, date: date)
-        }
-        
-        return nil
-        
+        return Message(imageUrl: imageurl, sender: Sender(senderId: userid, displayName: name), messageId: messageId, date: date)
+       
+//
+//        if image != nil {
+//            return Message(image: image!,sender: Sender(senderId: userid, displayName: name), messageId: messageId, date: date)
+//        }
+//
+//        return nil
+//
         
         
         

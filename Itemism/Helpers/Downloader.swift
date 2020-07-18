@@ -50,35 +50,54 @@ func downloadImageFromData(picturedata : String) -> UIImage?{
 
 func downLoadImageFromUrl(imageLink : String) -> UIImage?{
     let imageUrl = NSURL(string: imageLink)
-    let imageFileName = (imageLink.components(separatedBy: "%").last!).components(separatedBy: "?").first!
     
-    // check Exist
-    if fileExistPath(path: imageLink) {
-        
-        print("Exist")
-        if let componentsFile = UIImage(contentsOfFile: fileInDocumentDictionary(filename: imageFileName)) {
-            return componentsFile
-        } else {
-            return nil
-        }
-    } else {
-        let nsData = NSData(contentsOf: imageUrl! as URL)
-        
-        if nsData != nil {
-            // add To documentsUrl
-            var docURL = getDocumentUrl()
-            
-            docURL = docURL.appendingPathComponent(imageFileName, isDirectory: false)
-            nsData!.write(to: docURL, atomically: true)
-            
-            let imageToReturn = UIImage(data: nsData! as Data)
-            return imageToReturn
-            
-        } else {
-            print("No Image Database")
-            return nil
-        }
+    let imageCasch = NSCache<NSString, UIImage>()
+    
+    
+    if let imageFromCash = imageCasch.object(forKey: imageLink as NSString) {
+        print("already")
+        return imageFromCash
     }
+    
+    print(imageCasch)
+    
+    let nsData = NSData(contentsOf: imageUrl! as URL)
+    
+    let imageToreturn = UIImage(data: nsData! as Data)
+    imageCasch.setObject(imageToreturn!, forKey: imageLink as NSString)
+    
+    return imageToreturn
+    
+    
+//    let imageFileName = (imageLink.components(separatedBy: "%").last!).components(separatedBy: "?").first!
+//
+//    // check Exist
+//    if fileExistPath(path: imageLink) {
+//
+//        print("Exist")
+//        if let componentsFile = UIImage(contentsOfFile: fileInDocumentDictionary(filename: imageFileName)) {
+//            return componentsFile
+//        } else {
+//            return nil
+//        }
+//    } else {
+//        let nsData = NSData(contentsOf: imageUrl! as URL)
+//
+//        if nsData != nil {
+//            // add To documentsUrl
+//            var docURL = getDocumentUrl()
+//
+//            docURL = docURL.appendingPathComponent(imageFileName, isDirectory: false)
+//            nsData!.write(to: docURL, atomically: true)
+//
+//            let imageToReturn = UIImage(data: nsData! as Data)
+//            return imageToReturn
+//
+//        } else {
+//            print("No Image Database")
+//            return nil
+//        }
+//    }
 
     
 }
