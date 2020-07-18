@@ -12,6 +12,7 @@ import FirebaseFirestore
 import FirebaseStorage
 import InputBarAccessoryView
 import SDWebImage
+import SKPhotoBrowser
 
 struct Sender : SenderType {
     
@@ -92,6 +93,20 @@ class MessageViewController : MessagesViewController {
         
     }
     
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        var visbleRect = CGRect()
+        visbleRect.origin = self.messagesCollectionView.contentOffset
+        visbleRect.size = self.messagesCollectionView.bounds.size
+        let visiblePoint = CGPoint(x: visbleRect.midX, y: visbleRect.midY)
+        
+        guard let indexPath = self.messagesCollectionView.indexPathForItem(at: visiblePoint) else {return}
+        
+        if indexPath.section == 3 {
+            print("More")
+        }
+        
+    }
+    
     //MARK: - Actions
     @objc func handleRefresh() {
         
@@ -123,7 +138,7 @@ class MessageViewController : MessagesViewController {
         let storage = Storage.storage()
         
         let message = messageLists[indexPath.section]
-        let messageId = objectMessages[indexPath.section][kMESSAGEID] as! String
+        let messageId = message.messageId
         
         // delete message
         
@@ -358,7 +373,38 @@ extension MessageViewController : MessagesDisplayDelegate {
 extension MessageViewController : MessageCellDelegate {
     
     func didTapMessage(in cell: MessageCollectionViewCell) {
-        return
+        
+        guard let indexPath = messagesCollectionView.indexPath(for: cell) else {return}
+        guard let messageDatasource = messagesCollectionView.messagesDataSource else {return}
+        
+        let message = messageDatasource.messageForItem(at: indexPath, in: messagesCollectionView)
+        
+       print(message)
+    }
+    func didTapImage(in cell: MessageCollectionViewCell) {
+         guard let indexPath = messagesCollectionView.indexPath(for: cell) else {return}
+        guard let messageDatasource = messagesCollectionView.messagesDataSource else {return}
+        
+        let message = messageDatasource.messageForItem(at: indexPath, in: messagesCollectionView)
+        
+        switch message.kind {
+        case .photo(let photItem):
+            
+            guard let imageUrl = photItem.url?.absoluteString else {return}
+            var images = [SKPhoto]()
+            let photo = SKPhoto.photoWithImageURL(imageUrl)
+            images.append(photo)
+            
+            let browser = SKPhotoBrowser(photos: images)
+            browser.initPageIndex = 0
+            present(browser, animated: true, completion: nil)
+            
+            
+        default:
+            return
+        }
+        
+        
     }
     
 }

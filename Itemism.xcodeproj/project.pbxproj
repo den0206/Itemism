@@ -12,6 +12,7 @@
 		3A06338B24BC78E2003C9D9F /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06338A24BC78E2003C9D9F /* MessageViewController.swift */; };
 		3A07F13A24B501700046D649 /* WantRentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07F13924B501700046D649 /* WantRentCell.swift */; };
 		3A0AA474249EF87D009BE640 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0AA473249EF87D009BE640 /* SignUpViewController.swift */; };
+		3A1FAB1024C2CA2B002E8F11 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1FAB0F24C2CA2B002E8F11 /* ProfileViewController.swift */; };
 		3A407C6B24BC86930031494B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A407C6A24BC86930031494B /* Message.swift */; };
 		3A605C0224B6001B000794C3 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A605C0124B6001B000794C3 /* Request.swift */; };
 		3A63534424BAAB5700C75443 /* RecentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63534324BAAB5700C75443 /* RecentHeaderView.swift */; };
@@ -68,6 +69,7 @@
 		3A06338A24BC78E2003C9D9F /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		3A07F13924B501700046D649 /* WantRentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WantRentCell.swift; sourceTree = "<group>"; };
 		3A0AA473249EF87D009BE640 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		3A1FAB0F24C2CA2B002E8F11 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = "/Users/yuukisakai/Library/Autosave Information/Itemism/Itemism/ViewController/ProfileViewController.swift"; sourceTree = "<absolute>"; };
 		3A407C6A24BC86930031494B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3A605C0124B6001B000794C3 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		3A63534324BAAB5700C75443 /* RecentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentHeaderView.swift; sourceTree = "<group>"; };
@@ -140,6 +142,15 @@
 				3AF646D624BDEC4A00A4D8DA /* MessageViewController+Save&Load.swift */,
 			);
 			path = Message;
+			sourceTree = "<group>";
+		};
+		3A1FAB0E24C2C770002E8F11 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				3A1FAB0F24C2CA2B002E8F11 /* ProfileViewController.swift */,
+				3AD31B7324A85CDA00BD78D3 /* MyItemsViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		3A407C6924BC86780031494B /* Message */ = {
@@ -287,11 +298,11 @@
 				3AEE21B2249F2F9D002CB2F1 /* SettingViewController.swift */,
 				3A04834224A0DF8C008F1BC2 /* AddItemViewController.swift */,
 				3AE001EA24A79541009BD9B5 /* DetailItemViewController.swift */,
-				3AD31B7324A85CDA00BD78D3 /* MyItemsViewController.swift */,
 				3AD20ED424AF6F1000BA0D00 /* EditItemViewController.swift */,
 				3AD4211B24AB724A00CC88E9 /* WantRentViewController.swift */,
 				3AE1B04624B5DC7D004D7346 /* RequestedViewController.swift */,
 				3AE61A8224B7613F00ADDE2A /* RequestPopupController.swift */,
+				3A1FAB0E24C2C770002E8F11 /* Profile */,
 				3A06338924BC78C2003C9D9F /* Message */,
 			);
 			path = ViewController;
@@ -461,6 +472,7 @@
 				3ADB97E0249DD60A000AB412 /* Extensions.swift in Sources */,
 				3AD3328024A84360002A2672 /* CardView.swift in Sources */,
 				3AEE21AD249F25A9002CB2F1 /* FirebaseReferences.swift in Sources */,
+				3A1FAB1024C2CA2B002E8F11 /* ProfileViewController.swift in Sources */,
 				3ADB97E2249DD67F000AB412 /* MainTabController.swift in Sources */,
 				3A04834124A0CF28008F1BC2 /* SettingFooterView.swift in Sources */,
 				3AE001EB24A79541009BD9B5 /* DetailItemViewController.swift in Sources */,
