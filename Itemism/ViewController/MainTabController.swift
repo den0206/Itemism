@@ -70,12 +70,12 @@ class MainTabController : UITabBarController {
         let rentVC = WantRentViewController(user: User.currentUser()!)
         let nav3 = createNavController(image: UIImage(systemName: "square.grid.3x2.fill"), title: "Want", rootViewController: rentVC)
         
-        let settingVC = SettingViewController()
-        let nav4 = UINavigationController(rootViewController: settingVC)
+        let profileVC = ProfileViewController(user: User.currentUser()!)
+        let nav4 = UINavigationController(rootViewController: profileVC)
         
         
-        settingVC.tabBarItem.image = UIImage(systemName: "person.crop.rectangle")
-        settingVC.tabBarItem.title = "Settings"
+        profileVC.tabBarItem.image = UIImage(systemName: "person.crop.rectangle")
+        profileVC.tabBarItem.title = "Settings"
         
         viewControllers = [nav, nav1,nav2,nav3,nav4]
         
