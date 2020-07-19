@@ -37,7 +37,7 @@ class CardView : UIView {
     //MARK: - Parts
     
     private let gradientLayer = CAGradientLayer()
-    private let barStackView = UIStackView()
+    let barStackView = UIStackView()
     
     private let itemImageView : UIImageView = {
         let iv = UIImageView()
@@ -116,6 +116,7 @@ class CardView : UIView {
     }
     
     func configureBarStackView() {
+        
         
         (0 ..< item.imageLinks.count).forEach { (_) in
             

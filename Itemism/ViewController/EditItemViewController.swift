@@ -168,10 +168,6 @@ extension EditItemViewController {
         isEdit = true
         
         dismiss(animated: true, completion: nil)
-        
-        print(changeImageDictionary)
-        //        print(changeImageDictionary.keys.sorted())
-        
     }
 }
 

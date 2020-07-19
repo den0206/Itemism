@@ -28,6 +28,15 @@ class AddItemCell : UITableViewCell {
         }
     }
     
+    var editMode : Bool = true {
+        didSet {
+            if !editMode {
+                inputField.isUserInteractionEnabled = false
+                descriptionTextView.isUserInteractionEnabled = false
+            }
+        }
+    }
+    
     weak var delegate : AddItemCellDelegate?
     
     //MARK: - Parts
@@ -47,7 +56,7 @@ class AddItemCell : UITableViewCell {
         return tf
     }()
     
-    private let descriptionTextView = InputTextView()
+    let descriptionTextView = InputTextView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -59,7 +68,7 @@ class AddItemCell : UITableViewCell {
         inputField.fillSuperview()
 //
         addSubview(descriptionTextView)
-        descriptionTextView.anchor(top :topAnchor,left: leftAnchor,bottom: bottomAnchor,right: rightAnchor,paddingTop: 8,paddingLeft: 8,paddingRight: 8)
+        descriptionTextView.anchor(top :topAnchor,left: leftAnchor,bottom: bottomAnchor,right: rightAnchor,paddingTop: 8,paddingLeft: 14,paddingRight: 14)
         descriptionTextView.delegate = self
         
         
@@ -87,8 +96,9 @@ class AddItemCell : UITableViewCell {
             descriptionTextView.placeholderLabel.isHidden = true
         }
         
-        
     }
+    
+    
     
     //MARK: - Actiuons
     

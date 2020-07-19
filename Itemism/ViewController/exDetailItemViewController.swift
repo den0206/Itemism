@@ -10,6 +10,8 @@ import UIKit
 import PKHUD
 import SKPhotoBrowser
 
+private let reuseIdentifer = "Cell"
+
 class exDetailItemViewController : UITableViewController {
 
     //MARK: - Property
@@ -81,12 +83,18 @@ class exDetailItemViewController : UITableViewController {
         self.tableView.backgroundColor = .clear
         blurEffectView.frame = tableView.frame
         tableView.backgroundView = blurEffectView
+        tableView.isEditing = false
+        
+        tableView.register(AddItemCell.self, forCellReuseIdentifier: reuseIdentifer)
+      
+        tableView.tableHeaderView = header
+        header.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
+        
+        tableView.tableFooterView = bottomStack
+        bottomStack.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
         
         header.delegate = self
         header.imageUrls = item.imageLinks
-        
-        
-        
         
         /// viewController
 //        blurEffectView.frame = self.view.frame
@@ -108,24 +116,77 @@ class exDetailItemViewController : UITableViewController {
 
 extension exDetailItemViewController {
     
-    /// header & footer
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 200
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return itemtemSections.allCases.count
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return header
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return bottomStack
-    }
     
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifer, for: indexPath) as! AddItemCell
         
-        return 150
+        guard let section = itemtemSections(rawValue: indexPath.section) else {return cell}
+        
+        let viewModel = EditItemViewModel(item: item, section: section)
+        cell.editItemVM = viewModel
+        
+        cell.editMode = false
+        cell.backgroundColor = .clear
+        cell.descriptionTextView.backgroundColor = .clear
+    
+        
+        return cell
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let section = itemtemSections(rawValue: indexPath.section) else {return 0}
+        
+        if section == .description {
+            return 200
+        }
+        
+        return 45
+    }
+    
+    /// each header & footer
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        view.tintColor = .clear
+        
+        let header = view as! UITableViewHeaderFooterView
+        // テキスト色を変更する
+        header.textLabel?.textColor = .white
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        guard let section = itemtemSections(rawValue: section) else {return nil}
+        
+        return section.title
+    }
+    
+    
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 200
+//    }
+    
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        return header
+//    }
+    
+//    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        return bottomStack
+//    }
+//
+//    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//
+//        return 150
+//    }
 }
 
 //MARK: - DetailItem HeaderView Delegate

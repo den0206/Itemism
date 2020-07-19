@@ -175,6 +175,12 @@ func uploadItemImages(imageDic : [Int : UIImage], item : Item, completion :  @es
     var uploadImageCount = 0
     let sortedKeys = imageDic.keys.sorted()
     
+    /// no Image edit
+    if imageDic.keys.count == 0{
+        completion(item)
+        return
+    }
+    
     for key in sortedKeys {
         /// UIImage
         let fileName =  "ItemImages/" + item.id + "/" + "\(key)" + ".jpg"
@@ -193,6 +199,7 @@ func uploadItemImages(imageDic : [Int : UIImage], item : Item, completion :  @es
                 item.imageLinks.insert(imageLink!, at: key)
                 uploadImageCount += 1
                 
+                print(uploadImageCount)
                 if uploadImageCount == sortedKeys.count {
                     completion(item)
                 }

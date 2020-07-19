@@ -237,6 +237,10 @@ extension MyItemsViewController : EditItemViewControllerDelegate {
     func compDelete(item: Item) {
          guard let topCard = topCardView else {return}
         topCard.item.imageLinks = []
+        /// remove
+        topCard.barStackView.arrangedSubviews.forEach { (barView) in
+            barView.removeFromSuperview()
+        }
         
         topCard.item = item
         if topCard.item.imageLinks.count > 1 {
