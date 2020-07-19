@@ -60,15 +60,15 @@ class MainTabController : UITabBarController {
         let feedVC = FeedViewController()
         let nav = createNavController(image: UIImage(systemName: "house.fill"), title: "Feeds", rootViewController: feedVC)
         
+        let requestVC = AllRequestViewController(user: User.currentUser()!)
+        let nav1 = createNavController(image: UIImage(systemName: "gift.fill"), title: "Items", rootViewController: requestVC)
+        
         let messageVC = RecentsViewController()
-        let nav1 = createNavController(image: UIImage(systemName: "message.fill"), title: "Message", rootViewController: messageVC)
-        
-        let requestVC = RequestedViewController(user: User.currentUser()!)
-        let nav2 = createNavController(image: UIImage(systemName: "gift.fill"), title: "Items", rootViewController: requestVC)
+        let nav2 = createNavController(image: UIImage(systemName: "message.fill"), title: "Message", rootViewController: messageVC)
         
         
-        let rentVC = WantRentViewController(user: User.currentUser()!)
-        let nav3 = createNavController(image: UIImage(systemName: "square.grid.3x2.fill"), title: "Want", rootViewController: rentVC)
+//        let rentVC = WantRentViewController(user: User.currentUser()!)
+//        let nav3 = createNavController(image: UIImage(systemName: "square.grid.3x2.fill"), title: "Want", rootViewController: rentVC)
         
         let profileVC = ProfileViewController(user: User.currentUser()!)
         let nav4 = UINavigationController(rootViewController: profileVC)
@@ -77,7 +77,7 @@ class MainTabController : UITabBarController {
         profileVC.tabBarItem.image = UIImage(systemName: "person.crop.rectangle")
         profileVC.tabBarItem.title = "Settings"
         
-        viewControllers = [nav, nav1,nav2,nav3,nav4]
+        viewControllers = [nav, nav1,nav2,nav4]
         
         UITabBar.appearance().tintColor = .black
         tabBar.unselectedItemTintColor = .lightGray

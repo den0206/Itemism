@@ -9,18 +9,29 @@
 import UIKit
 import FirebaseAuth
 
+private let settingIdentifer = "SettingCell"
 class SettingViewController : UITableViewController {
     
     //MARK: - Parts
+    let user : User
     
-    
+    private lazy var headerView = UserProfileHeaderView(userImage: downloadImageFromData(picturedata: user.profileImageData)!)
     
     private let footeView = SettingFooterView()
+    
+    init(user : User) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        configureUI()
         configureTableView()
         
     }
@@ -29,40 +40,19 @@ class SettingViewController : UITableViewController {
   
     //MARK: - UI
     
-    private func configureUI() {
-        
-        navigationItem.title = "Setting"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = .black
-        
-        
-        /// set current user image (left bar button)
-        let userImage = downloadImageFromData(picturedata: User.currentUser()!.profileImageData)
-        let iv = UIImageView(image: userImage)
-        iv.setDimensions(height: 32, width: 32)
-        iv.layer.cornerRadius = 32 / 2
-        iv.clipsToBounds = true
-        iv.isUserInteractionEnabled = false
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedUserImage))
-        iv.addGestureRecognizer(tap)
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: iv)
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
-        
-        
-        
-    }
     
     private func configureTableView() {
         
         tableView.separatorStyle = .none
+
+        tableView.tableHeaderView = headerView
+        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
+        
         tableView.tableFooterView = footeView
-        
-        footeView.delegate = self
         footeView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 80)
+        footeView.delegate = self
         
+        tableView.register(SettingUserCell.self, forCellReuseIdentifier: settingIdentifer)
         
     }
     
@@ -79,14 +69,31 @@ class SettingViewController : UITableViewController {
 //        UserDefaults.standard.setValue(currentUserDic, forKey: kCURRENTUSER)
     }
     
-    @objc func tappedUserImage() {
+}
+
+extension SettingViewController {
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return SettingSections.allCases.count
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: settingIdentifer, for: indexPath) as! SettingUserCell
         
-        let myItemVC = MyItemsViewController(user: User.currentUser()!)
-        navigationController?.pushViewController(myItemVC, animated: true)
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let section = SettingSections(rawValue: section) else {return String()}
+        
+        return section.description
     }
 }
 
-//MARK: - Footer view Delelegate
+//MARK: - Footer view Delelegate (currentUser)
 
 extension SettingViewController : SettingFooterViewDelegate {
     

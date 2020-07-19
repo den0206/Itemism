@@ -17,6 +17,8 @@ class User {
     let uid : String
     let profileImageData : String
     
+    let bio : String
+    
     var userType : UserType {
         if self.uid == User.currentId() {
             return .current
@@ -30,6 +32,7 @@ class User {
         self.email = dictionary[kEMAIL] as? String ?? ""
         self.uid = dictionary[kUSERID] as? String ?? ""
         self.profileImageData = dictionary[kPROFILE_IMAGE] as? String ?? ""
+        self.bio = dictionary[kBIO] as? String ?? ""
     }
     
     class func currentId() -> String {

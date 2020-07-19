@@ -21,6 +21,7 @@ struct Sender : SenderType {
 
 }
 
+private let headerIdentifer = "headerIdentifer"
 class MessageViewController : MessagesViewController {
     
     var chatRoomId : String!
@@ -44,6 +45,7 @@ class MessageViewController : MessagesViewController {
     }
     
     let refreshController = UIRefreshControl()
+
 
     //MARK: - property
     
@@ -70,6 +72,14 @@ class MessageViewController : MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.messageCellDelegate = self
+        
+        
+//        messagesCollectionView.register(MessageReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifer)
+        
+//        messagesCollectionView.contentInset.top = 200
+//        header.backgroundColor = .red
+//        messagesCollectionView.addSubview(header)
+        
         
         messageInputBar.delegate = self
         
@@ -206,7 +216,7 @@ class MessageViewController : MessagesViewController {
             firebaseReference(.Message).document(userId).collection(chatRoomId).document(messageId).delete(completion: nil)
         }
     }
- 
+
 }
 
 extension MessageCollectionViewCell {

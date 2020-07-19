@@ -26,9 +26,9 @@ class ProfileViewController : UIViewController {
         sc.addTarget(self, action: #selector(handleSegment(_ :)), for: .valueChanged)
         return sc
     }()
+    
     private let contaierView : UIView = {
         let view = UIView()
-        view.backgroundColor = .red
         return view
     }()
     
@@ -38,7 +38,7 @@ class ProfileViewController : UIViewController {
     }()
     
     private lazy var settingViewController : SettingViewController = {
-        let settingVC = SettingViewController()
+        let settingVC = SettingViewController(user: user)
         
         return settingVC
     }()
