@@ -26,6 +26,10 @@ enum SettingSections : Int, CaseIterable {
 struct settingViewModel {
     
     private let user : User
+    
+    var userType : UserType{
+        return user.userType
+    }
     let section : SettingSections
     
     let placeholderText : String
@@ -33,6 +37,9 @@ struct settingViewModel {
     
     var shouldHideInputView : Bool {
         return section == .bio
+    }
+    var isEnable : Bool {
+        return userType == .current
     }
     
     var sholdHideTextView : Bool {

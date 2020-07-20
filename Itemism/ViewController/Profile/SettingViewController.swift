@@ -14,6 +14,9 @@ class SettingViewController : UITableViewController {
     
     //MARK: - Parts
     let user : User
+    var userType : UserType {
+        return user.userType
+    }
     
     private lazy var headerView = UserProfileHeaderView(userImage: downloadImageFromData(picturedata: user.profileImageData)!)
     
@@ -48,9 +51,23 @@ class SettingViewController : UITableViewController {
         tableView.tableHeaderView = headerView
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
         
-        tableView.tableFooterView = footeView
-        footeView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 80)
-        footeView.delegate = self
+        if userType == .current {
+            tableView.tableFooterView = footeView
+            footeView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 150)
+            footeView.delegate = self
+        } else {
+            let noButtonView = UIView()
+            tableView.tableFooterView = noButtonView
+            noButtonView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 32)
+            
+            let bottomLine = UIView()
+            bottomLine.backgroundColor = .systemGroupedBackground
+            noButtonView.addSubview(bottomLine)
+            bottomLine.anchor(top: noButtonView.topAnchor,left : noButtonView.leftAnchor,right: noButtonView.rightAnchor, width: noButtonView.frame.width, height: 32)
+            
+            
+        }
+        
         
         tableView.register(SettingUserCell.self, forCellReuseIdentifier: settingIdentifer)
         

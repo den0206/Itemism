@@ -153,7 +153,7 @@ class ProfileViewController : UIViewController {
                 add(viewController: myItemsViewController)
             case .another:
                 /// user profileView (example = anotheruserVC)
-                remove(viewController: exampleVIew)
+                remove(viewController: settingViewController)
                 add(viewController: myItemsViewController)
                 return
             }
@@ -168,7 +168,7 @@ class ProfileViewController : UIViewController {
             case .another:
                 /// user profileView (example = anotheruserVC)
                 remove(viewController: myItemsViewController)
-                add(viewController: exampleVIew)
+                add(viewController: settingViewController)
 
                 return
             }
