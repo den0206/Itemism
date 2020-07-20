@@ -83,13 +83,30 @@ extension SettingViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: settingIdentifer, for: indexPath) as! SettingUserCell
         
+        guard let section = SettingSections(rawValue: indexPath.section) else {return cell}
+        
+        let vm = settingViewModel(user: user, section: section)
+        
+        cell.settingViewModel = vm
         return cell
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let section = SettingSections(rawValue: section) else {return String()}
         
+        
         return section.description
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        guard let section = SettingSections(rawValue: indexPath.section) else {return 0}
+        
+        if section == .bio {
+            return 200
+        }
+        
+        return 45
     }
 }
 

@@ -22,3 +22,38 @@ enum SettingSections : Int, CaseIterable {
         }
     }
 }
+
+struct settingViewModel {
+    
+    private let user : User
+    let section : SettingSections
+    
+    let placeholderText : String
+    let value : String?
+    
+    var shouldHideInputView : Bool {
+        return section == .bio
+    }
+    
+    var sholdHideTextView : Bool {
+        return section != .bio
+    }
+    
+    init(user : User, section : SettingSections) {
+        self.user = user
+        self.section = section
+        
+        placeholderText = section.description
+        
+        switch section {
+        
+        case .name:
+            value = user.name
+        case .bio:
+            value = user.bio
+        }
+    }
+    
+    
+    
+}
