@@ -46,6 +46,10 @@ struct settingViewModel {
         return section != .bio
     }
     
+    var tfPlaceHolderisHidden : Bool {
+        return user.bio != ""
+    }
+    
     init(user : User, section : SettingSections) {
         self.user = user
         self.section = section

@@ -21,7 +21,7 @@ class SettingFooterView : UIView {
         let button = UIButton(type: .system)
         button.setTitle("Save", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .blue
+        button.backgroundColor = .lightGray
         button.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
         button.layer.cornerRadius = 32 / 2
         button.clipsToBounds = true

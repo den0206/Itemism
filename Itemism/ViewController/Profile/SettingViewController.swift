@@ -17,7 +17,7 @@ class SettingViewController : UITableViewController {
     var userType : UserType {
         return user.userType
     }
-    
+        
     private lazy var headerView = UserProfileHeaderView(userImage: downloadImageFromData(picturedata: user.profileImageData)!)
     
     private let footeView = SettingFooterView()
@@ -119,6 +119,8 @@ extension SettingViewController {
 //MARK: - cell delegate
 
 extension SettingViewController : SettingUserCellDelegate {
+    
+
     func updateUserInfo(cell: SettingUserCell, value: String, section: SettingSections) {
         
         switch section {
@@ -128,6 +130,8 @@ extension SettingViewController : SettingUserCellDelegate {
         case .bio:
             user.bio = value
         }
+        
+        footeView.saveButton.backgroundColor = .blue
     }
     
     
@@ -139,8 +143,23 @@ extension SettingViewController : SettingFooterViewDelegate {
     
     func handleSave() {
         view.endEditing(true)
+         
         
-        print(user.name,user.bio)
+        UserService.updateUser(user: user) { (error) in
+            if error != nil {
+                self.showAlert(title: "Error", message: error!.localizedDescription)
+                return
+            }
+
+            guard var ud = UserDefaults.standard.dictionary(forKey: kCURRENTUSER) else {return}
+            
+            ud[kFULLNAME] = self.user.name
+            ud[kBIO] = self.user.bio
+            
+            UserDefaults.standard.set(ud, forKey: kCURRENTUSER)
+            UserDefaults.standard.synchronize()
+
+        }
     }
     
     

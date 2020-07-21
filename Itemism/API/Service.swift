@@ -103,6 +103,16 @@ class UserService {
             }
         }
     }
+    
+    static func updateUser(user : User, completion :  @escaping(Error?) -> Void) {
+        
+        guard user.uid == User.currentId() else {return}
+        
+        let data = [kFULLNAME : user.name,
+                    kBIO : user.bio]
+        
+        firebaseReference(.User).document(user.uid).updateData(data, completion: completion)
+    }
 }
 
 //MARK: - ITEM Service
