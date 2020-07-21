@@ -9,16 +9,15 @@
 import UIKit
 
 protocol SettingFooterViewDelegate : class {
-    
+    func handleSave()
     func handleLogOut()
 }
 
 class SettingFooterView : UIView {
-    
     weak var delegate : SettingFooterViewDelegate?
     
     
-    let saveButton : UIButton = {
+    lazy var saveButton : UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Save", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -72,7 +71,7 @@ class SettingFooterView : UIView {
     //MARK: - Actions
     
     @objc func handleSave() {
-        print("save")
+        delegate?.handleSave()
     }
     
     @objc func handleLogout() {

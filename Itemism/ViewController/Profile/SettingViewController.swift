@@ -72,19 +72,7 @@ class SettingViewController : UITableViewController {
         tableView.register(SettingUserCell.self, forCellReuseIdentifier: settingIdentifer)
         
     }
-    
-    //MARK: - Actions
-    
-    @objc func handleDone() {
-        print("Done")
-        
-        /// set as UserDefaults
-//
-//        var currentUserDic = UserDefaults.standard.dictionary(forKey: kCURRENTUSER)
-//        currentUserDic?[kNAME] = ""
-//
-//        UserDefaults.standard.setValue(currentUserDic, forKey: kCURRENTUSER)
-    }
+
     
 }
 
@@ -105,6 +93,7 @@ extension SettingViewController {
         let vm = settingViewModel(user: user, section: section)
         
         cell.settingViewModel = vm
+        cell.delegate = self
         return cell
     }
     
@@ -127,9 +116,33 @@ extension SettingViewController {
     }
 }
 
+//MARK: - cell delegate
+
+extension SettingViewController : SettingUserCellDelegate {
+    func updateUserInfo(cell: SettingUserCell, value: String, section: SettingSections) {
+        
+        switch section {
+      
+        case .name:
+            user.name = value
+        case .bio:
+            user.bio = value
+        }
+    }
+    
+    
+}
+
 //MARK: - Footer view Delelegate (currentUser)
 
 extension SettingViewController : SettingFooterViewDelegate {
+    
+    func handleSave() {
+        view.endEditing(true)
+        
+        print(user.name,user.bio)
+    }
+    
     
     func handleLogOut() {
         logOut()

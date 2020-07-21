@@ -17,7 +17,7 @@ class User {
     let uid : String
     let profileImageData : String
     
-    let bio : String
+    var bio : String
     
     var userType : UserType {
         if self.uid == User.currentId() {
