@@ -13,7 +13,7 @@ private let settingIdentifer = "SettingCell"
 class SettingViewController : UITableViewController {
     
     //MARK: - Parts
-    let user : User
+    var user : User
     var userType : UserType {
         return user.userType
     }
@@ -69,9 +69,17 @@ class SettingViewController : UITableViewController {
             
         }
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBord))
+        tableView.addGestureRecognizer(tap)
         
         tableView.register(SettingUserCell.self, forCellReuseIdentifier: settingIdentifer)
         
+    }
+    
+    //MARK: - actions
+    
+    @objc func dismissKeyBord() {
+        view.endEditing(true)
     }
 
     
@@ -95,6 +103,7 @@ extension SettingViewController {
         
         cell.settingViewModel = vm
         cell.delegate = self
+        
         return cell
     }
     
@@ -120,8 +129,10 @@ extension SettingViewController {
 //MARK: - cell delegate
 
 extension SettingViewController : SettingUserCellDelegate {
+   
     
-
+    
+ 
     func updateUserInfo(cell: SettingUserCell, value: String, section: SettingSections) {
         
         switch section {
@@ -190,9 +201,13 @@ extension SettingViewController : SettingFooterViewDelegate {
     
     func handleSave() {
         view.endEditing(true)
+        
+        self.tabBarController?.showPresentLoadindView(true)
          
         UserService.updateUser(user: user) { (error) in
             if error != nil {
+                self.tabBarController?.showPresentLoadindView(false)
+
                 self.showAlert(title: "Error", message: error!.localizedDescription)
                 return
             }
@@ -205,6 +220,14 @@ extension SettingViewController : SettingFooterViewDelegate {
             
             UserDefaults.standard.set(ud, forKey: kCURRENTUSER)
             UserDefaults.standard.synchronize()
+            
+            /// update user
+            
+            
+            self.tabBarController?.showPresentLoadindView(false)
+
+            
+            
 
         }
     }

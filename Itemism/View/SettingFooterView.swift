@@ -38,6 +38,8 @@ class SettingFooterView : UIView {
                button.clipsToBounds = true
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.addTarget(self, action: #selector(handleLogout), for: .touchUpInside)
+        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor.black.cgColor
         
         return button
     }()
