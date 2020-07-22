@@ -17,8 +17,8 @@ class SettingViewController : UITableViewController {
     var userType : UserType {
         return user.userType
     }
-        
-    private lazy var headerView = UserProfileHeaderView(userImage: downloadImageFromData(picturedata: user.profileImageData)!)
+            
+    private lazy var headerView = SettingHeaderView(userImage: downloadImageFromData(picturedata: user.profileImageData)!)
     
     private let footeView = SettingFooterView()
     
@@ -49,6 +49,7 @@ class SettingViewController : UITableViewController {
         tableView.separatorStyle = .none
 
         tableView.tableHeaderView = headerView
+        headerView.delegate = self
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
         
         if userType == .current {
@@ -137,6 +138,52 @@ extension SettingViewController : SettingUserCellDelegate {
     
 }
 
+//MARK: - header view Delegate
+
+extension SettingViewController : SettingHeaderViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    func tappedImage() {
+        
+        let picker = UIImagePickerController()
+        picker.allowsEditing = true
+        picker.delegate = self
+        
+        present(picker, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        guard let image = info[.editedImage] as? UIImage else {
+            
+            picker.dismiss(animated: true) {
+                self.showAlert(title: "Error", message: "画像を取得できませんでした")
+            }
+            return
+            
+        }
+        headerView.userImageView.image = image
+        
+        let imageData = image.jpegData(compressionQuality: 0.3)
+        
+        guard let encordedImage = imageData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)) else {
+            picker.dismiss(animated: true) {
+                self.showAlert(title: "Error", message: "画像を取得できませんでした")
+            }
+            return
+        }
+        
+        print(encordedImage)
+        user.profileImageData = encordedImage
+        
+        self.dismiss(animated: true, completion: nil)
+        
+        
+    }
+    
+    
+}
+
 //MARK: - Footer view Delelegate (currentUser)
 
 extension SettingViewController : SettingFooterViewDelegate {
@@ -144,7 +191,6 @@ extension SettingViewController : SettingFooterViewDelegate {
     func handleSave() {
         view.endEditing(true)
          
-        
         UserService.updateUser(user: user) { (error) in
             if error != nil {
                 self.showAlert(title: "Error", message: error!.localizedDescription)
@@ -153,6 +199,7 @@ extension SettingViewController : SettingFooterViewDelegate {
 
             guard var ud = UserDefaults.standard.dictionary(forKey: kCURRENTUSER) else {return}
             
+            ud[kPROFILE_IMAGE] = self.user.profileImageData
             ud[kFULLNAME] = self.user.name
             ud[kBIO] = self.user.bio
             

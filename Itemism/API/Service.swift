@@ -108,7 +108,8 @@ class UserService {
         
         guard user.uid == User.currentId() else {return}
         
-        let data = [kFULLNAME : user.name,
+        let data = [kPROFILE_IMAGE : user.profileImageData,
+                    kFULLNAME : user.name,
                     kBIO : user.bio]
         
         firebaseReference(.User).document(user.uid).updateData(data, completion: completion)

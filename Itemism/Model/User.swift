@@ -15,7 +15,7 @@ class User {
     
     let email : String
     let uid : String
-    let profileImageData : String
+    var profileImageData : String
     
     var bio : String
     
