@@ -194,7 +194,7 @@ extension FeedViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let cellWidth = view.frame.width - 75
-        let cellHeight = view.frame.height - 300
+        let cellHeight = view.frame.height - 150
         
         return CGSize(width: cellWidth, height: cellHeight)
     }
