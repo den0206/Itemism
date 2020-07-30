@@ -437,6 +437,8 @@ class MatchService {
         }
     }
     
+
+    
     static func uploadMatch(currentUser : User, mathedUser : User) {
         let matchedUserDate = [ kUSERID : mathedUser.uid,
                                 kFULLNAME : mathedUser.name,
@@ -490,4 +492,31 @@ class MessageService {
         }
         
     }
+    
+    
+
+    //MARK: - No Use
+
+    static func downloaduserMatches(completion :  @escaping([String]) -> Void) {
+        /// only last MOnt
+        let lastMonth = Calendar.current.date(byAdding: .month, value: -1, to: Date()) ?? Date()
+        
+        firebaseReference(.Match).whereField(kMESSAGEID, arrayContains: User.currentId()).whereField(kDATE, isGreaterThan: lastMonth).order(by: kDATE, descending: true).getDocuments { (snapshot, error) in
+            
+            var allmatchesIds = [String]()
+            
+            guard let snapshot = snapshot else {return}
+            if !snapshot.isEmpty {
+                snapshot.documents.forEach({ (document) in
+                    
+                    allmatchesIds += document[kMESSAGEID] as? [String] ?? [""]
+                    
+                    completion(removeCurrentUserIDFrom(userIds: allmatchesIds))
+                })
+            }
+        }
+    }
+
 }
+
+

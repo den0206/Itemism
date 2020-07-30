@@ -18,7 +18,7 @@ class RecentMatchCell : UICollectionViewCell {
     
     //MARK: - Parts
     
-    private let profileImageView : UIImageView = {
+    let profileImageView : UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true

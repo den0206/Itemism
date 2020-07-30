@@ -88,18 +88,35 @@ class RecentHeaderView : UICollectionReusableView {
 
 extension RecentHeaderView : UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return matches.count
+        
+        
+        return matches.count > 0 ? matches.count : 1
+    
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: recentIdentifier, for: indexPath) as! RecentMatchCell
+
+        
+        guard (matches.count > 0) else {
+            cell.profileImageView.image =  #imageLiteral(resourceName: "noMatch")
+
+            return cell
+            
+        }
+        
         cell.match = matches[indexPath.item]
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard (matches.count > 0) else {return }
+        
         let match = matches[indexPath.item]
         
         delegate?.handleMatch(match: match)

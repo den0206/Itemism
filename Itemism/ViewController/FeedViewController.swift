@@ -83,7 +83,7 @@ class FeedViewController : UICollectionViewController {
     private func configureCV() {
         
         view.addSubview(actionButton)
-        actionButton.anchor( bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingBottom: 16, paddingRight: 16, width: 48, height: 48)
+        actionButton.anchor( top: view.safeAreaLayoutGuide.topAnchor, right: view.rightAnchor, paddingTop : 16, paddingRight: 16, width: 48, height: 48)
         actionButton.layer.cornerRadius = 48 / 2
         
         view.addSubview(refreshButton)
@@ -179,13 +179,7 @@ extension FeedViewController {
     
     //MARK: - header & footer
     
-//    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//
-//        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifer, for: indexPath)
-//
-//        return header
-//    }
-    
+
     
 }
 
@@ -194,7 +188,7 @@ extension FeedViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let cellWidth = view.frame.width - 75
-        let cellHeight = view.frame.height - 150
+        let cellHeight = view.frame.height - 250
         
         return CGSize(width: cellWidth, height: cellHeight)
     }

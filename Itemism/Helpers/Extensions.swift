@@ -27,6 +27,19 @@ func dateFormatter() -> DateFormatter {
     return dateFormatter
 }
 
+func removeCurrentUserIDFrom(userIds : [String] )-> [String] {
+    
+    var allIds = userIds
+    
+    for id in allIds {
+        if id == User.currentId() {
+            allIds.remove(at: allIds.firstIndex(of: id)!)
+        }
+    }
+    
+    return allIds
+}
+
 func timeElapsed(date: Date) -> String {
     
     let seconds = NSDate().timeIntervalSince(date)

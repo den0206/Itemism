@@ -78,6 +78,8 @@ class RecentsViewController : UITableViewController {
         }
     }
     
+    
+    
     private func fetchRecents() {
         
         recentsListner = MessageService.fetchRecent(userId: User.currentId(), completion: { (recents) in
@@ -117,7 +119,7 @@ class RecentsViewController : UITableViewController {
 extension RecentsViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        recents.count
+        return recents.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
