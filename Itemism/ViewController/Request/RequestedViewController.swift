@@ -121,7 +121,25 @@ extension RequestedViewController : RequestPopupControllerDelegate {
         MatchService.checkMatchExist(user: matchedUser) { (accepted) in
             
             guard !accepted else {
-                HUD.flash(.label("メッセージを送ってみましょう"), delay: 1.0)
+//                HUD.flash(.label("メッセージを送ってみましょう"), delay: 1.0)
+//                
+//                sleep(3)
+//
+                let match = Match(uid: matchedUser.uid, name: matchedUser.name, profileImageData: matchedUser.profileImageData)
+                
+                
+                let messageVC = MessageViewController()
+                messageVC.chatRoomId = Recent.startPrivateChat(currentUserId: User.currentId(), match: match)
+                messageVC.membersIds = [User.currentId(), match.uid]
+                
+                if let profileImage = downloadImageFromData(picturedata: match.profileImageData) {
+                    messageVC.profileImage = profileImage
+                }
+                
+                messageVC.configureAccesary()
+                
+                self.navigationController?.pushViewController(messageVC, animated: true)
+                
                 return
             }
             

@@ -13,6 +13,7 @@
 		3A07F13A24B501700046D649 /* WantRentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07F13924B501700046D649 /* WantRentCell.swift */; };
 		3A0AA474249EF87D009BE640 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0AA473249EF87D009BE640 /* SignUpViewController.swift */; };
 		3A1FAB1024C2CA2B002E8F11 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1FAB0F24C2CA2B002E8F11 /* ProfileViewController.swift */; };
+		3A3E358124D65C3100661C51 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E358024D65C3100661C51 /* ProfileViewController.swift */; };
 		3A407C6B24BC86930031494B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A407C6A24BC86930031494B /* Message.swift */; };
 		3A472DC424C485A900A95E5D /* SettingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A472DC324C485A900A95E5D /* SettingHeaderView.swift */; };
 		3A472DC624C48A7800A95E5D /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A472DC524C48A7800A95E5D /* SettingViewModel.swift */; };
@@ -77,6 +78,7 @@
 		3A07F13924B501700046D649 /* WantRentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WantRentCell.swift; sourceTree = "<group>"; };
 		3A0AA473249EF87D009BE640 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3A1FAB0F24C2CA2B002E8F11 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = "/Users/yuukisakai/Library/Autosave Information/Itemism/Itemism/ViewController/ProfileViewController.swift"; sourceTree = "<absolute>"; };
+		3A3E358024D65C3100661C51 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = "/Users/yuukisakai/Library/Autosave Information/Itemism/Itemism/ViewController/ProfileViewController.swift"; sourceTree = "<absolute>"; };
 		3A407C6A24BC86930031494B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3A472DC324C485A900A95E5D /* SettingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
 		3A472DC524C48A7800A95E5D /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				3ADB97E1249DD67F000AB412 /* MainTabController.swift */,
 				3AF97685249DBA0600A7BA80 /* FeedViewController.swift */,
 				3A04834224A0DF8C008F1BC2 /* AddItemViewController.swift */,
+				3A3E358024D65C3100661C51 /* ProfileViewController.swift */,
 				3AE001EA24A79541009BD9B5 /* DetailItemViewController.swift */,
 				3AE8EFBD24C317F90021A851 /* exDetailItemViewController.swift */,
 				3AD20ED424AF6F1000BA0D00 /* EditItemViewController.swift */,
@@ -478,6 +481,7 @@
 				3AC396D924A4B94A0088C622 /* Item.swift in Sources */,
 				3AD20ED524AF6F1000BA0D00 /* EditItemViewController.swift in Sources */,
 				3A605C0224B6001B000794C3 /* Request.swift in Sources */,
+				3A3E358124D65C3100661C51 /* ProfileViewController.swift in Sources */,
 				3AA04B8824A23D7B00886E65 /* AddItemViewModel.swift in Sources */,
 				3A59E52E24C32A64002F202A /* DetailItemHeaderView.swift in Sources */,
 				3AEB26FB24BF8051008102C9 /* IncomingMessage.swift in Sources */,

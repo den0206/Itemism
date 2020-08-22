@@ -16,6 +16,7 @@ protocol SettingFooterViewDelegate : class {
 class SettingFooterView : UIView {
     weak var delegate : SettingFooterViewDelegate?
     
+    var edited : Bool = false
     
     lazy var saveButton : UIButton = {
         let button = UIButton(type: .system)
@@ -25,6 +26,7 @@ class SettingFooterView : UIView {
         button.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
         button.layer.cornerRadius = 32 / 2
         button.clipsToBounds = true
+        button.isEnabled = false
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return button
     }()
@@ -68,6 +70,19 @@ class SettingFooterView : UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - UI
+    
+    func configureSaveButton(edited : Bool) {
+        
+        if edited {
+            saveButton.backgroundColor = .systemBlue
+            saveButton.isEnabled = true
+        } else {
+            saveButton.backgroundColor = .lightGray
+            saveButton.isEnabled = false
+        }
     }
     
     //MARK: - Actions

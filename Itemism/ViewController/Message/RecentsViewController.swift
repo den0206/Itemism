@@ -52,6 +52,9 @@ class RecentsViewController : UITableViewController {
         
         /// table view
         
+        tableView.delaysContentTouches = false
+
+        
         tableView.rowHeight = 100
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
@@ -96,19 +99,19 @@ class RecentsViewController : UITableViewController {
         let messageVC = MessageViewController()
         messageVC.chatRoomId = chatroomId
         messageVC.membersIds = members
-        messageVC.membersToPush = membersToPush
         
         if profileImage != nil {
             messageVC.profileImage = profileImage!
         }
         
         messageVC.configureAccesary()
+        messageVC.hidesBottomBarWhenPushed = true
 
         /// avoid Delay
-        DispatchQueue.main.async {
-            self.navigationController?.pushViewController(messageVC, animated: true)
-        }
-//        
+        
+        self.navigationController?.pushViewController(messageVC, animated: true)
+        
+        //
     }
     
     
@@ -148,10 +151,29 @@ extension RecentsViewController {
         let chatRoomId = (recent[kCHATROOMID] as? String)!
         let members = (recent[kMEMBERS] as? [String])!
         let membersToPush = (recent[kMEMBERSTOPUSH] as? [String])!
-
-        presentMessageVC(chatroomId: chatRoomId, members: members, membersToPush: membersToPush, profileImage : profileImage)
-
         
+        
+        self.presentMessageVC(chatroomId: chatRoomId, members: members, membersToPush: membersToPush, profileImage : profileImage)
+ 
+    }
+    
+    //MARK: - delete roq
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            let recent = recents[indexPath.row]
+            ///delete recentfirestore
+            Recent.deleteRecent(recent: recent)
+            
+            self.recents.remove(at: indexPath.row)
+            
+            /// sync didset
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 }
 
@@ -173,7 +195,10 @@ extension RecentsViewController : RecentHeaderViewDelegate{
         
         let profileImage = downloadImageFromData(picturedata: match.profileImageData)
         
-        presentMessageVC(chatroomId: chatRoomId, members: members, membersToPush: membersToPush, profileImage: profileImage)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.presentMessageVC(chatroomId: chatRoomId, members: members, membersToPush: membersToPush, profileImage: profileImage)
+            
+        }
         
         
         

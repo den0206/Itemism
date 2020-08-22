@@ -47,6 +47,7 @@ class SettingViewController : UITableViewController {
     private func configureTableView() {
         
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .systemGroupedBackground
 
         tableView.tableHeaderView = headerView
         headerView.delegate = self
@@ -129,9 +130,9 @@ extension SettingViewController {
 //MARK: - cell delegate
 
 extension SettingViewController : SettingUserCellDelegate {
+    
+
    
-    
-    
  
     func updateUserInfo(cell: SettingUserCell, value: String, section: SettingSections) {
         
@@ -143,7 +144,11 @@ extension SettingViewController : SettingUserCellDelegate {
             user.bio = value
         }
         
-        footeView.saveButton.backgroundColor = .blue
+    }
+    
+    
+    func edited(cell: SettingUserCell, edited: Bool) {
+        footeView.configureSaveButton(edited: edited)
     }
     
     
@@ -223,8 +228,9 @@ extension SettingViewController : SettingFooterViewDelegate {
             
             /// update user
             
-            
+            self.footeView.configureSaveButton(edited: false)
             self.tabBarController?.showPresentLoadindView(false)
+            
 
             
             

@@ -49,7 +49,6 @@ class Recent {
             }
             
             /// return if exist recent
-            
             guard !tempMembers.isEmpty else {print("already")
                 return
             }
@@ -130,6 +129,12 @@ class Recent {
                       kDATE : date] as [String : Any]
         
         firebaseReference(.Recent).document(recentId).updateData(values)
+    }
+    
+    static func deleteRecent(recent : [String : Any]) {
+        let recentId = recent[kRECENTID] as! String
+        print(recentId)
+        firebaseReference(.Recent).document(recentId).delete()
     }
     
 }

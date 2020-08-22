@@ -21,12 +21,11 @@ struct Sender : SenderType {
 
 }
 
-private let headerIdentifer = "headerIdentifer"
 class MessageViewController : MessagesViewController {
     
     var chatRoomId : String!
     var membersIds : [String]!
-    var membersToPush : [String]!
+//    var membersToPush : [String]!
     var profileImage : UIImage?
     
     var messageLists = [Message]() {
@@ -55,6 +54,7 @@ class MessageViewController : MessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
         
         configureMessagekit()
         hideCurrentUserAvatar()
